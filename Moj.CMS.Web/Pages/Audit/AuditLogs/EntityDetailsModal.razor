@@ -1,0 +1,52 @@
+﻿<MudDialog DisableSidePadding="true">
+    <TitleContent>
+        <MudText Typo="Typo.h5">
+            @Globallocalizer["Details"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Style="max-height: 80vh">
+            <MudGrid>
+                @if (Loading)
+                {
+                    <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="my-7" />
+                }
+                else
+                {
+                    if (EntityHistory == null)
+                    {
+                        <MudItem xs="12" Style="text-align:center; font-size:14px">@Globallocalizer["No changes found"]</MudItem>
+                    }
+                    else
+                    {
+                        <MudItem xs="4"><strong>@Globallocalizer["Entity Name"]: </strong>@EntityHistory.EntityName</MudItem>
+                        <MudItem xs="4"><strong>@Globallocalizer["Creation Date"]: </strong>@EntityHistory.CreationDate.FormatDateTime()</MudItem>
+                        <MudItem xs="4"><strong>@Globallocalizer["Operation Type"]: </strong>@EntityHistory.OperationType</MudItem>
+                        <MudItem xs="12">
+                            <MudTable Items="@TableData" Hover="true" Dense="true"
+                                      Bordered="false"
+                                      Striped="true"
+                                      HorizontalScrollbar="true"
+                                      FixedHeader="true"
+                                      Class="inlineHeaderTable"
+                                      Style="padding: 1px">
+                                <HeaderContent>
+                                    <MudTh>@Globallocalizer["Property Name"]</MudTh>
+                                    <MudTh>@Globallocalizer["Old Value"]</MudTh>
+                                    <MudTh>@Globallocalizer["New Value"]</MudTh>
+                                </HeaderContent>
+                                <RowTemplate>
+                                    <MudTd>@context.PropertyName</MudTd>
+                                    <MudTd>@context.OldValue</MudTd>
+                                    <MudTd>@context.NewValue</MudTd>
+                                </RowTemplate>
+                            </MudTable>
+                        </MudItem>
+                    }
+                }
+            </MudGrid>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+    </DialogActions>
+</MudDialog>

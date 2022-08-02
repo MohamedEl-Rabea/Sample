@@ -1,0 +1,40 @@
+﻿<MudTable Loading="@_loading" Hover="true" Items="@partySadadBillingList" Dense="true" Bordered="false" Striped="true" @ref="table"
+          HorizontalScrollbar="true">
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Collection Channel"]</MudTh>
+        <MudTh>@Globallocalizer["Collection Channel Type"]</MudTh>
+        <MudTh>@Globallocalizer["Ref Number"]</MudTh>
+        <MudTh>@Globallocalizer["Payment Notice Date"]</MudTh>
+        <MudTh>@Globallocalizer["Payment Notice Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Cach Notice Date"]</MudTh>
+        <MudTh>@Globallocalizer["Cach Notice Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Collected Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Settlement Date"]</MudTh>
+        <MudTh>@Globallocalizer["Settlement Result"]</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="FinancialTransactionNumber"> @context.CollectionChannel</MudTd>
+        <MudTd DataLabel="FinancialTransactionDate"> @context.CollectionChannelType</MudTd>
+        <MudTd DataLabel="FinancialTransactionType"> @context.ReferenceNumber</MudTd>
+        <MudTd DataLabel="FinancialTransactionRef"> @context.PaymentNoticeDate</MudTd>
+        <MudTd DataLabel="FinancialTransactionSource"> @context.PaymentNoticeAmount</MudTd>
+        <MudTd DataLabel="FinancialTransactionPaidAmount"> @context.CachNoticeDate</MudTd>
+        <MudTd DataLabel="FinancialTransactionTransferedAmount"> @context.CachNoticeAmount</MudTd>
+        <MudTd DataLabel="FinancialTransactionRemainingAmount"> @context.CollectedAmount</MudTd>
+        <MudTd DataLabel="FinalBalanceAmount"> @context.SettlementDate</MudTd>
+        <MudTd DataLabel="FinancialTransactionCaseNumber"> @context.SettlementResult</MudTd>
+    </RowTemplate>
+
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

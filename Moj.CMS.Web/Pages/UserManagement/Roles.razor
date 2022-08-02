@@ -1,0 +1,34 @@
+﻿@attribute [RouteAttribute(Urls.UserAdministration.Roles.Href)]
+
+<div style="text-align:initial">
+    <HeroTitle Title="@localizer["Roles"]" />
+</div>
+<MudTable @ref="@table" Hover="true" Items="roleList" Dense="true" Bordered="false" Striped="true" Filter="new Func<RoleDto, bool>(Search)" @bind-role="role" FixedHeader="true">
+    <ToolBarContent>
+        <MudItem lg="3" md="4" sm="6" xs="12">
+            <MudTextField Clearable="true"
+                          @bind-Value="searchString"
+                          Immediate="true"
+                          FullWidth=false
+                          Placeholder="@localizer["Search for Roles..."]">
+            </MudTextField>
+        </MudItem>
+        <MudToolBarSpacer />
+        <MudTooltip Text="@Globallocalizer["Create"]">
+            <MudIconButton Icon="@Icons.Material.Filled.Add" @onclick="@(()=>InvokeModal())"></MudIconButton>
+        </MudTooltip>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<RoleDto, object>(x => x.Name)">@localizer["Role"]</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="@localizer["Role"]">
+            <MudHighlighter Text="@context.Name" HighlightedText="@searchString" />
+        </MudTd>
+        <SSSActionsTd T="RoleDto" Actions="@Actions" IconStyle="@IconStyle" RowContext="@context" />
+    </RowTemplate>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

@@ -1,0 +1,39 @@
+﻿@attribute [RouteAttribute(Urls.General.Parties.ProfileHref + "{id:int}")]
+@using Moj.CMS.Web.Pages.Parties.PartyProfile.Tabs
+<style>
+    .tabPanel {
+        min-width: unset;
+    }
+</style>
+
+<div class="text-justify">
+    <HeroTitle Title="@Globallocalizer["Party Profile"]" />
+</div>
+
+<MudTabs Rounded="true" ApplyEffectsToContainer="true" Border="true" Outlined="true" TabPanelClass="tabPanel" PanelClass="pa-5">
+    <MudTabPanel Text="@Globallocalizer["Information panel"]">
+        <BasicDetails PartyId="@Id"></BasicDetails>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Cases"]">
+        <PartyCases PartyId="@Id"></PartyCases>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Creditor-Rights"]">
+        <PartyCreditsSummary PartyId="@Id"></PartyCreditsSummary>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Debt-Debts"]">
+        <PartyDebtsSummary PartyId="@Id"></PartyDebtsSummary>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Account Statement"]">
+        <PartyAccountStatement PartyId="@Id"></PartyAccountStatement>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Collection channels"]">
+        @*<UnderConstruction></UnderConstruction>*@
+        <PartySadadBilling PartyId="@Id"></PartySadadBilling>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Bank accounts"]">
+        <UnderConstruction></UnderConstruction>
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Events"]">
+        <UnderConstruction></UnderConstruction>
+    </MudTabPanel>
+</MudTabs>

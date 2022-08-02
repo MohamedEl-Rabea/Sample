@@ -1,0 +1,173 @@
+﻿@attribute [RouteAttribute(Urls.Administration.Dashboard.Href)]
+
+<HeroTitle Title="@Globallocalizer["Dashboard"]" />
+
+@if (_loading)
+{
+    <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="my-7" />
+}
+else
+{
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="6" lg="3">
+            <MudPaper Class="d-flex flex-row pt-6 pb-4 dashboardSectionBorder" Style="height: 100px;">
+                <MudIcon Icon="@Icons.Material.Filled.Gavel" Class="mx-4" Style="width: 54px; height: 54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@Localizer["Today received cases"]</MudText>
+                    <MudText Typo="Typo.h5" Class="text-justify">@Data.Summary.TodayCasesCount</MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6" lg="3">
+            <MudPaper Class="d-flex flex-row pt-6 pb-4 dashboardSectionBorder" Style="height: 100px;">
+                <MudIcon Icon="@Icons.Material.Filled.RequestQuote" Class="mx-4" Style="width: 54px; height: 54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@Localizer["Today financial claims"]</MudText>
+                    <MudText Typo="Typo.h5" Class="text-justify"><Money MoneyDto="@Data.Summary.TodayClaims" /></MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6" lg="3">
+            <MudPaper Class="d-flex flex-row pt-6 pb-4 dashboardSectionBorder" Style="height: 100px;">
+                <MudIcon Icon="@Icons.Material.Filled.FileCopy" Class="mx-4" Style="width: 54px; height: 54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@Localizer["Reports"]</MudText>
+                    <MudText Typo="Typo.h5" Class="text-justify">@Data.Summary.Reports</MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="6" lg="3">
+            <MudPaper Class="d-flex flex-row pt-6 pb-4 dashboardSectionBorder" Style="height: 100px;">
+                <MudIcon Icon="@Icons.Material.Filled.MoneyOff" Class="mx-4" Style="width: 54px; height: 54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">@Localizer["Seizing Orders"]</MudText>
+                    <MudText Typo="Typo.h5" Class="text-justify">9</MudText>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="6" Class="height-33-rem">
+            <MudCard Class="dashboardSectionBorder">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6" Class="text-center">@Localizer["TodayFundResources"]</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="px-0 p-4" Style="height: 90%;">
+                    <RadzenChart Style="height: 100%">
+                        <RadzenColumnSeries Data="@CashResources" CategoryProperty="Resource" ValueProperty="Amount" Title="@Globallocalizer["Cash Amount"]">
+                            <RadzenColumnOptions Radius="5" />
+                        </RadzenColumnSeries>
+                        <RadzenChartTooltipOptions Style="text-align: justify;border-color:var(--mud-palette-primary);" />
+                        <RadzenLegend Visible="false" />
+                        <RadzenValueAxis Formatter="@FormatCurrencies">
+                            <RadzenGridLines Visible="true" />
+                            <RadzenAxisTitle Text="@Globallocalizer["Amount In Riyal"]" />
+                        </RadzenValueAxis>
+                    </RadzenChart>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="6" Class="height-33-rem">
+            <MudCard Class="dashboardSectionBorder">
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6" Class="text-center">@Localizer["Cases"]</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="px-0">
+                    <MudTable Items="@Data.LastCases" Elevation="0" Hover="true" Dense="true" Height="26rem" FixedHeader="true">
+                        <HeaderContent>
+                            <MudTh>@Globallocalizer["Case Number"]</MudTh>
+                            <MudTh>@Globallocalizer["Date"]</MudTh>
+                            <MudTh>@Globallocalizer["Court"]</MudTh>
+                            <MudTh>@Globallocalizer["Division"]</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="CaseNumber">
+                                <MudLink Style="cursor: pointer" Href=@($"{Urls.General.Cases.ProfileHref}{context.CaseId}")
+                                         @onclick="@(()=>AddBreadItem(Globallocalizer["Case profile"],
+                                                     href: $"{Urls.General.Cases.ProfileHref}{context.CaseId}",
+                                                     disabled: true))">@context.CaseNumber </MudLink>
+                                                </MudTd>
+                                                <MudTd DataLabel="Date"><MudText Typo="Typo.body2">@context.Date</MudText></MudTd>
+                                                <MudTd DataLabel="CourtName"><MudText Typo="Typo.body2">@context.CourtName</MudText></MudTd>
+                                                <MudTd DataLabel="DivisionName"><MudText Typo="Typo.body2">@context.DivisionName</MudText></MudTd>
+                                            </RowTemplate>
+                                        </MudTable>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+
+                            <MudItem xs="12" sm="12" md="6">
+                                <MudCard Class="dashboardSectionBorder">
+                                    <MudCardHeader>
+                                        <CardHeaderContent>
+                                            <MudText Typo="Typo.h6" Class="text-center">@Localizer["Today sadad invoices"]</MudText>
+                                        </CardHeaderContent>
+                                    </MudCardHeader>
+                                    <MudCardContent Class="px-0">
+                                        <MudList Clickable="false" Style="margin-inline-start: 50px;">
+                                            <MudListItem>
+                                                <div class="d-flex flex-row">
+                                                    <MudItem xs="4">
+                                                        <MudAvatar Class="mud-elevation-25">
+                                                            <MudIcon Icon="@Icons.Material.Filled.AttachMoney" Class="mx-4" />
+                                                        </MudAvatar>
+                                                    </MudItem>
+                                                    <MudItem xs="4" Class="align-self-center">
+                                                        <MudText Typo="Typo.body1"><Money MoneyDto="@Data.Summary.Paid" /></MudText>
+                                                    </MudItem>
+                                                    <MudItem xs="4" Class="align-self-center">
+                                                        <MudChip Label="true" Color="Color.Info" Size="Size.Small" Class="mud-elevation-25" Text="@Localizer["Paid"]" />
+                                                    </MudItem>
+                                                </div>
+                                            </MudListItem>
+                                            <MudListItem>
+                                                <div class="d-flex flex-row">
+                                                    <MudItem xs="4">
+                                                        <MudAvatar Class="mud-elevation-25">
+                                                            <MudIcon Icon="@Icons.Material.Filled.MoneyOff" Class="mx-4" />
+                                                        </MudAvatar>
+                                                    </MudItem>
+                                                    <MudItem xs="4" Class="align-self-center">
+                                                        <MudText Typo="Typo.body1"><Money MoneyDto="@Data.Summary.UnPaid" /></MudText>
+                                                    </MudItem>
+                                                    <MudItem xs="4" Class="align-self-center">
+                                                        <MudChip Label="true" Color="Color.Error" Size="Size.Small" Class="mud-elevation-25" Text="@Localizer["UnPaid"]" />
+                                                    </MudItem>
+                                                </div>
+                                            </MudListItem>
+                                            <MudListItem>
+                                                <div class="d-flex flex-row">
+                                                    <MudItem xs="4">
+                                                        <MudAvatar Class="mud-elevation-25">
+                                                            <MudIcon Icon="@Icons.Material.Filled.Error" Class="mx-4" />
+                                                        </MudAvatar>
+                                                    </MudItem>
+                                                    <MudItem xs="4" Class="align-self-center">
+                                                        <MudText Typo="Typo.body1">@Data.Summary.TechnicalProblems @Localizer["Request"]</MudText>
+                                                    </MudItem>
+                                                    <MudItem xs="4" Class="align-self-center">
+                                                        <MudChip Label="true" Color="Color.Primary" Size="Size.Small" Class="mud-elevation-25" Text="@Localizer["Technical Problem"]" />
+                                                    </MudItem>
+                                                </div>
+                                            </MudListItem>
+                                        </MudList>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+                            <MudItem xs="12" sm="12" md="6">
+                                <MudCard Class="dashboardSectionBorder">
+                                    <MudCardHeader>
+                                        <CardHeaderContent>
+                                            <MudText Typo="Typo.h6" Class="text-center">@Localizer["Courts Report"]</MudText>
+                                        </CardHeaderContent>
+                                    </MudCardHeader>
+                                    <MudCardContent Class="px-0">
+                                        <UnderConstruction />
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+                        </MudGrid>
+                    }

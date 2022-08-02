@@ -1,0 +1,46 @@
+﻿@using System.Net.Http
+@using Blazored.LocalStorage
+@using Blazored.SessionStorage
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+@using MudBlazor
+@using Blazored.FluentValidation
+@using System.Threading
+@using Moj.CMS.UserAccess.Application.Services.Interfaces
+@using Microsoft.Extensions.Localization
+@using Moj.CMS.UserAccess.Application.DTO
+@using Moj.CMS.Application.AppServices.Case
+@using MediatR
+@using SSS.Components.FileUpload
+@*Shared Libraries*@
+@using Moj.CMS.Shared.Services
+@using Moj.CMS.Web.Shared.Components
+@using Moj.CMS.Web.Pages.UserManagement
+@using Moj.CMS.Shared.DTO
+@using Moj.CMS.Shared.Extensions
+@using Radzen
+@using Radzen.Blazor
+@using MudButtonType = MudBlazor.ButtonType
+@using System.Globalization
+@using Moj.CMS.Web.Constants
+@using SSS.Components.RowActions
+@using SSS.Components.NumberRange
+@using Moj.CMS.Shared.Models
+
+@inherits Moj.CMS.Web.Pages.AppComponentBase
+
+@inject IStringLocalizer<App> Globallocalizer
+@attribute [Authorize]
+@inject ISnackbar _snackBar
+@inject NavigationManager _navigationManager
+@inject IDialogService _dialogService
+@inject IAuthorizationService _authorizationService
+@inject ILocalStorageService _localStorage
+@inject ILookupsService _lookupsService
+@inject IMediator _mediator
+@inject ISessionStorageService _sessionStorage

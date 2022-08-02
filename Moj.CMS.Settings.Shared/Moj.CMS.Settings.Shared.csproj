@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="sharedappsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Moj.CMS.Domain.Shared\Moj.CMS.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Infrastructure\Moj.CMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Integration.Contracts\Moj.CMS.Integration.Contracts.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Shared\Moj.CMS.Shared.csproj" />
+    <ProjectReference Include="..\SSS.BackgroundJobs.Hangfire\SSS.BackgroundJobs.Hangfire.csproj" />
+    <ProjectReference Include="..\Moj.CMS.UserAccess.Infrastructure\Moj.CMS.UserAccess.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

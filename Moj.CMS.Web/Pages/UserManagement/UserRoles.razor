@@ -1,0 +1,42 @@
+﻿@attribute [RouteAttribute(Urls.UserAdministration.Users.UserRolesHref + "{Id}")]
+
+@using Microsoft.AspNetCore.Components
+@using Moj.CMS.Shared.Constants.Permission
+@attribute [Authorize(Policy = Permissions.Roles.View)]
+
+<style>
+    .mud-table-container {
+        overflow-y: hidden;
+    }
+</style>
+
+<div style="text-align:initial">
+    <HeroTitle Title="@Title" />
+</div>
+<MudTable Hover="true" Items="UserRolesList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped" Filter="new Func<UserRoleModel, bool>(Search)"
+          @bind-userRole="userRole" HorizontalScrollbar="true">
+    <ToolBarContent>
+        <MudItem lg="3" md="4" sm="6" xs="12">
+            <MudTextField @bind-Value="searchString" Immediate="true" FullWidth=false Placeholder="@localizer["Search For User Roles"]" Class="mt-0 mb-3"></MudTextField>
+        </MudItem>
+        <MudToolBarSpacer />
+        <div class="justify-center mud-text-align-center">
+            <AuthorizeView Policy="@Permissions.Roles.Create">
+                <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" OnClick="SaveAsync" ButtonType="MudButtonType.Submit">@Globallocalizer["Save Changes"]</MudButton>
+            </AuthorizeView>
+        </div>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserRoleModel, object>(x => x.RoleName)">@localizer["Role Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserRoleModel, object>(x => x.Selected)">@localizer["Status"]</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">
+            <MudHighlighter Text="@context.RoleName" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="Role"><MudCheckBox @bind-Checked="@context.Selected" Color="Color.Success"></MudCheckBox></MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>

@@ -1,0 +1,29 @@
+﻿@namespace Moj.CMS.Web.Shared.Components
+<!--<MudCard Elevation="0" Square="true" Class="@Class">
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            @if (string.IsNullOrEmpty(ImageDataUrl))
+            {
+                <MudAvatar Color="Color.Secondary" Image=""></MudAvatar> @FirstName
+            }
+            else
+            {
+                <MudAvatar Image="@ImageDataUrl" Style="height:50px; width:50px;"> </MudAvatar> @FirstName
+            }
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body2">@FirstName @SecondName</MudText>-->
+@*<MudText Typo="Typo.caption">@Email</MudText>*@
+<!--</CardHeaderContent>
+    </MudCardHeader>
+</MudCard>-->
+
+
+
+
+<div style="display: inline;">
+    <MudItem Style="display: table-caption" Class="text-nowrap">
+        @(DisplayName)
+    </MudItem>
+    <MudAvatar Image="@( string.IsNullOrEmpty(ImageDataUrl) ? "imgs/defaultuser.jpg" : ImageDataUrl )" Size="Size.Small " Class="mt-1 mr-1"></MudAvatar>
+</div>

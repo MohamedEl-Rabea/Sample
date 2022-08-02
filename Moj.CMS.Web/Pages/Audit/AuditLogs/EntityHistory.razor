@@ -1,0 +1,76 @@
+﻿@using Moj.CMS.Shared.Enums
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<EntityHistoryDto>>>(ServerReload))"
+          Elevation="0"
+          Loading="_loading"
+          Hover="true"
+          Dense="true"
+          Bordered="false"
+          Striped="true"
+          @ref="_table"
+          HorizontalScrollbar="true"
+          Class="inlineTable">
+    <ToolBarContent>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="_entityFilter.EntityId"
+                          Placeholder="@Globallocalizer["Entity Id"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="_entityFilter.EntityName"
+                          Placeholder="@Globallocalizer["Entity Name"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudSelect T="string" Clearable="true"
+                       @bind-Value="_entityFilter.OperationType"
+                       Label="@Globallocalizer["Operation Type"]"
+                       Strict="false" Variant="Variant.Text" Adornment="Adornment.End" Class="m-2  text-justify" Direction="Direction.Bottom"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium" Dense="true" OffsetY="true">
+                <MudSelectItem Disabled="true" T="string" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                <MudSelectItem T="string" Value='AuditType.Create.ToString()'>@Globallocalizer[AuditType.Create.ToString()]</MudSelectItem>
+                <MudSelectItem T="string" Value='AuditType.Update.ToString()'>@Globallocalizer[AuditType.Update.ToString()]</MudSelectItem>
+                <MudSelectItem T="string" Value='AuditType.Delete.ToString()'>@Globallocalizer[AuditType.Delete.ToString()]</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudToolBarSpacer />
+        <MudTooltip Text="@Globallocalizer["Filter"]">
+            <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(OnFilter)"></MudIconButton>
+        </MudTooltip>
+        <MudTooltip Text="@Globallocalizer["Clear"]">
+            <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(Clear)"></MudIconButton>
+        </MudTooltip>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Request Id"]</MudTh>
+        <MudTh>@Globallocalizer["Request Name"]</MudTh>
+        <MudTh>@Globallocalizer["Operation Type"]</MudTh>
+        <MudTh>@Globallocalizer["Entity Id"]</MudTh>
+        <MudTh>@Globallocalizer["Entity Name"]</MudTh>
+        <MudTh><MudTableSortLabel T="EntityHistoryDto" SortLabel="CreationDate" InitialDirection="SortDirection.Descending">@Globallocalizer["Creation Date"]</MudTableSortLabel></MudTh>
+        <MudTh>@Globallocalizer["UserName"]</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="@Globallocalizer["Request Id"]">@context.RequestId</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Request Name"]">@context.RequestName</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Operation Type"]">@Globallocalizer[context.OperationType]</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Entity Id"]">@context.EntityId</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Entity Name"]">@context.EntityName</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Creation Date"]">@context.CreationDate.FormatDateTime()</MudTd>
+        <MudTd DataLabel="@Globallocalizer["User Name"]">@context.UserName</MudTd>
+        <SSSActionsTd T="EntityHistoryDto" Actions="@Actions" IconStyle="@IconStyle" RowContext="@context" />
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="_table" />
+    </PagerContent>
+</MudTable>

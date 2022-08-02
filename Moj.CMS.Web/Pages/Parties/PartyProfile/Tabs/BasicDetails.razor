@@ -1,0 +1,66 @@
+﻿@if (_loading)
+{
+    <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="mb-7" />
+}
+else
+{
+    <MudGrid Class="text-justify">
+        <MudItem xs="6">
+            <p>@Globallocalizer["Name"] :</p>
+            @partyDto.Name
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Party IBAN Number"] :</p>
+            @partyDto.PartyIbanNumber
+        </MudItem>
+        <MudItem xs="6">
+            <p> @Globallocalizer["Identity Number"] :</p>
+            @partyDto.IdentityNumber
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Identity type"] :</p>
+            @partyDto.IdentityTypeText
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Party Type"] :</p>
+            @partyDto.PartyTypeText
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Gender"] :</p>
+            @Globallocalizer[@partyDto.Gender.ToString()]
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Nationality"] :</p>
+            @partyDto.NationalityText
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Loaction"] :</p>
+            @partyDto.LocationText
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Credit Cases Count"] :</p>
+            @partyDto.CreditCaseCount
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Debt Cases Count"] :</p>
+            @partyDto.DebtCaseCount
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Total Credits Amount"] :</p>
+            <Money MoneyDto="@partyDto.TotalCreditAmountMoney"></Money>
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Total Required Amounts"] :</p>
+            <Money MoneyDto="@partyDto.TotalDebtAmountMoney"></Money>
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Phone Number"] :</p>
+            @partyDto.PartyPhoneNumber
+        </MudItem>
+
+        <MudItem xs="6">
+            <p>@Globallocalizer["Date Of Birth"] :</p>
+            @partyDto.DateOfBirth?.FormatDate()
+        </MudItem>
+    </MudGrid>
+}

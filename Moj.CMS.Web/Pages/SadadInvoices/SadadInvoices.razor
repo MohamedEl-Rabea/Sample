@@ -1,0 +1,180 @@
+﻿@attribute [RouteAttribute(Urls.General.SadadInvoices.Href)]
+@attribute [Authorize(Policy = Permissions.SadadInvoice.View)]
+@using Moj.CMS.Shared.Constants.Permission
+@using Moj.CMS.Application.AppServices.SadadInvoice.Queries
+
+<div style="text-align:initial">
+    <HeroTitle Title="@Localizer["Sadad Invoices"]" />
+</div>
+
+<AdvancedSearch Open="FilterManagerOpen" OpenChanged="OpenFilterManager" OnClearFilters="Clear" OnApplyFilters="OnFilter">
+    <Content>
+        <MudItem xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="SadadInvoiceFilter.PartyIdentityNumber"
+                          Placeholder="@Globallocalizer["Identity Number"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="SadadInvoiceFilter.PartyName"
+                          Placeholder="@Localizer["Party Name"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem xs="12">
+            <NumberRange @bind-Range="MinBillableAmount" 
+                         @ref="MinBillableAmountNumberRange"
+                         Variant="Variant.Text"
+                         MinLabel="@Localizer["Min Minimum Billable Amount"]"
+                         MaxLabel="@Localizer["Max Minimum Billable Amount"]"
+                         ValueType="@ValueTypeEnum.Money" />
+        </MudItem>
+        <MudItem xs="12">
+            <NumberRange @bind-Range="Amount" 
+                         @ref="AmountNumberRange"
+                         Variant="Variant.Text"
+                         MinLabel="@Localizer["Min Amount"]"
+                         MaxLabel="@Localizer["Max Amount"]"
+                         ValueType="@ValueTypeEnum.Money" />
+        </MudItem>
+        <MudItem xs="12">
+            <NumberRange @bind-Range="PaidAmount"
+                         @ref="PaidAmountNumberRange"
+                         Variant="Variant.Text"
+                         MinLabel="@Localizer["Min Paid Amount"]"
+                         MaxLabel="@Localizer["Max Paid Amount"]"
+                         ValueType="@ValueTypeEnum.Money" />
+        </MudItem>
+        <MudItem xs="12">
+            <NumberRange @bind-Range="RemainingAmount" 
+                         @ref="RemainingAmountNumberRange"
+                         Variant="Variant.Text"
+                         MinLabel="@Localizer["Min Remaining Amount"]"
+                         MaxLabel="@Localizer["Max Remaining Amount"]"
+                         ValueType="@ValueTypeEnum.Money" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudDateRangePicker Label="@Localizer["Issue Date"]" Variant="Variant.Text" @bind-DateRange="IssueDateRange" @ref="IssueDateDatePicker" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudDateRangePicker Label="@Localizer["Expiry Date"]" Variant="Variant.Text" @bind-DateRange="ExpiryDateRange" @ref="ExpiryDateDatePicker" />
+        </MudItem>
+        <MudToolBarSpacer />
+    </Content>
+</AdvancedSearch>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<SadadInvoiceDto>>>(ServerReload))"
+          Loading="_loading"
+          Hover="true"
+          Dense="true"
+          Bordered="@false"
+          Striped="@true"
+          @ref="table"
+          HorizontalScrollbar="true">
+    <ToolBarContent>
+        <MudGrid Class="hideOnPrint" Spacing="11">
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="SadadInvoiceFilter.Number"
+                              Placeholder="@Localizer["Number"]"
+                              Class="m-2"></MudTextField>
+            </MudItem>
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="SadadInvoiceFilter.ClaimNumber"
+                              Placeholder="@Globallocalizer["Financial Claim Number"]"
+                              Class="m-2"></MudTextField>
+            </MudItem>
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="SadadInvoiceFilter.PartyIdentityNumber"
+                              Placeholder="@Localizer["Case Number"]"
+                              Class="m-2"></MudTextField>
+            </MudItem>
+            <MudToolBarSpacer />
+            <MudTooltip Text="@Globallocalizer["Filter"]">
+                <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(OnFilter)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Clear"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(Clear)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Advanced Search"]">
+                <AdvancedSearchButton OnClick="@((e) => OpenFilterManager(true))" />
+            </MudTooltip>
+            @if (pagedData?.Any() == true)
+            {
+                <MudTooltip Text="@Globallocalizer["Export"]">
+                    <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+                </MudTooltip>
+                <MudTooltip Text="@Globallocalizer["Print/PDF"]">
+                    <MudIconButton Size="Size.Medium" Icon="@Icons.Custom.FileFormats.FilePdf" OnClick="@(Print)"></MudIconButton>
+                </MudTooltip>
+            }
+        </MudGrid>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Localizer["Number"]</MudTh>
+        <MudTh>@Localizer["Type"]</MudTh>
+        <MudTh>@Localizer["Description"]</MudTh>
+        <MudTh>@Localizer["Issue Date"]</MudTh>
+        <MudTh>@Localizer["Expiry Date"]</MudTh>
+        <MudTh>@Localizer["Minimum Payment"]</MudTh>
+        <MudTh>@Localizer["Amount"]</MudTh>
+        <MudTh>@Localizer["Paid Amount"]</MudTh>
+        <MudTh>@Localizer["Remaining Amount"]</MudTh>
+        <MudTh>@Localizer["Party Identity Number"]</MudTh>
+        <MudTh>@Localizer["Party Name"]</MudTh>
+        <MudTh>@Globallocalizer["Payment Channel Number"]</MudTh>
+        <MudTh>@Localizer["Case Number"]</MudTh>
+        <MudTh>@Localizer["Claim Number"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Sadad Invoice Number" Class="tableTd">
+            @context.Number
+        </MudTd>
+        <MudTd DataLabel="Sadad Invoice Type" Class="tableTd">
+            @context.Type
+        </MudTd>
+        <MudTd DataLabel="Sadad Invoice Description" Class="tableTd">
+            @context.Description
+        </MudTd>
+        <MudTd DataLabel="Sadad Invoice Issue Date">@context.IssueDate.FormatDateTime()</MudTd>
+        <MudTd DataLabel="Sadad Invoice Expiry Date">@context.ExpiryDate.FormatDateTime()</MudTd>
+        <MudTd DataLabel="Sadad Invoice Min Billable Amount" Class="tableTd">
+            <Money MoneyDto="@context.MinBillableAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="Sadad Invoice Amount" Class="tableTd">
+            <Money MoneyDto="@context.Amount"></Money>
+        </MudTd><MudTd DataLabel="Sadad Invoice Paid Amount" Class="tableTd">
+            <Money MoneyDto="@context.PaidAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="Sadad Invoice Remaining Amount" Class="tableTd">
+            <Money MoneyDto="@context.RemainingAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="Party Identity Number" Class="tableTd">
+            @context.PartyIdentityNumber
+        </MudTd>
+        <MudTd DataLabel="Sadad Invoice Party Name" Class="tableTd">
+            @context.PartyName
+        </MudTd>
+        <MudTd DataLabel="VIban" Class="tableTd">
+            @context.VIban
+        </MudTd>
+        <MudTd DataLabel="Case Number" Class="tableTd">
+            @context.CaseNumber
+        </MudTd>
+        <MudTd DataLabel="Claim Number" Class="tableTd">
+            <MudLink Href="@($"{Urls.General.Cases.ProfileHref}{context.ClaimNumber}")" @onclick="@(()=>AddBreadItem(Localizer["Claim profile"], href: $"{Urls.General.Claims.ProfileHref}{context.ClaimNumber}", disabled: true))">@context.ClaimNumber</MudLink>
+        </MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>
+

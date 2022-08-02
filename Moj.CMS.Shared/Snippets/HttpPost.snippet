@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>HttpPost</Title>
+      <Description>Declares HttpPost action along with its attributes.</Description>
+      <Shortcut>HttpPost</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+        [HttpPost("$[Action]$")]
+        [Authorize($Permission$)]
+        [ProducesResponseType(typeof(IResult<ResourceCreatedDto>), (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(ProblemDetailsBase), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetailsBase), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ProblemDetailsBase), (int)HttpStatusCode.InternalServerError)]
+        public async Task<ActionResult> $MethodName$($TParam$  inputDto)
+    {
+        return Created("", /*Replace with the result*/);   
+    }
+        
+       ]]>
+      </Code>
+      <Imports>
+        <Import>
+          <Namespace>Moj.CMS.Shared.Wrapper</Namespace>
+        </Import> 
+        <Import>
+          <Namespace>Microsoft.AspNetCore.Mvc</Namespace>
+        </Import>
+        <Import>
+          <Namespace>using System.Net</Namespace>
+        </Import>  
+        <Import>
+          <Namespace>Microsoft.AspNetCore.Authorization</Namespace>
+        </Import>
+        <Import>
+          <Namespace>using Moj.CMS.Shared.Constants.Permission</Namespace>
+        </Import>
+        <Import>
+          <Namespace>System.Threading.Tasks</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>[Action]</ID>
+          <ToolTip>Replace with specified name</ToolTip>
+          <Default>[action]</Default>
+        </Literal>
+        <Literal>
+          <ID>Permission</ID>
+          <ToolTip>Replace with specified name</ToolTip>
+          <Default>Permissions.</Default>
+        </Literal>
+        <Literal>
+          <ID>MethodName</ID>
+          <ToolTip>Replace with specified name</ToolTip>
+          <Default>Create</Default>
+        </Literal>
+        <Object>
+          <ID>TParam</ID>
+          <ToolTip>Replace with a param dto.</ToolTip>
+          <Default>TParamDto</Default>
+        </Object>
+      </Declarations>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

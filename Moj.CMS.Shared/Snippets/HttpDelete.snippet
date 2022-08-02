@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>HttpDelete</Title>
+      <Description>Declares HttpDelete Action.</Description>
+      <Shortcut>HttpDelete</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[[HttpDelete("$[Action]$")]
+        [Authorize("$Permission$")]
+        [ProducesResponseType(typeof(IResult), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ProblemDetailsBase), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ProblemDetailsBase), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ProblemDetailsBase), (int)HttpStatusCode.InternalServerError)]
+        public async Task<ActionResult> $DeleteAsync$($TParam$ param)
+        {
+            return Ok(/* Replace with the result */);
+        }]]>
+      </Code>
+
+      <Imports>
+        <Import>
+          <Namespace>Microsoft.AspNetCore.Authorization</Namespace>
+        </Import>
+        <Import>
+          <Namespace>Microsoft.AspNetCore.Mvc</Namespace>
+        </Import>
+        <Import>
+          <Namespace>Moj.CMS.Api.Validation</Namespace>
+        </Import>
+        <Import>
+          <Namespace>Moj.CMS.Shared.Wrapper</Namespace>
+        </Import>
+        <Import>
+          <Namespace>System.Net</Namespace>
+        </Import>
+        <Import>
+          <Namespace>System.Threading.Tasks</Namespace>
+        </Import>
+      </Imports>
+
+      <Declarations>
+        <Literal>
+          <ID>[Action]</ID>
+          <ToolTip>Replace with specified route</ToolTip>
+          <Default>[Action]</Default>
+        </Literal>
+        <Literal>
+          <ID>Permission</ID>
+          <ToolTip>Replace with specified permission</ToolTip>
+          <Default>Permission</Default>
+        </Literal>
+        <Literal>
+          <ID>DeleteAsync</ID>
+          <ToolTip>Replace with specified action name</ToolTip>
+          <Default>DeleteAsync</Default>
+        </Literal>
+        <Object>
+          <ID>TParam</ID>
+          <ToolTip>Replace with specified input type</ToolTip>
+          <Default>TParam</Default>
+        </Object>
+      </Declarations>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,13 @@
+﻿@attribute [RouteAttribute(Urls.Settings.Notify.Href)]
+
+<div style="text-align:initial">
+    <HeroTitle Title="@Globallocalizer["Notifications"]" />
+</div>
+<MudTabs Rounded="true" Border="true" Outlined="true" Class="noShadow" Color="Color.Transparent" PanelClass="mt-6 p-3">
+    <MudTabPanel Text="@Globallocalizer["Email"]">
+        <EmailSettings />
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["SMS"]">
+        <SmsSettings />
+    </MudTabPanel>
+</MudTabs>

@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="&quot;User Not Active. Please contact the administrator." xml:space="preserve">
+    <value>المستخدم غير نشط. الرجاء الاتصال بالمسؤول</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+  <data name="Activate User?" xml:space="preserve">
+    <value>تنشيط المستخدم؟</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشيط</value>
+  </data>
+  <data name="Active?" xml:space="preserve">
+    <value>نشيط؟</value>
+  </data>
+  <data name="Add Role" xml:space="preserve">
+    <value>أضف دورًا</value>
+  </data>
+  <data name="Administrator Settings." xml:space="preserve">
+    <value>إعدادات المدير.</value>
+  </data>
+  <data name="Administrators Profile's Status cannot be toggled" xml:space="preserve">
+    <value />
+  </data>
+  <data name="An Error has occured" xml:space="preserve">
+    <value>حدث خطأ</value>
+  </data>
+  <data name="Auto Confirm Email?" xml:space="preserve">
+    <value>تأكيد البريد الإلكتروني تلقائيًا؟</value>
+  </data>
+  <data name="Bordered" xml:space="preserve">
+    <value>محددة</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="Confirm Password" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>إنشاء</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>تم الانشاء</value>
+  </data>
+  <data name="Current Password" xml:space="preserve">
+    <value>كلمة المرور الحالية</value>
+  </data>
+  <data name="Current password is required!" xml:space="preserve">
+    <value>كلمة المرور الحالية مطلوبة</value>
+  </data>
+  <data name="Current {0} is required!" xml:space="preserve">
+    <value> {0}  الحالى لازم يبقى موجود يانجم</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Delete Image" xml:space="preserve">
+    <value>حذف صورة</value>
+  </data>
+  <data name="Delete Picture" xml:space="preserve">
+    <value>حذف الصورة</value>
+  </data>
+  <data name="deleted" xml:space="preserve">
+    <value>تم الحذف</value>
+  </data>
+  <data name="Dense" xml:space="preserve">
+    <value>كثيف</value>
+  </data>
+  <data name="Do you want to delete the profile picture of" xml:space="preserve">
+    <value>هل تريد حذف صورة ملف التعريف الخاصة بـ</value>
+  </data>
+  <data name="Done!" xml:space="preserve">
+    <value>تم بنجاح</value>
+  </data>
+  <data name="E-mail" xml:space="preserve">
+    <value>البريد إلكتروني</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد إلكتروني</value>
+  </data>
+  <data name="Email Confirmation" xml:space="preserve">
+    <value>تأكيد الإيميل</value>
+  </data>
+  <data name="Email is not correct" xml:space="preserve">
+    <value>البريد الإلكتروني غير صحيح</value>
+  </data>
+  <data name="Email is required" xml:space="preserve">
+    <value>البريد الالكتروني مطلوب</value>
+  </data>
+  <data name="Enter email for password reset" xml:space="preserve">
+    <value>أدخل البريد الإلكتروني لإعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="Fill Administrator Credentials" xml:space="preserve">
+    <value>تعبئة بيانات المدير</value>
+  </data>
+  <data name="First Name is required" xml:space="preserve">
+    <value>الإسم الأول مطلوب</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>الاسم الأول</value>
+  </data>
+  <data name="Forgot password?" xml:space="preserve">
+    <value>هل نسيت كلمة المرور؟</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>المعرف</value>
+  </data>
+  <data name="Incorrect Password." xml:space="preserve">
+    <value>كلمة مرور خاطئة.</value>
+  </data>
+  <data name="Invalid login user name / password" xml:space="preserve">
+    <value>اسم مستخدم / كلمة مرور تسجيل الدخول غير صالحة</value>
+  </data>
+  <data name="is already registered" xml:space="preserve">
+    <value>مسجل بالفعل</value>
+  </data>
+  <data name="is already taken" xml:space="preserve">
+    <value>موجود بالفعل</value>
+  </data>
+  <data name="is invalid, can only contain letters or digits" xml:space="preserve">
+    <value>غير صالح ، يمكن أن يحتوي فقط على أحرف أو أرقام</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>نشيط</value>
+  </data>
+  <data name="Last Name is required" xml:space="preserve">
+    <value>إسم العائلة مطلوب</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>إسم العائلة</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>إدارة</value>
+  </data>
+  <data name="Manage Permission" xml:space="preserve">
+    <value>إداره الصلاحيات</value>
+  </data>
+  <data name="Manage Permissions for" xml:space="preserve">
+    <value>إدارة صلاحيات</value>
+  </data>
+  <data name="Manage Roles" xml:space="preserve">
+    <value>إداره ادوار المستخدمين</value>
+  </data>
+  <data name="Manage Users" xml:space="preserve">
+    <value>اداره المستخدمين</value>
+  </data>
+  <data name="Manage your account" xml:space="preserve">
+    <value>إدارة الحساب</value>
+  </data>
+  <data name="Name is required" xml:space="preserve">
+    <value>الاسم مطلوب</value>
+  </data>
+  <data name="Not Allowed" xml:space="preserve">
+    <value>غير مسموح</value>
+  </data>
+  <data name="Not allowed to delete" xml:space="preserve">
+    <value>غير مسموح بالحذف</value>
+  </data>
+  <data name="Not allowed to modify" xml:space="preserve">
+    <value>غير مسموح بالتعديل</value>
+  </data>
+  <data name="Not allowed to modify Permissions for this Role" xml:space="preserve">
+    <value>غير مسموح بتعديل صلاحيات هذا الدور</value>
+  </data>
+  <data name="Page Under Construction" xml:space="preserve">
+    <value>الصفحة قيد الانشاء</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمه المرور</value>
+  </data>
+  <data name="Password Changed!" xml:space="preserve">
+    <value>تم تغيير كلمة المرور</value>
+  </data>
+  <data name="Password Confirmation" xml:space="preserve">
+    <value>تأكيد كلمة المرور</value>
+  </data>
+  <data name="Password Confirmation is required!" xml:space="preserve">
+    <value>مطلوب تأكيد كلمة المرور</value>
+  </data>
+  <data name="Password is required!" xml:space="preserve">
+    <value>كلمة المرور مطلوبة</value>
+  </data>
+  <data name="Password must be at least of length 8" xml:space="preserve">
+    <value>يجب ألا يقل طول كلمة المرور عن 8</value>
+  </data>
+  <data name="Password must contain at least one capital letter" xml:space="preserve">
+    <value>يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل</value>
+  </data>
+  <data name="Password must contain at least one digit" xml:space="preserve">
+    <value>يجب أن تحتوي كلمة المرور على رقم واحد على الأقل</value>
+  </data>
+  <data name="Password must contain at least one lowercase letter" xml:space="preserve">
+    <value>يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل</value>
+  </data>
+  <data name="Password Reset Mail has been sent to your authorized EmailId" xml:space="preserve">
+    <value>تم إرسال بريد إعادة تعيين كلمة المرور إلى معرف البريد الإلكتروني المعتمد</value>
+  </data>
+  <data name="Password Reset Successful" xml:space="preserve">
+    <value>تمت إعادة تعيين كلمة المرور بنجاح</value>
+  </data>
+  <data name="Passwords don't match" xml:space="preserve">
+    <value>كلمات المرور غير متطابقة</value>
+  </data>
+  <data name="Permissions" xml:space="preserve">
+    <value>الصلاحيات</value>
+  </data>
+  <data name="Phone Number" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>الملف الشخصي</value>
+  </data>
+  <data name="Profile Details" xml:space="preserve">
+    <value>تفاصيل الملف الشخصي</value>
+  </data>
+  <data name="Public Profile" xml:space="preserve">
+    <value>حساب عام</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
+  <data name="Register User" xml:space="preserve">
+    <value>تسجيل المستخدم</value>
+  </data>
+  <data name="Remember me?" xml:space="preserve">
+    <value>تذكرنى</value>
+  </data>
+  <data name="Reset Password" xml:space="preserve">
+    <value>إعادة تعيين كلمة المرور</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="Role as it is being used" xml:space="preserve">
+    <value>حيث يتم استخدامها</value>
+  </data>
+  <data name="Role ID" xml:space="preserve">
+    <value>معرف الدور</value>
+  </data>
+  <data name="Role Name" xml:space="preserve">
+    <value>اسم الدور</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>ادوار المستخدمين</value>
+  </data>
+  <data name="Roles Updated" xml:space="preserve">
+    <value>تم تحديث ادوار المستخدم</value>
+  </data>
+  <data name="SadadInvoiceCreated" xml:space="preserve">
+    <value>تم انشاء فاتوره سداد</value>
+  </data>
+  <data name="Save Role" xml:space="preserve">
+    <value>حفظ الدور</value>
+  </data>
+  <data name="Search For Permissions" xml:space="preserve">
+    <value>ابحث عن صلاحيات</value>
+  </data>
+  <data name="Search for Roles..." xml:space="preserve">
+    <value>بحث عن أدوار</value>
+  </data>
+  <data name="Search For User Roles" xml:space="preserve">
+    <value>ابحث عن أدوار المستخدم</value>
+  </data>
+  <data name="Search For Users" xml:space="preserve">
+    <value>بحث عن المستخدمين</value>
+  </data>
+  <data name="Security" xml:space="preserve">
+    <value>الأمان</value>
+  </data>
+  <data name="Sign In" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="Similar Role already exists" xml:space="preserve">
+    <value>الدور المماثل موجود بالفعل</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>لا يمكن تبديل حالة ادوار المسؤولين</value>
+  </data>
+  <data name="Striped" xml:space="preserve">
+    <value>مخطط</value>
+  </data>
+  <data name="This is an Administrator Only View." xml:space="preserve">
+    <value>هذا العرض للمدير فقط.</value>
+  </data>
+  <data name="Token is required" xml:space="preserve">
+    <value>الرمز مطلوب</value>
+  </data>
+  <data name="Token Not Found!" xml:space="preserve">
+    <value>لم يتم العثور على الرمز!</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="Update Role" xml:space="preserve">
+    <value>تحديث الدور</value>
+  </data>
+  <data name="Update Role Permissions" xml:space="preserve">
+    <value>تحديث صلاحيات الدور</value>
+  </data>
+  <data name="Update User Roles" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>تم التحديث</value>
+  </data>
+  <data name="Updated User Status." xml:space="preserve">
+    <value>تم تحديث حالة المستخدم.</value>
+  </data>
+  <data name="Upload Image" xml:space="preserve">
+    <value>تحميل الصور</value>
+  </data>
+  <data name="User Not Active. Please contact the administrator" xml:space="preserve">
+    <value>المستخدم غير نشط. يرجى الاتصال بالمسؤول</value>
+  </data>
+  <data name="User Not Found" xml:space="preserve">
+    <value>المستخدم  غير موجود</value>
+  </data>
+  <data name="User Registered" xml:space="preserve">
+    <value>تم التسجيل بنجاح </value>
+  </data>
+  <data name="User Registered Mailbox" xml:space="preserve">
+    <value>مستخدم مسجل. تم تسليم بريد التأكيد إلى صندوق البريد</value>
+  </data>
+  <data name="User Registered. Please check your Mailbox to verify!" xml:space="preserve">
+    <value>تم التسجيل يرجى التحقق من صندوق البريد الخاص بك للتأكيد</value>
+  </data>
+  <data name="User Roles" xml:space="preserve">
+    <value>أدوار المستخدم</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>إسم المستخدم</value>
+  </data>
+  <data name="Username is invalid, can only contain letters or digits" xml:space="preserve">
+    <value>اسم المستخدم غير صالح ، يمكن أن يحتوي فقط على أحرف أو أرقام</value>
+  </data>
+  <data name="UserName is required" xml:space="preserve">
+    <value>اسم المستخدم مطلوب</value>
+  </data>
+  <data name="UserName must be at least of length 6" xml:space="preserve">
+    <value>اسم المستخدم غير صالح ، يجب ان يحتوى على الاقل 6 احرف</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="View Profile" xml:space="preserve">
+    <value>عرض الصفحة الشخصية</value>
+  </data>
+  <data name="Your Profile has been updated. Please Login to Continue." xml:space="preserve">
+    <value>تم تحديث ملفك الشخصي. الرجاء تسجيل الدخول للمتابعة.</value>
+  </data>
+</root>

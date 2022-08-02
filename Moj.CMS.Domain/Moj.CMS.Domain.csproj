@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Aggregates\Promissory\Entities\**" />
+    <EmbeddedResource Remove="Aggregates\Promissory\Entities\**" />
+    <None Remove="Aggregates\Promissory\Entities\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Moj.CMS.Domain.Shared\Moj.CMS.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Aggregates\Party\DomainEvents\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.6" />
+    <PackageReference Include="TanvirArjel.Extensions.Microsoft.DependencyInjection" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>

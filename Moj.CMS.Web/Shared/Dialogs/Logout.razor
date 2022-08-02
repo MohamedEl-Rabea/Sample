@@ -1,0 +1,43 @@
+﻿@using Moj.CMS.Web.Middlewares
+@namespace Moj.CMS.Web.Shared.Dialogs
+<MudDialog ContentStyle="text-align:initial">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Logout" Class="mr-3 mb-n1" />
+            @Globallocalizer["Logout Confirmation"]
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText>@ContentText</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="@Color" Variant="Variant.Filled" OnClick="Submit">@ButtonText</MudButton>
+        <MudButton OnClick="Cancel">@Globallocalizer["Cancel"]</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string ContentText { get; set; }
+
+    [Parameter] public string ButtonText { get; set; }
+
+    [Parameter] public Color Color { get; set; }
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+
+    async Task Submit()
+    {
+        var user = (await AuthenticationStateTask).User;
+        Guid key = Guid.NewGuid();
+        BlazorCookieLoginMiddleware.Logouts[key] = user;
+        _navigationManager.NavigateTo($"/login?logoutKey={key}", true);
+    }
+    void Cancel() => MudDialog.Cancel();
+    //void Cancel() {
+    //    //MudDialog.Close();
+    //    MudDialog.Close(DialogResult.Ok(true));
+    //}
+}

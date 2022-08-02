@@ -1,0 +1,46 @@
+﻿@attribute [RouteAttribute(Urls.UserAdministration.Roles.RolePermissions + "{id}")]
+
+@using Excubo.Blazor.TreeViews
+@using MatBlazor
+<div style="text-align:initial">
+    <HeroTitle Title="@Description" />
+</div>
+<div style="text-align:end">
+    <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" OnClick="SaveAsync" ButtonType="MudButtonType.Submit">@Globallocalizer["Save Changes"]</MudButton>
+</div>
+@if (model == null)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <div style="text-align:initial">
+        <TreeView InitiallyCollapsed="true" Items="model.Permissions" SelectedItems="SelectedItems"
+                  GetParent="GetParent"
+                  AllowSelection="true"
+                  CheckboxTemplate="checkbox_template_matblazor">
+            <ItemTemplate>
+                @Globallocalizer[context.Item.Name]
+            </ItemTemplate>
+        </TreeView>
+    </div>
+}
+
+@code {
+    PermissionDto GetParent(PermissionDto permission)
+         => model.Permissions.Where(c => c.Code == permission.ParentCode).FirstOrDefault();
+
+    private static readonly object no_render = new object();
+    private static readonly CheckboxFragment checkbox_template_matblazor =
+        (value, indeterminate, value_changed, disabled) =>
+            (builder) =>
+            {
+                builder.OpenComponent<MatBlazor.MatCheckbox<bool?>>(0);
+                builder.AddAttribute(1, nameof(MatBlazor.MatCheckbox<bool?>.Value), indeterminate ? null : value);
+                builder.AddAttribute(2, nameof(MatBlazor.MatCheckbox<bool?>.ValueChanged), EventCallback.Factory.Create<bool?>(no_render, (v) => { if (v != null) { value_changed(v.Value); } }));
+                builder.AddAttribute(3, nameof(MatBlazor.MatCheckbox<bool?>.Indeterminate), true);
+                builder.AddAttribute(4, nameof(MatBlazor.MatCheckbox<bool?>.Disabled), disabled);
+                builder.AddEventStopPropagationAttribute(5, "onclick", true);
+                builder.CloseComponent();
+            };
+}

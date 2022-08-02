@@ -1,0 +1,98 @@
+﻿@using Moj.CMS.Application.AppServices.Case.Queries.GetCaseEvents
+@using System.Globalization
+
+<style>
+    .textWithDots {
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical !important;
+    }
+
+    .mud-table-cell {
+        padding-inline-start: 10px !important;
+        padding-inline-end: 8px !important;
+        white-space: nowrap;
+    }
+</style>
+<MudTable Items="@FilteredCaseEvents" Hover="true"
+          Dense="true"
+          Bordered="false"
+          Striped="true"
+          @ref="table"
+          Style="margin-top: -12px;">
+
+    <ToolBarContent>
+        <MudItem lg="3" md="4" sm="6" xs="12" Style="margin-bottom: 6px; margin-inline-end: 8px;">
+            <MudDateRangePicker @ref="_picker" Label="@Globallocalizer["Date"]" @bind-DateRange="DateRange" />
+        </MudItem>
+        <MudItem lg="3" md="4" sm="6" xs="12">
+            <MudSelect T="int?" @bind-Value="OperationId" Clearable="true"
+                       Label="@(_caseOperationList != null ? Globallocalizer["Event"] : Globallocalizer["loading..."])"
+                       Placeholder="@(Globallocalizer["Select Case Operation"])"
+                       Strict="false"
+                       Variant="Variant.Text"
+                       Class="m-2 text-justify text-nowrap flex-wrap"
+                       Direction="Direction.Bottom"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       OffsetY="true"
+                       IconSize="Size.Medium">
+                <MudSelectItem Disabled="true" T="int?" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in _caseOperationList)
+                {
+                    <MudSelectItem T="int?" Value="@item.Key">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true" @bind-Value="UserName"
+                          Placeholder="@Globallocalizer["User Name"]"
+                          Class="m-2">
+            </MudTextField>
+        </MudItem>
+        <MudToolBarSpacer />
+        <MudTooltip Text="@Globallocalizer["Filter"]">
+            <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(OnFilter)"></MudIconButton>
+        </MudTooltip>
+        <MudTooltip Text="@Globallocalizer["Clear"]">
+            <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(Clear)"></MudIconButton>
+        </MudTooltip>
+        @if (CaseEvents?.Any() == true)
+        {
+            <MudTooltip Text="@Globallocalizer["Export"]">
+                <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+            </MudTooltip>
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel T="CaseEventsDto" SortLabel="Date">@Globallocalizer["Date"]</MudTableSortLabel></MudTh>
+        <MudTh>@Globallocalizer["Event"]</MudTh>
+        <MudTh>@Globallocalizer["Details"]</MudTh>
+        <MudTh>@Globallocalizer["User Name"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Date">
+            <MudHighlighter Text="@context.Date.FormatDateTime()" />
+        </MudTd>
+        <MudTd DataLabel="Event">
+            <MudHighlighter Text="@context.Operation" />
+        </MudTd>
+        <MudTd DataLabel="Details" Style="white-space: unset; cursor: pointer !important">
+            <span class="textWithDots" style="white-space: break-spaces;" onclick="ShowTextWithDots(this)">
+                <MudHighlighter Text="@context.Details" />
+            </span>
+        </MudTd>
+        <MudTd DataLabel="UserName">
+            <MudHighlighter Text="@context.UserName" />
+        </MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

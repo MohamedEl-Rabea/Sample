@@ -1,0 +1,100 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>8f082a51-7e92-48ac-8406-5349886d36c1</UserSecretsId>
+    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <FileVersion>1.0.0.3</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\Components\BlazorHeroLogo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Blazored.FluentValidation" Version="2.0.1" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.1.1" />
+    <PackageReference Include="Blazored.SessionStorage" Version="2.1.0" />
+    <PackageReference Include="Excubo.Blazor.TreeViews" Version="2.2.12" />
+    <PackageReference Include="LazyCache.AspNetCore" Version="2.1.3" />
+    <PackageReference Include="MatBlazor" Version="2.8.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MudBlazor" Version="5.1.3" />
+    <PackageReference Include="Radzen.Blazor" Version="3.9.9" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
+    <PackageReference Include="TanvirArjel.Extensions.Microsoft.DependencyInjection" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Moj.CMS.Application\Moj.CMS.Application.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Domain.Shared\Moj.CMS.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Infrastructure\Moj.CMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Settings.Shared\Moj.CMS.Settings.Shared.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Shared\Moj.CMS.Shared.csproj" />
+    <ProjectReference Include="..\Moj.CMS.UserAccess.Infrastructure\Moj.CMS.UserAccess.Infrastructure.csproj" />
+    <ProjectReference Include="..\SSS.Components\SSS.Components.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Shared\Components\BlazorHeroLogo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\UserManagement\RolePermissions.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\UserManagement\Security.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\UserManagement\UserProfile.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\UserManagement\UserRoles.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\UserManagement\Account.razor" />
+    <_ContentIncludedByDefault Remove="Pages\UserManagement\Forgot.razor" />
+    <_ContentIncludedByDefault Remove="Pages\UserManagement\Profile.razor" />
+    <_ContentIncludedByDefault Remove="Pages\UserManagement\Reset.razor" />
+    <_ContentIncludedByDefault Remove="Pages\UserManagement\RoleModal.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\UserManagement\Account.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\UserManagement\Forgot.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\UserManagement\Profile.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\UserManagement\Reset.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\UserManagement\RoleModal.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Pages\SadadInvoices\SadadInvoices.ar.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

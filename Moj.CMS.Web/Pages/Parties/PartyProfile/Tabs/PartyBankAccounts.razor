@@ -1,0 +1,40 @@
+﻿<MudTable Loading="@_loading" Hover="true" Items="@partyBankAccountList" Dense="true" Bordered="false" Striped="true" @ref="table"
+          HorizontalScrollbar="true">
+
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Account Number"]</MudTh>
+        <MudTh>@Globallocalizer["Account Type"]</MudTh>
+        <MudTh>@Globallocalizer["Account Name"]</MudTh>
+        <MudTh>@Globallocalizer["Bank Name"]</MudTh>
+        <MudTh>@Globallocalizer["Party Number"]</MudTh>
+        <MudTh>@Globallocalizer["Account Verification Status"]</MudTh>
+        <MudTh>@Globallocalizer["Account Validity Status"]</MudTh>
+        <MudTh>@Globallocalizer["Not Has Account Reason"]</MudTh>
+        <MudTh>@Globallocalizer["CaseNumber"]</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="AccountNumber"> @context.AccountNumber</MudTd>
+        <MudTd DataLabel="AccountType"> @context.AccountType</MudTd>
+        <MudTd DataLabel="AccountName"> @context.AccountName</MudTd>
+        <MudTd DataLabel="BankName"> @context.BankName</MudTd>
+        <MudTd DataLabel="PartyNumber"> @context.PartyNumber</MudTd>
+        <MudTd DataLabel="AccountVerificationStatus"> @context.AccountVerificationStatus</MudTd>
+        <MudTd DataLabel="AccountValidityStatus"> @context.AccountValidityStatus</MudTd>
+        <MudTd DataLabel="NotHasAccountReason"> @context.NotHasAccountReason</MudTd>
+        <MudTd DataLabel="CaseNumber"> @context.CaseNumber</MudTd>
+    </RowTemplate>
+
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+
+</MudTable>

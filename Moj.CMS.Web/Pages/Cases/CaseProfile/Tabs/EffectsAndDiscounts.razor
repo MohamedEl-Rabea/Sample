@@ -1,0 +1,32 @@
+﻿<MudTable @ref="table" Items="effectAndDiscountList" Hover="true"
+          Dense="true"
+          Bordered="false"
+          Striped="true"
+          HorizontalScrollbar="true"
+          Loading="_loading">
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Created By"]</MudTh>
+        <MudTh>@Globallocalizer["Claim Number"]</MudTh>
+        <MudTh>@Globallocalizer["Effect Type"]</MudTh>
+        <MudTh>@Globallocalizer["Required Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Effect And Discount Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Remaining Amount"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="CreatedUser" Class="tableTd">@context.CreatorUser</MudTd>
+        <MudTd DataLabel="ClaimNumber" Class="tableTd">@context.ClaimNumber</MudTd>
+        <MudTd DataLabel="EffectType" Class="tableTd">@context.EffectType</MudTd>
+        <MudTd DataLabel="OldTotalAmount" Class="tableTd">@context.OldTotalAmount</MudTd>
+        <MudTd DataLabel="EffectAndDiscountAmount" Class="tableTd">@context.EffectAmount</MudTd>
+        <MudTd DataLabel="NewTotalAmount" Class="tableTd">@context.NewTotalAmount</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

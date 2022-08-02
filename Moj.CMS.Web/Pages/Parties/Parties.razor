@@ -1,0 +1,183 @@
+﻿@attribute [RouteAttribute(Urls.General.Parties.Href)]
+@using Moj.CMS.Shared.Constants.Permission
+@using Moj.CMS.Application.AppServices.Party.Queries;
+
+@attribute [Authorize(Policy = Permissions.Parties.View)]
+<div style="text-align:initial">
+    <HeroTitle Title="@Globallocalizer["Parties"]" />
+</div>
+
+<AdvancedSearch Open="FilterManagerOpen" OpenChanged="OpenFilterManager" OnClearFilters="Clear" OnApplyFilters="OnFilter">
+    <Content>
+        <MudItem xs="12">
+            <MudSelect T="int?" @bind-Value="PartyFilter.IdentityTypeId" Clearable="true"
+                       Placeholder="@(Globallocalizer["Identity type"])"
+                       Strict="false" Dense="true"
+                       Variant="Variant.Text"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="int?" Value='0'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in partyIdentitytypeList)
+                {
+                    <MudSelectItem T="int?" Value="@item.Key">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="PartyFilter.IdentityNumber"
+                          Placeholder="@Globallocalizer["Identity Number"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem xs="12">
+            <MudSelect T="int?" @bind-Value="PartyFilter.PartyTypeId" Clearable="true"
+                       Placeholder="@(Globallocalizer["Party Type"])"
+                       Strict="false" Dense="true"
+                       Variant="Variant.Text"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="int?" Value='0'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in partyTypeList)
+                {
+                    <MudSelectItem T="int?" Value="@item.Key">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudSelect T="string" @bind-Value="PartyFilter.NationalityCode" Clearable="true"
+                       Placeholder="@(Globallocalizer["Nationality"])"
+                       Strict="false" Dense="true"
+                       Variant="Variant.Text"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="string" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in NationalityList)
+                {
+                    <MudSelectItem T="string" Value="@item.Code">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <NumberRange @bind-Range="TotalCreditRange" Variant="Variant.Text"
+                         MinLabel="@Globallocalizer["Min Credits"]"
+                         MaxLabel="@Globallocalizer["Max Credits"]"
+                         ValueType="@ValueTypeEnum.Money" />
+        </MudItem>
+        <MudItem xs="12">
+            <NumberRange @bind-Range="TotalDebtRange" Variant="Variant.Text"
+                         MinLabel="@Globallocalizer["Min Debts"]"
+                         MaxLabel="@Globallocalizer["Max Debts"]"
+                         ValueType="@ValueTypeEnum.Money" />
+        </MudItem>
+    </Content>
+</AdvancedSearch>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<PartyListItemDto>>>(ServerReload))"
+          Loading="_loading" Hover="true" Dense="true" Bordered="@false" Striped="@true" @ref="table" HorizontalScrollbar="true">
+    <ToolBarContent>
+        <MudItem lg="3" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="PartyFilter.Name"
+                          Placeholder="@Globallocalizer["Name"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem lg="3" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="PartyFilter.Number"
+                          Placeholder="@Globallocalizer["Party Number"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudToolBarSpacer />
+        <MudTooltip Text="@Globallocalizer["Filter"]">
+            <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" OnClick="@(OnFilter)"></MudIconButton>
+        </MudTooltip>
+        <MudTooltip Text="@Globallocalizer["Clear"]">
+            <MudIconButton Icon="@Icons.Material.Filled.Clear" OnClick="@(Clear)"></MudIconButton>
+        </MudTooltip>
+        <MudTooltip Text="@Globallocalizer["Advanced Search"]">
+            <AdvancedSearchButton OnClick="@((e) => OpenFilterManager(true))" />
+        </MudTooltip>
+        @if (pagedData?.Any() == true)
+        {
+            <MudTooltip Text="@Globallocalizer["Export"]">
+                <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(ExportToExcel)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Print/PDF"]">
+                <MudIconButton Size="Size.Medium" Icon="@Icons.Custom.FileFormats.FilePdf" OnClick="@(Print)"></MudIconButton>
+            </MudTooltip>
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Party Number"]</MudTh>
+        <MudTh>@Globallocalizer["Name"]</MudTh>
+        <MudTh>@Globallocalizer["Identity Number"]</MudTh>
+        <MudTh>@Globallocalizer["Identity type"]</MudTh>
+        <MudTh>@Globallocalizer["Party Type"]</MudTh>
+        <MudTh>@Globallocalizer["Nationality"]</MudTh>
+        <MudTh>@Globallocalizer["Total Credits Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Total Required Amounts"]</MudTh>
+        <MudTh>@Globallocalizer["Credit Cases Count"]</MudTh>
+        <MudTh>@Globallocalizer["Debt Cases Count"]</MudTh>
+        <MudTh>
+            <MudTableSortLabel SortLabel="LastUpdate" InitialDirection="SortDirection.Descending" T="PartyListItemDto">
+                <span class="addColor">@localizer["Add"]/</span><span class="updateColor">@localizer["Update"]</span>
+            </MudTableSortLabel>
+        </MudTh>
+        <MudTh>@Globallocalizer["Updated By"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Number">
+            <MudLink Href="@($"{Urls.General.Parties.ProfileHref}{context.Id}")" @onclick="@(()=>AddBreadItem(Globallocalizer["Party Profile"], href: "", disabled: true))">@context.Number</MudLink>
+        </MudTd>
+        <MudTd DataLabel="Name">
+            @context.Name
+        </MudTd>
+        <MudTd DataLabel="IdentityNumber">
+            @context.IdentityNumber
+        </MudTd>
+        <MudTd DataLabel="Identitytype">
+            @context.IdentityTypeText
+        </MudTd>
+        <MudTd DataLabel="PartyCategory">
+            @context.PartyTypeText
+        </MudTd>
+        <MudTd DataLabel="NationalityText">
+            @context.NationalityText
+        </MudTd>
+        <MudTd DataLabel="TotalCreditAmount">
+            <Money MoneyDto="@context.TotalCreditAmountMoney"></Money>
+        </MudTd>
+        <MudTd DataLabel="TotalDebtAmount">
+            <Money MoneyDto="@context.TotalDebtAmountMoney"></Money>
+        </MudTd>
+        <MudTd DataLabel="CreditCaseCount">
+            @context.CreditCaseCount
+        </MudTd>
+        <MudTd DataLabel="DebtCaseCount">
+            @context.DebtCaseCount
+        </MudTd>
+        <MudTd DataLabel="LastUpdate" Class="@(context.IsUpdate ? "updateColor" : "addColor")">
+            @context.LastUpdate.FormatDateTime()
+        </MudTd>
+        <MudTd DataLabel="UpdatedBy">@context.UpdatedBy</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

@@ -1,0 +1,38 @@
+﻿
+@foreach (var bank in BankAccountsGrouping)
+{
+    <MudItem Style="text-align:start;"><MudText>@bank.Key</MudText></MudItem>
+
+    <MudTable Items="@bank.ToList()" Hover="true" Dense="true" Bordered="false" Striped="true" Breakpoint="Breakpoint.Sm" Loading="@_Loading"
+              LoadingProgressColor="Color.Info" Elevation="2" @ref="mytables[bank.Key]">
+        <HeaderContent>
+            <MudTh>@Globallocalizer["Account Number"]</MudTh>
+            <MudTh>@Globallocalizer["Account Type"]</MudTh>
+            <MudTh>@Globallocalizer["Bank Name"]</MudTh>
+            <MudTh>@Globallocalizer["Account Name"]</MudTh>
+            <MudTh>@Globallocalizer["Collection Account"]</MudTh>
+            <MudTh>@Globallocalizer["Transaction Count"]</MudTh>
+            <MudTh>@Globallocalizer["Reference Name"]</MudTh>
+            <MudTh>@Globallocalizer["Reference Type"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="@Globallocalizer["Account Number"]">@context.AccountNumber</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Account Type"]">@context.AccountType</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Bank Name"]">@context.BankName</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Account Name"]">@context.AccountName</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Collection Account"]">@context.CollectionAccount</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Transaction Count"]">@context.TransactionCount</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Reference Name"]">@context.ReferenceName</MudTd>
+            <MudTd DataLabel="@Globallocalizer["Reference Type"]">@context.ReferenceType</MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>@Globallocalizer["No matching records found"] </MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>@Globallocalizer["Loading..."]</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <TablePager Table="mytables[bank.Key]" />
+        </PagerContent>
+    </MudTable>
+}

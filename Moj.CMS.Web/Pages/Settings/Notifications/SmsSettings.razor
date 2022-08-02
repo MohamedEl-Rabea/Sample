@@ -1,0 +1,26 @@
+﻿<MudGrid>
+    <MudItem>
+        <EditForm Model="@SmsSettingsDto" OnValidSubmit="SaveAsync">
+            <FluentValidationValidator />
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@SmsSettingsDto.SourcePhoneNumber" For="@(() => SmsSettingsDto.SourcePhoneNumber)" Label="@Globallocalizer["Source Phone Number"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@SmsSettingsDto.UserName" For="@(() => SmsSettingsDto.UserName)" Label="@Globallocalizer["User Name"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" @bind-Value="@SmsSettingsDto.Password" For="@(() => SmsSettingsDto.Password)" Label="@Globallocalizer["Password"]" Variant="Variant.Outlined"
+                                  InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon"
+                                  OnAdornmentClick="@(() => TogglePasswordVisibility())" />
+                </MudItem>
+                <MudItem xs="12" md="6" style="text-align: initial">
+                    <MudCheckBox @bind-Checked="@SmsSettingsDto.IsActive" Disabled="@true" For="@(() => SmsSettingsDto.IsActive)" Label="@Globallocalizer["Is Active"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12"Style="text-align: start;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" ButtonType="MudButtonType.Submit">@Globallocalizer["Save Changes"]</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </MudItem>
+</MudGrid>

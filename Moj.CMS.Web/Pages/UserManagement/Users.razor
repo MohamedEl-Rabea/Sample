@@ -1,0 +1,74 @@
+﻿@attribute [RouteAttribute(Urls.UserAdministration.Users.Href)]
+@using Moj.CMS.Shared.Constants.Permission
+
+<style>
+    .mud-table-container {
+        overflow-y: hidden;
+    }
+
+    .userSearch .mud-input.mud-input-text {
+        margin-top: 0 !important;
+    }
+</style>
+
+<div style="text-align:initial">
+    <HeroTitle Title="@localizer["Users"]"  />
+</div>
+<MudTable @ref="@table" Items="userList" Hover="true" Dense="true" Striped="true" Filter="new Func<UserDto, bool>(Search)" @bind-user="user" HorizontalScrollbar="true">
+    <ToolBarContent>
+        <MudItem lg="3" md="4" sm="6" xs="12">
+            <MudTextField Clearable="true"
+                          @bind-Value="searchString"
+                          Immediate="true"
+                          FullWidth=false
+                          Placeholder="@localizer["Search For Users"]"
+                          Class="userSearch">
+            </MudTextField>
+        </MudItem>
+        <MudToolBarSpacer />
+        <AuthorizeView Policy="@Permissions.Users.Create">
+            <MudTooltip Text="@Globallocalizer["Create"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Add" @onclick="@(()=>InvokeModal())"></MudIconButton>
+            </MudTooltip>
+        </AuthorizeView>
+        @if (table.FilteredItems.Any())
+        {
+            <MudTooltip Text="@Globallocalizer["Export"]">
+                <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+            </MudTooltip>
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.FirstName)">@localizer["FirstName"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.LastName)">@localizer["LastName"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.UserName)">@localizer["UserName"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.Email)">@localizer["Email"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.PhoneNumber)">@localizer["PhoneNumber"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.EmailConfirmed)">@localizer["Email Confirmation"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<UserDto, object>(x => x.IsActive)">@localizer["Active"]</MudTableSortLabel></MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="FirstName">
+            <MudHighlighter Text="@context.FirstName" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="LastName">
+            <MudHighlighter Text="@context.LastName" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="UserName">
+            <MudHighlighter Text="@context.UserName" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="Email">
+            <MudHighlighter Text="@context.Email" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="PhoneNumber">
+            <MudHighlighter Text="@context.PhoneNumber" HighlightedText="@searchString" />
+        </MudTd>
+        <MudTd DataLabel="EmailConfirmed"><MudCheckBox @bind-Checked="@context.EmailConfirmed" ReadOnly Color="@Color.Secondary"></MudCheckBox></MudTd>
+        <MudTd DataLabel="Active"><MudCheckBox @bind-Checked="@context.IsActive" ReadOnly Color="Color.Info"></MudCheckBox></MudTd>
+        <SSSActionsTd T="UserDto" Actions="@Actions" IconStyle="@IconStyle" RowContext="@context" />
+    </RowTemplate>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

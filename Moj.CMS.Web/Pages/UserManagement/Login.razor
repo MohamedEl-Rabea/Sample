@@ -1,0 +1,65 @@
+﻿@page "/login"
+@using Moj.CMS.Web.Shared
+@using InputType = MudBlazor.InputType
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+<EditForm Model="@_loginDto" OnValidSubmit="SubmitAsync">
+    <FluentValidationValidator />
+    <MudGrid>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <img src="../imgs/Adllogo.svg" Style="height:150px !important;" />
+            </div>
+        </MudItem>
+        <DataAnnotationsValidator />
+        <MudItem xs="12">
+            <MudTextField T="string" Label="@localizer["E-mail"]" Variant="Variant.Outlined"
+                          @bind-Value="@_loginDto.Email"
+                          For="@(() => _loginDto.Email)" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@localizer["Password"]" Variant="Variant.Outlined" @bind-Value="_loginDto.Password"
+                          For="@(() => _loginDto.Password)"
+                          InputType="@PasswordInput"
+                          Adornment="Adornment.End"
+                          AdornmentIcon="@PasswordInputIcon"
+                          OnAdornmentClick="TogglePasswordVisibility" />
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-space-between align-center">
+            <MudCheckBox T="bool" Label="@localizer["Remember me?"]" Color="Color.Primary"
+                         Class="ml-n1" />
+            <MudLink Href="/account/forgot-password">@localizer["Forgot password?"]</MudLink>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton ButtonType="MudButtonType.Submit" Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" Style="width: 100%;">@localizer["Sign In"]</MudButton>
+        </MudItem>
+        <MudItem xs="12">
+            <MudButton OnClick="FillAdministratorCredentials">@localizer["Fill Administrator Credentials"]</MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+@code {
+    string Password { get; set; }
+
+    bool PasswordVisibility;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    void TogglePasswordVisibility()
+    {
+        @if (PasswordVisibility)
+        {
+            PasswordVisibility = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            PasswordVisibility = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+}

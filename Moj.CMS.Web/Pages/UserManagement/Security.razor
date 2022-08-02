@@ -1,0 +1,30 @@
+<EditForm Model="@passwordModel" OnValidSubmit="ChangePasswordAsync">
+    <FluentValidationValidator />
+    <MudGrid>
+        <MudItem xs="12">
+            <MudCard Class="card-without-background">
+                <MudCardHeader Class="text-align-start">
+                    <CardHeaderContent>
+                        <MudText>@localizer["Change Password"]</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent Class="m-0">
+                    <MudGrid>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" @bind-Value="passwordModel.NewPassword" For="@(() => passwordModel.NewPassword)" Label="@localizer["Password"]" Variant="Variant.Outlined" InputType="InputType.Password" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" @bind-Value="passwordModel.ConfirmNewPassword" For="@(() => passwordModel.ConfirmNewPassword)" Label="@localizer["Password Confirmation"]" Variant="Variant.Outlined" InputType="InputType.Password" />
+                        </MudItem>
+                        <MudItem xs="12" md="6">
+                            <MudTextField T="string" @bind-Value="passwordModel.Password" For="@(() => passwordModel.Password)" Label="@localizer["Current Password"]" Variant="Variant.Outlined" InputType="InputType.Password" />
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+                <MudCardActions Class="text-align-start pa-4">
+                    <MudButton Variant="Variant.Filled" Color="Color.Info" ButtonType="MudButtonType.Submit" Class="ml-auto">@localizer["Change Password"]</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>

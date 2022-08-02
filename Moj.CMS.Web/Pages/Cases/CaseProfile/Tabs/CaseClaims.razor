@@ -1,0 +1,110 @@
+﻿@using Moj.CMS.Application.AppServices.Case.Queries.GetCasePromissories
+<style>
+    .mud-grid-item-sm-4 {
+        display: grid !important;
+    }
+</style>
+
+@if (caseClaimsDto != null)
+{
+
+    <MudGrid>
+        <MudItem md="4" sm="6" xs="12" Style="min-width: 280px">
+            <MudChip Label="true" Size="Size.Large" Color="Color.Secondary" Variant="Variant.Outlined" Class="w-100">
+                @Globallocalizer["Total Required Amount"]: <Money MoneyDto="@caseClaimsDto.TotalRequired" />
+            </MudChip>
+        </MudItem>
+        <MudItem md="4" sm="6" xs="12" Style="min-width: 280px">
+            <MudChip Label="true" Size="Size.Large" Color="Color.Success" Variant="Variant.Outlined" Class="w-100">
+                @Globallocalizer["Total Collected Amount"]: <Money MoneyDto="@caseClaimsDto.TotalCollected" />
+            </MudChip>
+        </MudItem>
+        <MudItem md="4" sm="6" xs="12" Style="min-width: 280px">
+            <MudChip Label="true" Size="Size.Large" Color="Color.Error" Variant="Variant.Outlined" Class="w-100">
+                @Globallocalizer["Total Remaining Amount"]: <Money MoneyDto="@caseClaimsDto.TotalRemaining" />
+            </MudChip>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTable Items="@caseClaimsDto.ClaimList" Hover="true" Breakpoint="Breakpoint.Sm" Dense="true">
+                <HeaderContent>
+                    <MudTh>
+                    </MudTh>
+                    <MudTh> @Globallocalizer["Claim Number"]</MudTh>
+                    <MudTh> @Globallocalizer["Complaint"]</MudTh>
+                    <MudTh>@Globallocalizer["Required Amount"]</MudTh>
+                    <MudTh>@Globallocalizer["Remaining Amount"]</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>
+                        <MudToggleIconButton Size="Size.Small" Toggled="@context.ShowDetails" ToggledChanged="@(() => context.ShowDetails=!context.ShowDetails)"
+                                             Icon="@Icons.Material.Filled.ExpandMore"
+                                             Color="@Color.Info"
+                                             Title="@Globallocalizer["Show"]"
+                                             ToggledSize="Size.Small"
+                                             ToggledIcon="@Icons.Material.Filled.ExpandLess"
+                                             ToggledColor="@Color.Dark"
+                                             ToggledTitle="@Globallocalizer["Hide"]" />
+                    </MudTd>
+                    <MudTd DataLabel="@Globallocalizer["Claim Number"]">@context.ClaimNumber</MudTd>
+                    <MudTd DataLabel="@Globallocalizer["Complaint"]">@context.ComplaintPartyName</MudTd>
+                    <MudTd DataLabel="@Globallocalizer["Required Amount"]">@context.RequiredAmount</MudTd>
+                    <MudTd DataLabel="@Globallocalizer["Remaining Amount"]">@context.RemainingAmount</MudTd>
+                </RowTemplate>
+                <ChildRowContent>
+                    @if (context.ShowDetails)
+                        {
+                        <MudTr>
+                            <MudTd colspan="5">
+                                <MudCard Elevation="0" Class="w-100">
+                                    <MudCardContent Class="pa-2">
+                                        <MudTable Items="@context.ClaimDetails" Context="party" Hover="true" Breakpoint="Breakpoint.Sm" Elevation="0" Dense="true" Striped="true"
+                                                  HeaderClass="headerStyle">
+                                            <HeaderContent>
+                                                <MudTh>@Globallocalizer["Accused"]</MudTh>
+                                                <MudTh>@Globallocalizer["Debt Amount"]</MudTh>
+                                                <MudTh>@Globallocalizer["Billing Amount"]</MudTh>
+                                                <MudTh>@Globallocalizer["Pays"]</MudTh>
+                                                <MudTh>@Globallocalizer["Report"]</MudTh>
+                                                <MudTh>@Globallocalizer["Cashing"]</MudTh>
+                                                <MudTh>@Globallocalizer["Transfer"]</MudTh>
+                                                <MudTh>@Globallocalizer["Cheque"]</MudTh>
+                                                <MudTh>@Globallocalizer["Named"]</MudTh>
+                                            </HeaderContent>
+                                            <RowTemplate>
+                                                <MudTd DataLabel="@Globallocalizer["Accused"]">@party.PartyName</MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Debt Amount"]">
+                                                    <Money MoneyDto="@party.RequiredAmount" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Billing Amount"]">
+                                                    <Money MoneyDto="@party.BillingAmount" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Pays"]">
+                                                    <Money MoneyDto="@party.Paid" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Report"]">
+                                                    <Money MoneyDto="@party.CollectedByReports" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Cashing"]">
+                                                    <Money MoneyDto="@party.Cashing" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Transfer"]">
+                                                    <Money MoneyDto="@party.Transfer" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Cheque"]">
+                                                    <Money MoneyDto="@party.Cheque" />
+                                                </MudTd>
+                                                <MudTd DataLabel="@Globallocalizer["Named"]">
+                                                    <Money MoneyDto="@party.Named" />
+                                                </MudTd>
+                                            </RowTemplate>
+                                        </MudTable>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudTd>
+                        </MudTr>
+                        }
+                </ChildRowContent>
+            </MudTable>
+        </MudItem>
+    </MudGrid>
+}

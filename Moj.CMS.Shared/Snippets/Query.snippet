@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Query</Title>
+      <Description>Declares query type along with its handler.</Description>
+      <Shortcut>query</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[public class $QueryName$ : Query<$TResult$>
+    {
+
+    }
+
+    public class $QueryName$Handler : IRequestHandler<$QueryName$, IResult<$TResult$>>
+    {
+        
+        public $QueryName$Handler()
+        {
+            
+        }
+
+        public async Task<IResult<$TResult$>> Handle($QueryName$ query, CancellationToken cancellationToken)
+        {
+            
+        }
+    }]]>
+      </Code>
+      <Imports>
+        <Import>
+          <Namespace>Moj.CMS.Shared.Wrapper</Namespace>
+        </Import>
+        <Import>
+          <Namespace>MediatR</Namespace>
+        </Import>
+        <Import>
+          <Namespace>Moj.CMS.Shared.Infrastructure</Namespace>
+        </Import>
+        <Import>
+          <Namespace>System.Threading</Namespace>
+        </Import>
+      </Imports>
+      <Declarations>
+        <Literal>
+          <ID>QueryName</ID>
+          <ToolTip>Replace with specified name</ToolTip>
+          <Default>Query</Default>
+        </Literal>
+        <Object>
+          <ID>TResult</ID>
+          <ToolTip>Replace with a result dto.</ToolTip>
+          <Default>TResultDto</Default>
+        </Object>
+      </Declarations>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

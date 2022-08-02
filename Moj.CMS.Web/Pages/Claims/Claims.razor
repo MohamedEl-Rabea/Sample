@@ -1,0 +1,220 @@
+﻿@attribute [RouteAttribute(Urls.General.Claims.Href)]
+@attribute [Authorize(Policy = Permissions.Claims.View)]
+@using Moj.CMS.Shared.Constants.Permission
+@using Moj.CMS.Application.AppServices.Claims.Queries
+
+<style>
+    .mud-picker-inline-paper {
+        left: 10px;
+        position: fixed !important;
+    }
+</style>
+
+<div style="text-align:initial">
+    <HeroTitle Title="@Globallocalizer["Claims"]" />
+</div>
+
+<AdvancedSearch Open="FilterManagerOpen" OpenChanged="OpenFilterManager" OnClearFilters="Clear" OnApplyFilters="OnFilter">
+    <Content>
+        <MudItem lg="12">
+            <MudSelect T="int?" @bind-Value="claimFilter.StatusId" Clearable="true"
+                       Label="@(claimStatusList!=null ? Globallocalizer["Financial Claim Status"]:"loading...")"
+                       Strict="false" Dense="true"
+                       Variant="Variant.Text"
+                       Adornment="Adornment.End"
+                       Class="m-2"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium">
+                <MudSelectItem Disabled="true" T="int?" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in claimStatusList)
+                {
+                    <MudSelectItem T="int?" Value="@item.Key">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudSelect Value="claimFilter.CourtCode" T="string"
+                       ValueChanged="@(courtCode=> RefreshDivisionList(courtCode))"
+                       Clearable="true"
+                       Label="@(courtList!=null ? Globallocalizer["Court"]:"loading...")"
+                       Placeholder="@(Globallocalizer["Select Court"])"
+                       Strict="false"
+                       Variant="Variant.Text" Dense="true"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="string" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in courtList)
+                {
+                    <MudSelectItem T="string" Value="@item.Code">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudSelect T="string" @bind-Value="claimFilter.DivisionCode" Clearable="true"
+                       Label="@(divisionList!=null ? Globallocalizer["Division"]:"loading...")"
+                       Placeholder="@(Globallocalizer["Select Division"])"
+                       Strict="false"
+                       Variant="Variant.Text" Dense="true"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="string" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in divisionList)
+                {
+                    <MudSelectItem T="string" Value="@item.Code">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudSelect T="string" @bind-Value="claimFilter.JudgeCode" Clearable="true"
+                       Label="@(JudgetList !=null ? Globallocalizer["Judge"]:Globallocalizer["loading..."])"
+                       Placeholder="@(Globallocalizer["Select Judge"])"
+                       Strict="false"
+                       Variant="Variant.Text" Dense="true"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="string" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in JudgetList)
+                {
+                    <MudSelectItem T="string" Value="@item.Code">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudNumericField Variant="Variant.Text"
+                             @bind-Value="claimFilter.RequiredAmount"
+                             Step=".2M"
+                             Format="N2"
+                             Placeholder="@Globallocalizer["Required"]"
+                             AdornmentIcon="@Icons.Material.Filled.MonetizationOn"
+                             Adornment="Adornment.End"
+                             HideSpinButtons="true"
+                             Class="m-2"
+                             Culture="@CultureInfo.InvariantCulture">
+            </MudNumericField>
+        </MudItem>
+        <MudItem xs="12">
+            <MudDateRangePicker Label="@Globallocalizer["Claim Date"]" Variant="Variant.Text" @bind-DateRange="claimDateValue" @ref="claimDatePicker" />
+        </MudItem>
+        <MudToolBarSpacer />
+    </Content>
+</AdvancedSearch>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllClaimsDto>>>(ServerReload))"
+          Loading="_loading"
+          Hover="true"
+          Dense="true"
+          Bordered="@false"
+          Striped="@true"
+          @ref="table"
+          HorizontalScrollbar="true">
+    <ToolBarContent>
+        <MudGrid Class="hideOnPrint" Spacing="11">
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="claimFilter.ClaimNumber"
+                              Placeholder="@Globallocalizer["Financial Claim Number"]"
+                              Class="m-2"></MudTextField>
+            </MudItem>
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="claimFilter.CaseNumber"
+                              Placeholder="@Globallocalizer["CaseNumber"]"
+                              Class="m-2"></MudTextField>
+            </MudItem>
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="claimFilter.PartyIdentityNumber"
+                              Placeholder="@Globallocalizer["Party Identity Number"]"
+                              Class="m-2"></MudTextField>
+            </MudItem>
+            <MudToolBarSpacer />
+            <MudTooltip Text="@Globallocalizer["Filter"]">
+                <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(OnFilter)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Clear"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(Clear)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Advanced Search"]">
+                <AdvancedSearchButton OnClick="@((e) => OpenFilterManager(true))" />
+            </MudTooltip>
+            @if (pagedData?.Any() == true)
+            {
+                <MudTooltip Text="@Globallocalizer["Export"]">
+                    <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+                </MudTooltip>
+                <MudTooltip Text="@Globallocalizer["Print/PDF"]">
+                    <MudIconButton Size="Size.Medium" Icon="@Icons.Custom.FileFormats.FilePdf" OnClick="@(Print)"></MudIconButton>
+                </MudTooltip>
+            }
+        </MudGrid>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Financial Claim Number"]</MudTh>
+        <MudTh>@Globallocalizer["Case"]</MudTh>
+        <MudTh>@Globallocalizer["Identity"]</MudTh>
+        <MudTh>@Globallocalizer["Court"]</MudTh>
+        <MudTh>@Globallocalizer["Division"]</MudTh>
+        <MudTh>@Globallocalizer["Judge"]</MudTh>
+        <MudTh>@Globallocalizer["Claim Date"]</MudTh>
+        <MudTh>@Globallocalizer["Required"]</MudTh>
+        <MudTh>@Globallocalizer["Remaining"]</MudTh>
+        <MudTh>@Globallocalizer["Status"]</MudTh>
+        <MudTh>
+            <MudTableSortLabel SortLabel="LastUpdate" InitialDirection="SortDirection.Descending" T="GetAllClaimsDto">
+                <span class="addColor">@localizer["Add"]/</span><span class="updateColor">@localizer["Update"]</span>
+            </MudTableSortLabel>
+        </MudTh>
+        <MudTh>@Globallocalizer["Updated By"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="FinancialClaimNumber" Class="tableTd">
+            <MudLink Href="@($"{Urls.General.Claims.ProfileHref}{@context.ClaimId}")" @onclick='@(()=>AddBreadItem(Globallocalizer["Claim profile"], href: "", disabled: true))'>@context.ClaimNumber</MudLink>
+        </MudTd>
+        <MudTd DataLabel="CaseNumber" Class="tableTd">
+            <MudLink Href="@($"{Urls.General.Cases.ProfileHref}{context.CaseId}")" @onclick="@(()=>AddBreadItem(Globallocalizer["Case profile"], href: $"{Urls.General.Cases.ProfileHref}{context.CaseId}", disabled: true))">@context.CaseNumber</MudLink>
+        </MudTd>
+        <MudTd DataLabel="PartyIdentityNumber" Class="tableTd">
+            @context.PartyIdentityNumber
+        </MudTd>
+        <MudTd DataLabel="CourtName" Class="tableTd">
+            @context.CourtName
+        </MudTd>
+        <MudTd DataLabel="DivisionName" Class="tableTd">
+            @context.DivisionName
+        </MudTd>
+        <MudTd DataLabel="JudgeName" Class="tableTd">
+            @context.JudgeName
+        </MudTd>
+        <MudTd DataLabel="ClaimDateTime">@context.ClaimDateTime.FormatDateTime()</MudTd>
+        <MudTd DataLabel="RequiredAmount" Class="tableTd">
+            <Money MoneyDto="@context.RequiredAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="RemainingAmount" Class="tableTd">
+            <Money MoneyDto="@context.RemainingAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="FinancialClaimStatus" Class="tableTd">
+            @context.StatusName
+        </MudTd>
+        <MudTd DataLabel="LastUpdate" Class="@(context.IsUpdate ? "updateColor" : "addColor")">@context.LastUpdate.FormatDateTime()</MudTd>
+        <MudTd DataLabel="UpdatedBy">@context.UpdatedBy</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

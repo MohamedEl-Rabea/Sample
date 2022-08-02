@@ -1,0 +1,29 @@
+﻿@if (_loading)
+{
+    <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="mb-7" />
+}
+else
+{
+    <MudGrid Class="text-justify">
+        <MudItem xs="12">
+            <p>@Globallocalizer["Total Credits Amount"] :</p>
+            @partyCreditsSummary.TotalCreditsAmount
+        </MudItem>
+        <MudItem xs="6">
+            <p> @Globallocalizer["Cases Count"] :</p>
+            @partyCreditsSummary.CasesCount
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Total Transfered Amount"] :</p>
+            @partyCreditsSummary.TotalTransferedAmount
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Total Collected Amount"] :</p>
+            @partyCreditsSummary.TotalCollectedAmount
+        </MudItem>
+        <MudItem xs="6">
+            <p>@Globallocalizer["Total Remaining Amount"] :</p>
+            @partyCreditsSummary.TotalRemainingAmount
+        </MudItem>
+    </MudGrid>
+}

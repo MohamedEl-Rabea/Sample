@@ -1,0 +1,28 @@
+﻿@using Moj.CMS.Application.AppServices.Case.Queries.GetCasePromissories
+
+<MudTable @ref="table" Items="casePromissoryList" Hover="true"
+          Dense="true"
+          Bordered="false"
+          Striped="true"
+          HorizontalScrollbar="true"
+          Loading="_loading">
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Promissory Type"]</MudTh>
+        <MudTh>@Globallocalizer["Promissories Numbers"]</MudTh>
+        <MudTh>@Globallocalizer["Count"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="PromissoryTypeDesription" Class="tableTd">@context.PromissoryTypeDesription</MudTd>
+        <MudTd DataLabel="PromissoriesNumbers" Class="tableTd">@context.PromissoriesNumbers</MudTd>
+        <MudTd DataLabel="NumberPerType" Class="tableTd">@context.Count</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

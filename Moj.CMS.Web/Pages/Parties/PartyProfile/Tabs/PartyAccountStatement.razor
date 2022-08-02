@@ -1,0 +1,42 @@
+﻿<MudTable Loading="@_loading" Hover="true" Items="@partyAccountStatement" Dense="true" Bordered="false" Striped="true" @ref="table"
+          HorizontalScrollbar="true">
+
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Financial Transaction Number"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Date"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Type"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Ref"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Source"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Paid Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Transfered Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction Remaining Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Final Balance Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Financial Transaction CaseNumber"]</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="FinancialTransactionNumber"> @context.FinancialTransactionNumber</MudTd>
+        <MudTd DataLabel="FinancialTransactionDate"> @context.FinancialTransactionDate</MudTd>
+        <MudTd DataLabel="FinancialTransactionType"> @context.FinancialTransactionType</MudTd>
+        <MudTd DataLabel="FinancialTransactionRef"> @context.FinancialTransactionRef</MudTd>
+        <MudTd DataLabel="FinancialTransactionSource"> @context.FinancialTransactionSource</MudTd>
+        <MudTd DataLabel="FinancialTransactionPaidAmount"> @context.FinancialTransactionPaidAmount</MudTd>
+        <MudTd DataLabel="FinancialTransactionTransferedAmount"> @context.FinancialTransactionTransferedAmount</MudTd>
+        <MudTd DataLabel="FinancialTransactionRemainingAmount"> @context.FinancialTransactionRemainingAmount</MudTd>
+        <MudTd DataLabel="FinalBalanceAmount"> @context.FinalBalanceAmount</MudTd>
+        <MudTd DataLabel="FinancialTransactionCaseNumber"> @context.FinancialTransactionCaseNumber</MudTd>
+    </RowTemplate>
+
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+  
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+   
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+
+</MudTable>

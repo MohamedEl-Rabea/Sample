@@ -1,0 +1,5 @@
+﻿<MudIconButton Icon="fas fa-sliders-h fa-sm" Color="@Color.Warning" @onclick="OnClick" />
+
+@code {
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+}

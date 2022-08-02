@@ -1,0 +1,17 @@
+﻿@if (TimeSpan.HasValue && TimeSpan.Value.TotalMinutes >= 1)
+{
+    var timeSpanValue = TimeSpan.Value;
+    @($"{timeSpanValue.Days}{Globallocalizer["d"]}  " +
+      (ShowTime ?
+          $"{timeSpanValue.Hours}{Globallocalizer["h"]}  " +
+          $"{timeSpanValue.Minutes}{Globallocalizer["m"]}" : ""))
+}
+else
+{
+    @("---")
+}
+
+@code {
+    [Parameter] public TimeSpan? TimeSpan { get; set; }
+    [Parameter] public bool ShowTime { get; set; } = true;
+}

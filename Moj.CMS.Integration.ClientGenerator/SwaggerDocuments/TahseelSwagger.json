@@ -1,0 +1,846 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "INTEG_GSN_MOJ_TO_TAHSEEL_169",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https:\/\/api-test.moj.gov.local\/v1\/tahseel_169",
+      "description": "For Integration Testing - MOJ Internal Clients"
+    },
+    {
+      "url": "https:\/\/api-test.moj.gov.sa\/v1\/tahseel_169",
+      "description": "For Integration Testing - Public Clients"
+    },
+    {
+      "url": "https:\/\/api-trust-test.moj.gov.sa\/v1\/tahseel_169",
+      "description": "For Integration Testing - Trusted Clients"
+    }
+  ],
+  "paths": {
+    "\/bills": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application\/json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/CreateBillManageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application\/json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/BillManageResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "\/bills\/{BillNo}": {
+      "put": {
+        "requestBody": {
+          "description": "OK",
+          "content": {
+            "application\/json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/PUTBillManageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "BillNo",
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application\/json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/BillManageResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "requestBody": {
+          "description": "OK",
+          "content": {
+            "application\/json": {
+              "schema": {
+                "$ref": "#\/components\/schemas\/DeleteBillManageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "BillNo",
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application\/json": {
+                "schema": {
+                  "$ref": "#\/components\/schemas\/BillManageResponse"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BillManageResponse": {
+        "title": "Root Type for BillManageResponse",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "@Id": {
+            "type": "string"
+          },
+          "BillsMngAGWRs": {
+            "type": "object",
+            "properties": {
+              "MsgRsHdr": {
+                "type": "object",
+                "properties": {
+                  "RqUID": {
+                    "type": "string"
+                  },
+                  "Status": {
+                    "type": "object",
+                    "properties": {
+                      "StatusCode": {
+                        "type": "string"
+                      },
+                      "StatusDesc": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "@Id": "Body-af80c5ab-8ebe-4db7-82b9-6662e4feb754",
+          "BillsMngAGWRs": {
+            "MsgRsHdr": {
+              "RqUID": "c5d4496a-2f23-439a-9036-0c78b0103144",
+              "Status": {
+                "StatusCode": "I000000",
+                "StatusDesc": "Success"
+              }
+            }
+          }
+        }
+      },
+      "MsgRqHdrRequest": {
+        "title": "Root Type for MsgRqHdrRequest",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "RqUID": {
+            "description": "Client timestamp\r",
+            "type": "string"
+          },
+          "ClientDt": {
+            "format": "date-time",
+            "description": "Universally unique identifier for the request message\r\n",
+            "type": "string"
+          }
+        },
+        "example": {
+          "RqUID": "c5d4496a-2f23-439a-9036-0c78b0103144",
+          "ClientDt": "2021-04-21T11:26:48.466+03:00"
+        }
+      },
+      "BillInfoRequest": {
+        "title": "Root Type for BillInfoRequest",
+        "description": "",
+        "required": [
+          "BillCategory",
+          "BillAmt",
+          "BillAcct",
+          "DueDt"
+        ],
+        "type": "object",
+        "properties": {
+          "BillAcct": {
+            "description": "Billing account number, represents the actual account number in the Agency\u2019s systemand this bill is related to it in case of recurring bills and represents bill number in case of one-off bills.",
+            "type": "string"
+          },
+          "BillCategory": {
+            "type": "string"
+          },
+          "DisplayLabelAr": {
+            "description": "Bill Arabic Display Label\r\n",
+            "type": "string"
+          },
+          "DisplayLabelEn": {
+            "description": "Bill English Display Label\r\n",
+            "type": "string"
+          },
+          "BillAmt": {
+            "format": "double",
+            "description": "Bill amount, the amount of this bill which should be paid by the beneficiary",
+            "type": "number"
+          },
+          "DueDt": {
+            "format": "date",
+            "description": "Bill due date, Payments are considered late if submitted beyond this date",
+            "type": "string"
+          },
+          "ExpDt": {
+            "description": "Bill expiry date, indicates when the bill is no longer considered valid, it shouldn\u2019t be provided in case of expiry bill.\r\n",
+            "type": "string"
+          },
+          "BillRefInfo": {
+            "description": "Bill reference information, represents any reference information can be sent by the agency",
+            "type": "string"
+          },
+          "BillDesc": {
+            "description": "Bill description, represents description for the bill which will be provided by business users",
+            "type": "string"
+          },
+          "PmtOptions": {
+            "$ref": "#\/components\/schemas\/PmtOptionsRequest",
+            "description": "Payment Options aggregate, which represents minimum and maximum partial, advance and over payments\r\n"
+          },
+          "BenInfo": {
+            "$ref": "#\/components\/schemas\/BenInfoRequest",
+            "description": "Beneficiary information aggregate"
+          },
+          "RevenueEntryList": {
+            "description": "Revenue Entries List aggregate",
+            "type": "string"
+          }
+        },
+        "example": {
+          "BillAcct": "1000030201008568765",
+          "BillCategory": "MOJEP",
+          "DisplayLabelAr": "",
+          "DisplayLabelEn": "",
+          "BillAmt": 40090,
+          "DueDt": "2021-04-22",
+          "ExpDt": "",
+          "BillRefInfo": "1",
+          "BillDesc": "ds",
+          "PmtOptions": "",
+          "BenInfo": "",
+          "BenName": "a",
+          "RevenueEntryList": ""
+        }
+      },
+      "PmtOptionsRequest": {
+        "title": "Root Type for PmtOptionsRequest",
+        "description": "",
+        "type": "object",
+        "properties": {
+          "MinPartialPmtAmt": {
+            "format": "double",
+            "description": "The minimum amount when submitting partial payments",
+            "type": "number"
+          }
+        },
+        "example": {
+          "MinPartialPmtAmt": 50
+        }
+      },
+      "BenInfoRequest": {
+        "title": "Root Type for BenInfoRequest",
+        "description": "",
+        "required": [],
+        "type": "object",
+        "properties": {
+          "BenPOI": {
+            "$ref": "#\/components\/schemas\/BenPOIRequest",
+            "description": "Beneficiary POI aggregate",
+            "properties": {
+              "POINum": {
+                "type": "string"
+              },
+              "POIType": {
+                "type": "string"
+              }
+            }
+          },
+          "BenName": {
+            "description": "Beneficiary name",
+            "type": "string"
+          }
+        },
+        "example": {
+          "BenPOI": {
+            "POINum": "1452639688",
+            "POIType": "NAT"
+          },
+          "BenName": "a"
+        }
+      },
+      "BenPOIRequest": {
+        "title": "Root Type for BenPOIRequest",
+        "description": "",
+        "required": [
+          "POIType",
+          "POINum"
+        ],
+        "type": "object",
+        "properties": {
+          "POINum": {
+            "description": "Beneficiary POI numberr",
+            "type": "string"
+          },
+          "POIType": {
+            "description": "NAT\u0027: National ID\r\n\u0027IQA\u0027: Iqama ID\r\n\u0027BIS\u0027: Business ID (Commercial Registration)\r\n\u0027UOI\u0027: Unified Organization ID\r\n\u0027C700\u0027: 700 Code\r\n\u0027GCC\u0027: GCC Passport Number\r\n\u0027PAS\u0027: Passport Number\r\n\u0027BDN\u0027: Border Number\r\n\u0027FCN\u0027: Family Card Number",
+            "type": "string"
+          }
+        },
+        "example": {
+          "POINum": "1452639688",
+          "POIType": "NAT"
+        }
+      },
+      "RevenueEntryListRequest": {
+        "$ref": "#\/components\/schemas\/RevenueEntryInfoRequest",
+        "title": "Root Type for RevenueEntryListRequest",
+        "description": "Revenue Entries List aggregate",
+        "example": {
+          "RevenueEntryInfo": [
+            {
+              "BenAgencyId": "034001000001000000",
+              "GFSCode": "14412314",
+              "Amt": 40090.1
+            },
+            {
+              "BenAgencyId": "034001000001000000",
+              "GFSCode": "14412314",
+              "Amt": 40090.1
+            }
+          ]
+        }
+      },
+      "RevenueEntryInfoRequest": {
+        "title": "Root Type for RevenueEntryInfoRequest",
+        "description": "",
+        "required": [
+          "BenAgencyId",
+          "GFSCode",
+          "Amt",
+          "RevenueEntryInfo"
+        ],
+        "type": "object",
+        "properties": {
+          "RevenueEntryInfo": {
+            "description": "Revenue Entry Information aggregate",
+            "properties": {
+              "BenAgencyId": {
+                "type": "string"
+              },
+              "GFSCode": {
+                "type": "string"
+              },
+              "Amt": {
+                "type": "string"
+              }
+            }
+          },
+          "BenAgencyId": {
+            "description": "Beneficiary agency id",
+            "type": "string"
+          },
+          "GFSCode": {
+            "description": "GFS Code",
+            "type": "string"
+          },
+          "Amt": {
+            "format": "double",
+            "description": "Amount",
+            "type": "number"
+          }
+        },
+        "example": {
+          "RevenueEntryInfo": [
+            {
+              "BenAgencyId": "034001000001000000",
+              "GFSCode": "14412314",
+              "Amt": 40090.1
+            },
+            {
+              "BenAgencyId": "034001000001000000",
+              "GFSCode": "14412314",
+              "Amt": 40090.1
+            }
+          ]
+        }
+      },
+      "CreateBillManageRequest": {
+        "title": "Root Type for CreateBillManageRequest",
+        "description": "",
+        "required": [
+          "BillsMngAGWRq",
+          "MsgRqHdr",
+          "BillInfo"
+        ],
+        "type": "object",
+        "properties": {
+          "BillsMngAGWRq": {
+            "properties": {
+              "MsgRqHdr": {
+                "type": "object",
+                "properties": {
+                  "RqUID": {
+                    "type": "string"
+                  },
+                  "ClientDt": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                }
+              },
+              "Body": {
+                "type": "object",
+                "properties": {
+                  "BillList": {
+                    "type": "object",
+                    "properties": {
+                      "BillInfo": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "BillAcct": {
+                              "type": "string"
+                            },
+                            "BillCategory": {
+                              "type": "string"
+                            },
+                            "DisplayLabelAr": {
+                              "type": "string"
+                            },
+                            "DisplayLabelEn": {
+                              "type": "string"
+                            },
+                            "BillAmt": {
+                              "format": "double",
+                              "type": "number"
+                            },
+                            "DueDt": {
+                              "format": "date",
+                              "type": "string"
+                            },
+                            "ExpDt": {
+                              "type": "string"
+                            },
+                            "BillRefInfo": {
+                              "type": "string"
+                            },
+                            "BillDesc": {
+                              "type": "string"
+                            },
+                            "PmtOptions": {
+                              "type": "object",
+                              "properties": {
+                                "MinPartialPmtAmt": {
+                                  "format": "int32",
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "BenInfo": {
+                              "type": "object",
+                              "properties": {
+                                "BenPOI": {
+                                  "type": "object",
+                                  "properties": {
+                                    "POINum": {
+                                      "type": "string"
+                                    },
+                                    "POIType": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "BenName": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "RevenueEntryList": {
+                              "type": "object",
+                              "properties": {
+                                "RevenueEntryInfo": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "BenAgencyId": {
+                                        "type": "string"
+                                      },
+                                      "GFSCode": {
+                                        "type": "string"
+                                      },
+                                      "Amt": {
+                                        "format": "double",
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "MsgRqHdr": {
+            "$ref": "#\/components\/schemas\/MsgRqHdrRequest",
+            "description": ""
+          },
+          "BillInfo": {
+            "$ref": "#\/components\/schemas\/BillInfoRequest",
+            "description": ""
+          }
+        },
+        "example": {
+          "BillsMngAGWRq": {
+            "MsgRqHdr": {
+              "RqUID": "c5d4496a-2f23-439a-9036-0c78b0103144",
+              "ClientDt": "2021-04-21T11:26:48.466+03:00"
+            },
+            "Body": {
+              "BillList": {
+                "BillInfo": [
+                  {
+                    "BillAcct": "10000302010079992",
+                    "BillCategory": "MOJEP",
+                    "DisplayLabelAr": "",
+                    "DisplayLabelEn": "",
+                    "BillAmt": 40090.1,
+                    "DueDt": "2021-04-22",
+                    "ExpDt": "",
+                    "BillRefInfo": "1",
+                    "BillDesc": "ds",
+                    "PmtOptions": {
+                      "MinPartialPmtAmt": 50
+                    },
+                    "BenInfo": {
+                      "BenPOI": {
+                        "POINum": "1452639688",
+                        "POIType": "NAT"
+                      },
+                      "BenName": "a"
+                    },
+                    "RevenueEntryList": {
+                      "RevenueEntryInfo": [
+                        {
+                          "BenAgencyId": "034001000001000000",
+                          "GFSCode": "14412314",
+                          "Amt": 40090.1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "DeleteBillManageRequest": {
+        "title": "Root Type for DeleteBillManageRequest",
+        "description": "",
+        "required": [
+          "BillsMngAGWRq"
+        ],
+        "type": "object",
+        "properties": {
+          "BillsMngAGWRq": {
+            "properties": {
+              "MsgRqHdr": {
+                "type": "object",
+                "properties": {
+                  "RqUID": {
+                    "type": "string"
+                  },
+                  "ClientDt": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                }
+              },
+              "Body": {
+                "type": "object",
+                "properties": {
+                  "BillList": {
+                    "type": "object",
+                    "properties": {
+                      "BillInfo": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ActionReason": {
+                              "type": "string"
+                            },
+                            "BillCategory": {
+                              "type": "string"
+                            },
+                            "BillAmt": {
+                              "format": "double",
+                              "type": "number"
+                            },
+                            "DueDt": {
+                              "format": "date",
+                              "type": "string"
+                            },
+                            "BillRefInfo": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "BillsMngAGWRq": {
+            "MsgRqHdr": {
+              "RqUID": "c5d4496a-2f23-439a-9036-0c78b0103144",
+              "ClientDt": "2021-04-21T11:26:48.466+03:00"
+            },
+            "Body": {
+              "BillList": {
+                "BillInfo": [
+                  {
+                    "ActionReason": "Expire reson",
+                    "BillCategory": "MOJEP",
+                    "BillAmt": 40090.1,
+                    "DueDt": "2021-04-22",
+                    "BillRefInfo": "3"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "PUTBillManageRequest": {
+        "title": "Root Type for PUTBillManageRequest",
+        "description": "",
+        "required": [
+          "BillsMngAGWRq"
+        ],
+        "type": "object",
+        "properties": {
+          "BillsMngAGWRq": {
+            "properties": {
+              "MsgRqHdr": {
+                "type": "object",
+                "properties": {
+                  "RqUID": {
+                    "type": "string"
+                  },
+                  "ClientDt": {
+                    "format": "date-time",
+                    "type": "string"
+                  }
+                }
+              },
+              "Body": {
+                "type": "object",
+                "properties": {
+                  "BillList": {
+                    "type": "object",
+                    "properties": {
+                      "BillInfo": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "ActionReason": {
+                              "type": "string"
+                            },
+                            "BillCategory": {
+                              "type": "string"
+                            },
+                            "DisplayLabelAr": {
+                              "type": "string"
+                            },
+                            "DisplayLabelEn": {
+                              "type": "string"
+                            },
+                            "BillAmt": {
+                              "format": "double",
+                              "type": "number"
+                            },
+                            "DueDt": {
+                              "format": "date",
+                              "type": "string"
+                            },
+                            "BillDesc": {
+                              "type": "string"
+                            },
+                            "PmtOptions": {
+                              "type": "object",
+                              "properties": {
+                                "MinPartialPmtAmt": {
+                                  "format": "int32",
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "BenInfo": {
+                              "type": "object",
+                              "properties": {
+                                "BenPOI": {
+                                  "type": "object",
+                                  "properties": {
+                                    "POINum": {
+                                      "type": "string"
+                                    },
+                                    "POIType": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "BenName": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "RevenueEntryList": {
+                              "type": "object",
+                              "properties": {
+                                "RevenueEntryInfo": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "BenAgencyId": {
+                                        "type": "string"
+                                      },
+                                      "GFSCode": {
+                                        "type": "string"
+                                      },
+                                      "Amt": {
+                                        "format": "double",
+                                        "type": "number"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "example": {
+          "BillsMngAGWRq": {
+            "MsgRqHdr": {
+              "RqUID": "c5d4496a-2f23-439a-9036-0c78b0103144",
+              "ClientDt": "2021-04-21T11:26:48.466+03:00"
+            },
+            "Body": {
+              "BillList": {
+                "BillInfo": [
+                  {
+                    "ActionReason": "Edit label",
+                    "BillCategory": "MOJEP",
+                    "DisplayLabelAr": "bbv",
+                    "DisplayLabelEn": "s",
+                    "BillAmt": 40090.1,
+                    "DueDt": "2021-04-22",
+                    "BillDesc": "ds",
+                    "PmtOptions": {
+                      "MinPartialPmtAmt": 50
+                    },
+                    "BenInfo": {
+                      "BenPOI": {
+                        "POINum": "1452639688",
+                        "POIType": "NAT"
+                      },
+                      "BenName": "a"
+                    },
+                    "RevenueEntryList": {
+                      "RevenueEntryInfo": [
+                        {
+                          "BenAgencyId": "034001000001000000",
+                          "GFSCode": "14412314",
+                          "Amt": 40090.1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "\/v1\/authorize\/access-token",
+            "scopes": {}
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ]
+}

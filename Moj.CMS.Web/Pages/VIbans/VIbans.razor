@@ -1,0 +1,107 @@
+﻿@attribute [RouteAttribute(Urls.General.VIbans.Href)]
+@using Moj.CMS.Application.AppServices.VIban.Queries.GetAllVIbans
+
+<HeroTitle Title="@Globallocalizer["VIbans"]" />
+
+<AdvancedSearch Open="FilterManagerOpen" OpenChanged="OpenFilterManager" OnClearFilters="Clear" OnApplyFilters="OnFilter">
+    <Content>
+        <MudItem xs="12">
+            <MudTextField T="string" Clearable="true" @bind-Value="vIbanFilter.ReferenceNumber"
+                          Placeholder="@Globallocalizer["Reference Number"]"
+                          Class="m-2">
+            </MudTextField>
+        </MudItem>
+        <MudItem xs="12">
+            <MudSelect T="int?" @bind-Value="vIbanFilter.ReferenceTypeId" Clearable="true"
+                       Label="@(_referenceTypesList != null ? Globallocalizer["Reference Type"] : Globallocalizer["loading..."])"
+                       Placeholder="@(Globallocalizer["Select Reference Type"])"
+                       Strict="false"
+                       Variant="Variant.Text" Dense="true"
+                       Adornment="Adornment.End"
+                       Direction="Direction.Bottom" OffsetY="true"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium"
+                       Class="m-2">
+                <MudSelectItem Disabled="true" T="int?" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in _referenceTypesList)
+                {
+                    <MudSelectItem T="int?" Value="@item.Key">@item.Text</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <MudDateRangePicker @ref="_issueDatePicker" Label="@(Globallocalizer["Issue Date"])"
+                                Variant="Variant.Text" @bind-DateRange="IssueDateRange" />
+        </MudItem>
+    </Content>
+</AdvancedSearch>
+
+<MudTable ServerData="@(new Func<TableState, Task<TableData<VIbanDto>>>(ServerReload))"
+          Loading="Loading"
+          Hover="true"
+          Dense="true"
+          Bordered="false"
+          Striped="true"
+          @ref="_table"
+          HorizontalScrollbar="true">
+    <ToolBarContent>
+        <MudGrid Class="hideOnPrint" Spacing="11">
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true" @bind-Value="vIbanFilter.AccountNumber"
+                              Placeholder="@Globallocalizer["Account Number"]"
+                              Class="m-2">
+                </MudTextField>
+            </MudItem>
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true" @bind-Value="vIbanFilter.Alias"
+                              Placeholder="@Globallocalizer["Alias"]"
+                              Class="m-2">
+                </MudTextField>
+            </MudItem>
+            <MudToolBarSpacer />
+            <MudTooltip Text="@Globallocalizer["Filter"]">
+                <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" OnClick="@(OnFilter)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Clear"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Clear" OnClick="@(Clear)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Advanced Search"]">
+                <AdvancedSearchButton OnClick="@((e) => OpenFilterManager(true))" />
+            </MudTooltip>
+            @if (_pagedData?.Any() == true)
+            {
+                <MudTooltip Text="@Globallocalizer["Export"]">
+                    <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+                </MudTooltip>
+                <MudTooltip Text="@Globallocalizer["Print/PDF"]">
+                    <MudIconButton Size="Size.Medium" Icon="@Icons.Custom.FileFormats.FilePdf" OnClick="@(Print)"></MudIconButton>
+                </MudTooltip>
+            }
+        </MudGrid>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Account Number"]</MudTh>
+        <MudTh>@Globallocalizer["Alias"]</MudTh>
+        <MudTh>@Globallocalizer["Reference Number"]</MudTh>
+        <MudTh>@Globallocalizer["Reference Type"]</MudTh>
+        <MudTh>@Globallocalizer["Issue Date"]</MudTh>
+        <MudTh>@Globallocalizer["Account Status"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="@Globallocalizer["Account Number"]">@context.AccountNumber</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Alias"]">@context.Alias</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Reference Number"]">@context.ReferenceNumber</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Reference Type"]">@context.ReferenceType</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Issue Date"]">@context.IssueDate</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Account Status"]">@localizer[context.AccountStatus]</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="_table" />
+    </PagerContent>
+</MudTable>

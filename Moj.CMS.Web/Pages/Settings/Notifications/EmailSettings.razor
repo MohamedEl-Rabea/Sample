@@ -1,0 +1,35 @@
+﻿<MudGrid>
+    <MudItem>
+        <EditForm Model="@EmailSettingsDto" OnValidSubmit="SaveAsync">
+            <FluentValidationValidator />
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@EmailSettingsDto.EmailHost" For="@(() => EmailSettingsDto.EmailHost)" Label="@Globallocalizer["Email Host"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@EmailSettingsDto.Port" For="@(() => EmailSettingsDto.Port)" Label="@Globallocalizer["Port"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@EmailSettingsDto.Email" For="@(() => EmailSettingsDto.Email)" Label="@Globallocalizer["Email"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField @bind-Value="@EmailSettingsDto.DisplayName" For="@(() => EmailSettingsDto.DisplayName)" Label="@Globallocalizer["Display Name"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" @bind-Value="@EmailSettingsDto.Password" For="@(() => EmailSettingsDto.Password)" Label="@Globallocalizer["Password"]" Variant="Variant.Outlined"
+                                  InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon"
+                                  OnAdornmentClick="@(() => TogglePasswordVisibility())" />
+                </MudItem>
+                <MudItem xs="6" md="3" style="text-align: initial">
+                    <MudCheckBox @bind-Checked="@EmailSettingsDto.UseSsl" For="@(() => EmailSettingsDto.UseSsl)" Label="@Globallocalizer["Use Ssl"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="6" md="3" style="text-align: initial">
+                    <MudCheckBox @bind-Checked="@EmailSettingsDto.IsActive" Disabled="@true" For="@(() => EmailSettingsDto.IsActive)" Label="@Globallocalizer["Is Active"]" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" Style="text-align: start;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Info" Class="ml-auto" ButtonType="MudButtonType.Submit">@Globallocalizer["Save Changes"]</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </MudItem>
+</MudGrid>

@@ -1,0 +1,69 @@
+﻿<style>
+    .mud-link:hover {
+        text-decoration: underline !important;
+        cursor: pointer;
+    }
+
+    .mud-grid-item {
+        display: inline-flex;
+    }
+
+    p {
+        font-weight: bold;
+        margin-inline-end: 10px;
+    }
+</style>
+
+@if (_loading)
+{
+    <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="mb-7" />
+}
+else
+{  
+    <MudGrid Class="text-justify">
+        <MudItem xs="4">
+            <p> @Globallocalizer["Current Court"] :</p>
+            @CaseBasicDetailsDto.CourtName
+        </MudItem>
+        <MudItem xs="8">
+            <MudLink Color="Color.Primary">@Globallocalizer["Changes"]</MudLink>
+        </MudItem>
+
+        <MudItem xs="4">
+            <p>@Globallocalizer["Current Division"] :</p>
+            @CaseBasicDetailsDto.DivisionName
+        </MudItem>
+        <MudItem xs="8">
+            <MudLink Color="Color.Primary">@Globallocalizer["Changes"]</MudLink>
+        </MudItem>
+
+        <MudItem xs="4">
+            <p>@Globallocalizer["Current Judge"] :</p>
+            @CaseBasicDetailsDto.JudgeName
+        </MudItem>
+        <MudItem xs="8">
+            <MudLink Color="Color.Primary">@Globallocalizer["Changes"]</MudLink>
+        </MudItem>
+
+        <MudItem xs="4">
+            <p>@Globallocalizer["Current Mahasa Judge"] :</p>
+            @CaseBasicDetailsDto.MahasaJudgeName
+        </MudItem>
+        <MudItem xs="8">
+            <MudLink Color="Color.Primary">@Globallocalizer["Changes"]</MudLink>
+        </MudItem>
+
+        <MudItem xs="4">
+            <p>@Globallocalizer["Current Case Amount"] :</p>
+            <Money MoneyDto="@CaseBasicDetailsDto.Amount" />
+        </MudItem>
+        <MudItem xs="8">
+            <MudLink Color="Color.Primary">@Globallocalizer["Changes"]</MudLink>
+        </MudItem>
+
+        <MudItem xs="12">
+            <p>@Globallocalizer["Debt Type"] :</p>
+            @(string.IsNullOrWhiteSpace(CaseBasicDetailsDto.DebtType)?"----" : CaseBasicDetailsDto.DebtType)
+        </MudItem>
+    </MudGrid>
+}

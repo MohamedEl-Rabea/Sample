@@ -1,0 +1,53 @@
+﻿@using System.Globalization
+@inject IStringLocalizer<AdvancedSearch> Localizer
+
+<style>
+    #filterDrawer {
+        border-radius: 0 10px 10px 0;
+        top: 105px;
+        height: 80%;
+        box-shadow: none;
+        border: 0.5px solid var(--mud-palette-info);
+    }
+
+    .mudItemPadding {
+        padding: 12px 0 !important;
+    }
+
+        .mudItemPadding > button {
+            min-width: 80%;
+        }
+
+    .filterGrid {
+        text-align: center;
+        width: 80%;
+        margin: 0;
+        align-self: center;
+    }
+
+    #filterDrawer .mud-picker-inline-paper {
+        left: 10px;
+        position: fixed !important;
+    }
+</style>
+
+<CascadingValue Value="this">
+    <MudDrawer id="filterDrawer" @bind-Open="@Open" Anchor="@Anchor" Variant="@DrawerVariant.Temporary" DisableOverlay="true" Width="312px">
+        <div class="text-justify" style="margin: 25px;">
+            @Content
+        </div>
+        <MudGrid Class="filterGrid">
+            <MudItem xs="6" Class="mudItemPadding">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Color="Color.Info" @onclick="OnApplyFilters">
+                    @Localizer["Search"]
+                </MudButton>
+            </MudItem>
+            <MudItem xs="6" Class="mudItemPadding">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Clear" Color="Color.Primary" @onclick="OnClearFilters">
+                    @Localizer["Clear"]
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudDrawer>
+    <MudOverlay @bind-Visible="Open" OnClick="@UpdateOpenValue" DarkBackground="false" />
+</CascadingValue>

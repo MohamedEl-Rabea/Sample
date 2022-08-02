@@ -1,0 +1,64 @@
+﻿@using System.Globalization
+@inherits LayoutComponentBase
+
+<MudRTLProvider RightToLeft="@_rightToLeft">
+    <MudThemeProvider Theme="_currentTheme" />
+    @*<MudDialogProvider />*@
+    <MudSnackbarProvider />
+    <AuthorizeView>
+        <NotAuthorized>
+            <MudContainer MaxWidth="MaxWidth.Small" Class="d-flex align-center" Style="height: 100vh;">
+                <MudPaper Elevation="25" Class="pa-8" Style="width:500px;">
+                    @Body
+                </MudPaper>
+            </MudContainer>
+        </NotAuthorized>
+        <Authorized>
+            <MudLayout>
+                <MudAppBar Elevation="4" Color="Color.Info" ToolBarClass="h-auto" Class="hideOnPrint">
+                    <div class="row" style="display: inline-flex; align-items: center;width:240px">
+                        <MudItem Class="col-10" Style="padding:0;text-align: start;padding-inline-start: 12px"> @DateTime.Now.ToString("dddd, d MMMM yyyy")</MudItem>
+                        <MudToolBar DisableGutters="true" Class="col-2" Style="padding: 0;height:56px;">
+                            <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" />
+                        </MudToolBar>
+                    </div>
+                    <MudBreadcrumbs Items="BreadcrumbItems" Separator=">"></MudBreadcrumbs>
+                    <MudAppBarSpacer />
+                    <MudText Style="margin:auto 20px auto 20px">
+
+                        دائرة التنفيذ الرابعة بمحكمة الرياض
+
+                    </MudText>
+                    <MudHidden Breakpoint="Breakpoint.MdAndUp" Invert="true">
+                        <LanguageSelector />
+                        @*<MudTooltip Text="@Globallocalizer["Toggle Dark Mode"]">
+                                <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => DarkMode())" />
+                            </MudTooltip>*@
+                    </MudHidden>
+                    <MudMenu Direction="_rightToLeft?Direction.Right:Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                        <ActivatorContent>
+                            <UserCard />
+                            @*<MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>*@
+                        </ActivatorContent>
+                        <ChildContent>
+                            @*<UserCard Class="mt-n2" />
+                                <MudDivider Class="mb-2" />*@
+                            <MudListItem Text="@Globallocalizer["Account"]" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+                            <MudListItem Text="@Globallocalizer["Logout"]" Icon="@Icons.Material.Filled.Logout" OnClick="Logout" />
+                        </ChildContent>
+                    </MudMenu>
+
+                </MudAppBar>
+                <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
+                    <NavMenu />
+                </MudDrawer>
+                <MudMainContent Style="padding-top:55px;">
+                    <MudContainer MaxWidth="MaxWidth.False">
+                        @Body
+                    </MudContainer>
+                </MudMainContent>
+                <MudDialogProvider />
+            </MudLayout>
+        </Authorized>
+    </AuthorizeView>
+</MudRTLProvider>

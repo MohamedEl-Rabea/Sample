@@ -1,0 +1,8 @@
+﻿
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Claims> localizer
+<div style="text-align:initial">
+    @localizer["Page Under Construction"]
+</div>
+<MudPaper Class="pa-4" Width="25%">
+    <MudChart ChartType="ChartType.Pie" InputData="@data" @bind-SelectedIndex="Index" InputLabels="@labels" Width="50%" Height="300px" />
+</MudPaper>

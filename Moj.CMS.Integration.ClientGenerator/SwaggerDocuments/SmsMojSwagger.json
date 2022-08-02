@@ -1,0 +1,1209 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "SMS - \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0627\u0644\u0646\u0635\u064a\u0629",
+        "description": "SMS Service for MOJ - \u062e\u062f\u0645\u0629 \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0627\u0644\u0646\u0635\u064a\u0629 \u0628\u0648\u0632\u0627\u0631\u0629 \u0627\u0644\u0639\u062f\u0644",
+        "termsOfService": "http:\/\/developer.moj.gov.sa\/terms\/",
+        "contact": {
+            "email": "takamul@moj.gov.sa"
+        },
+        "license": {
+            "name": "License",
+            "url": "http:\/\/developer.moj.gov.sa\/license\/"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https:\/\/api-test.moj.gov.local\/v1\/nic\/sms\/socialid",
+            "description": "For Integration Testing - MOJ Internal Clients"
+        },
+        {
+            "url": "https:\/\/api-test.moj.gov.sa\/v1\/nic\/sms\/socialid",
+            "description": "For Integration Testing - Public Clients"
+        }
+    ],
+    "tags": [
+        {
+            "name": "socialId",
+            "description": "SMS operations by socialId.  - \u062e\u062f\u0645\u0627\u062a \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0628\u0631\u0642\u0645 \u0627\u0644\u0647\u0648\u064a\u0629"
+        }
+    ],
+    "paths": {
+        "": {
+            "post": {
+                "tags": [
+                    "socialId"
+                ],
+                "summary": "send new sms - \u0625\u0631\u0633\u0627\u0644 \u0631\u0633\u0627\u0644\u0629 \u062c\u062f\u064a\u062f\u0629",
+                "operationId": "sendSMSbySocial",
+                "requestBody": {
+                    "description": "Message object that needs to be sent.",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/SocialMessageInfo"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 201,
+                                    "name": "Created",
+                                    "statusDetails": [
+                                        {
+                                            "code": 201,
+                                            "message": "SMS Sent sucsessfuly"
+                                        }
+                                    ],
+                                    "data": [
+                                        {
+                                            "messageId": 2000241357901,
+                                            "status": "Sent",
+                                            "recipient": "966xxxxxxxxx",
+                                            "timeCreated": "2019-10-17T09:07:43.970Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized \\\n  **- list of errors** :\\\n        code: 401-01  - message: API authorization failed\\\n        code: 401-02  - message: Access Token expired\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 401,
+                                    "name": "Unauthorized",
+                                    "statusDetails": [
+                                        {
+                                            "code": "401-01",
+                                            "message": "API authorization failed"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 404,
+                                    "name": "Not Found",
+                                    "statusDetails": [
+                                        {
+                                            "code": 404,
+                                            "message": "Not Found"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 405,
+                                    "name": "Method Not Allowed",
+                                    "statusDetails": [
+                                        {
+                                            "code": 405,
+                                            "message": "Method Not Allowed"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity \\\n**- list of errors** :\\\ncode: 422-01  - message: message is required!\\\ncode: 422-01  - message: socialId  is required!\\\ncode: 422-04  - message: message Max Length is 300 !\\\ncode: 422-02  - message: socialId Accept Only 10 Numbers Of Digits !\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 422,
+                                    "name": "Unprocessable Entity",
+                                    "statusDetails": [
+                                        {
+                                            "code": "422-01",
+                                            "message": "Required Fields",
+                                            "validationFields": [
+                                                {
+                                                    "name": "message",
+                                                    "message": "message  is required!"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests \\\n**- list of errors** :\\\ncode: 429-01  - message: Too many requests by Spike arrest violation. Allowed\nrate is 10ps        \ncode: 429-02  - message: Too many requests by quota violation. Allowed rate is 1000 per day\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 429,
+                                    "name": "Too many requests",
+                                    "statusDetails": [
+                                        {
+                                            "code": "429-01",
+                                            "message": "Too many requests by Spike arrest violation. Allowed rate is 10ps"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 500,
+                                    "name": "Internal Server Error",
+                                    "statusDetails": [
+                                        {
+                                            "code": 500,
+                                            "message": "Internal Server Error - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 503,
+                                    "name": "Service Unavailable",
+                                    "statusDetails": [
+                                        {
+                                            "code": 503,
+                                            "message": "Service Unavailable - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 504,
+                                    "name": "Gateway Timeout",
+                                    "statusDetails": [
+                                        {
+                                            "code": 504,
+                                            "message": "Gateway Timeout - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "send_sms"
+                        ]
+                    }
+                ],
+                "x-codegen-request-body-name": "MessageInfo"
+            }
+        },
+        "\/otp\/{socialid}\/{otp}": {
+            "get": {
+                "tags": [
+                    "socialId"
+                ],
+                "summary": "send OTP - \u0625\u0631\u0633\u0627\u0644 \u0631\u0633\u0627\u0644\u0629 \u062a\u062d\u062a\u0648\u064a \u0643\u0644\u0645\u0629 \u0645\u0631\u0648\u0631 \u0644\u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629",
+                "operationId": "sendOTP",
+                "parameters": [
+                    {
+                        "name": "otp",
+                        "in": "path",
+                        "description": "OTP to be send",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "socialid",
+                        "in": "path",
+                        "description": "socialId for the reciever",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 200,
+                                    "name": "Ok",
+                                    "statusDetails": [
+                                        {
+                                            "code": 200,
+                                            "message": "OK"
+                                        }
+                                    ],
+                                    "data": [
+                                        {
+                                            "sendStatus": "Sent",
+                                            "Message": {
+                                                "messageId": 2000241357901,
+                                                "status": "sent",
+                                                "messageBody": "test",
+                                                "country": "ksa",
+                                                "DLR": "Sent",
+                                                "senderId": "MOJ.GOV.SA",
+                                                "recipient": "966xxxxxxxxx",
+                                                "createdDate": "2019-10-17T09:07:43.970Z",
+                                                "sentDate": "2019-10-17T09:07:43.983Z",
+                                                "campaignId": "",
+                                                "messageSource": "Restful"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized\\\n  **- list of errors** :\\\n        code: 401-01  - message: API authorization failed\\\n        code: 401-02  - message: Access Token expired\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 401,
+                                    "name": "Unauthorized",
+                                    "statusDetails": [
+                                        {
+                                            "code": "401-01",
+                                            "message": "API authorization failed"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 404,
+                                    "name": "Not Found",
+                                    "statusDetails": [
+                                        {
+                                            "code": 404,
+                                            "message": "Not Found"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 405,
+                                    "name": "Method Not Allowed",
+                                    "statusDetails": [
+                                        {
+                                            "code": 405,
+                                            "message": "Method Not Allowed"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity \\\n**- list of errors** :\\\ncode: 422-01 - message: otp  is required!\\\ncode: 422-01 - message: socialId  is required!\\\ncode: 422-04 - message: otp Accept Only 4 Digits !\\\ncode: 422-04 - message: socialId Accept Only 10 Numbers Of Digits !\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 422,
+                                    "name": "Unprocessable Entity",
+                                    "statusDetails": [
+                                        {
+                                            "code": "422-01",
+                                            "message": "Required Fields",
+                                            "validationFields": [
+                                                {
+                                                    "name": "otp",
+                                                    "message": "otp  is required!"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests\\\n**- list of errors** :\\\ncode: 429-01  - message: Too many requests by Spike arrest violation. Allowed\n rate is 10ps\\\n code: 429-02  - message: Too many requests by quota violation. Allowed rate is 1000 per day\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 429,
+                                    "name": "Too many requests",
+                                    "statusDetails": [
+                                        {
+                                            "code": "429-01",
+                                            "message": "Too many requests by Spike arrest violation. Allowed rate is 10ps"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 500,
+                                    "name": "Internal Server Error",
+                                    "statusDetails": [
+                                        {
+                                            "code": 500,
+                                            "message": "Internal Server Error - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 503,
+                                    "name": "Service Unavailable",
+                                    "statusDetails": [
+                                        {
+                                            "code": 503,
+                                            "message": "Service Unavailable - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 504,
+                                    "name": "Gateway Timeout",
+                                    "statusDetails": [
+                                        {
+                                            "code": 504,
+                                            "message": "Gateway Timeout - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "send_sms_otp"
+                        ]
+                    }
+                ]
+            }
+        },
+        "\/status\/{moireference}": {
+            "get": {
+                "tags": [
+                    "socialId"
+                ],
+                "summary": "get status - \u0645\u0639\u0631\u0641\u0629 \u0627\u0644\u062d\u0627\u0644\u0647 \u0627\u0644\u062e\u0627\u0635\u0647 \u0628\u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                "operationId": "sendStatus",
+                "parameters": [
+                    {
+                        "name": "moireference",
+                        "in": "path",
+                        "description": "status to be get",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 200,
+                                    "name": "Ok",
+                                    "statusDetails": [
+                                        {
+                                            "code": 200,
+                                            "message": "OK"
+                                        }
+                                    ],
+                                    "data": [
+                                        {
+                                            "sendStatus": "Sent"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized\\\n  **- list of errors** :\\\n        code: 401-01  - message: API authorization failed\\\n        code: 401-02  - message: Access Token expired\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 401,
+                                    "name": "Unauthorized",
+                                    "statusDetails": [
+                                        {
+                                            "code": "401-01",
+                                            "message": "API authorization failed"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 404,
+                                    "name": "Not Found",
+                                    "statusDetails": [
+                                        {
+                                            "code": 404,
+                                            "message": "Not Found"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 405,
+                                    "name": "Method Not Allowed",
+                                    "statusDetails": [
+                                        {
+                                            "code": 405,
+                                            "message": "Method Not Allowed"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity \\\n**- list of errors** :\\\ncode: 422-01 - message: moiReference  is required!\\\ncode: 422-04 - message: moiReference Accept Only Digits !\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 422,
+                                    "name": "Unprocessable Entity",
+                                    "statusDetails": [
+                                        {
+                                            "code": "422-01",
+                                            "message": "Required Fields",
+                                            "validationFields": [
+                                                {
+                                                    "name": "moiReference",
+                                                    "message": "moiReference  is required!"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too many requests\\\n**- list of errors** :\\\ncode: 429-01  - message: Too many requests by Spike arrest violation. Allowed\n rate is 10ps\\\n code: 429-02  - message: Too many requests by quota violation. Allowed rate is 1000 per day\n",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 429,
+                                    "name": "Too many requests",
+                                    "statusDetails": [
+                                        {
+                                            "code": "429-01",
+                                            "message": "Too many requests by Spike arrest violation. Allowed rate is 10ps"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 500,
+                                    "name": "Internal Server Error",
+                                    "statusDetails": [
+                                        {
+                                            "code": 500,
+                                            "message": "Internal Server Error - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 503,
+                                    "name": "Service Unavailable",
+                                    "statusDetails": [
+                                        {
+                                            "code": 503,
+                                            "message": "Service Unavailable - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    },
+                    "504": {
+                        "description": "Gateway Timeout",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/response"
+                                },
+                                "example": {
+                                    "code": 504,
+                                    "name": "Gateway Timeout",
+                                    "statusDetails": [
+                                        {
+                                            "code": 504,
+                                            "message": "Gateway Timeout - Report the error by mail to apisupport@moj.gov.sa"
+                                        }
+                                    ],
+                                    "data": []
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2": [
+                            "get_sms"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "MobileMessageInfo": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "maxLength": 300,
+                        "type": "string",
+                        "description": "Message - \u0646\u0635 \u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                        "example": "Hellow MOJ"
+                    },
+                    "mobileNumber": {
+                        "type": "string",
+                        "description": "Mobile number - \u0631\u0642\u0645 \u0627\u0644\u062c\u0648\u0627\u0644",
+                        "example": 966550000000
+                    }
+                }
+            },
+            "SocialMessageInfo": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "maxLength": 300,
+                        "type": "string",
+                        "description": "Message - \u0646\u0635 \u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                        "example": "Hellow MOJ"
+                    },
+                    "socialid": {
+                        "type": "number",
+                        "description": "social id - \u0631\u0642\u0645 \u0627\u0644\u0647\u0648\u064a\u0629",
+                        "example": "22xxxxxxxx"
+                    }
+                }
+            },
+            "Message": {
+                "type": "object",
+                "properties": {
+                    "messageId": {
+                        "type": "string",
+                        "description": "messageId - \u0645\u0639\u0631\u0641 \u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                        "example": "2000xxxxxxxxx"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Status - \u062d\u0627\u0644\u0629 \u0627\u0644\u0625\u0631\u0633\u0627\u0644",
+                        "example": "sent"
+                    },
+                    "messageBody": {
+                        "type": "string",
+                        "description": "Message - \u0646\u0635 \u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                        "example": "Hellow MOJ"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country - \u0627\u0644\u062f\u0648\u0644\u0629",
+                        "example": "KSA"
+                    },
+                    "DLR": {
+                        "type": "string",
+                        "description": "DLR",
+                        "example": "Sent"
+                    },
+                    "senderId": {
+                        "type": "string",
+                        "description": "Sender Id - \u0627\u0644\u0645\u0631\u0633\u0644",
+                        "example": "MOJ.GOV.SA"
+                    },
+                    "recipient": {
+                        "type": "string",
+                        "description": "Recipient - \u0645\u0633\u062a\u0642\u0628\u0644 \u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                        "example": "966xxxxxxxxx"
+                    },
+                    "createdDate": {
+                        "type": "string",
+                        "description": "Created Date - \u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0625\u0636\u0627\u0641\u0629",
+                        "example": "2019-10-17T09:07:43.970Z"
+                    },
+                    "sentDate": {
+                        "type": "string",
+                        "description": "Sent Date - \u062a\u0627\u0631\u064a\u062e \u0627\u0644\u0625\u0631\u0633\u0627\u0644",
+                        "example": "2019-10-17T09:07:43.983Z"
+                    },
+                    "campaignId": {
+                        "type": "number",
+                        "description": "CampaignId"
+                    },
+                    "messageSource": {
+                        "type": "string",
+                        "description": "messageSource - \u0645\u0635\u062f\u0631 \u0627\u0644\u0631\u0633\u0627\u0644\u0629",
+                        "example": "Restful"
+                    }
+                }
+            },
+            "response": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "maxLength": 10,
+                        "minLength": 3,
+                        "type": "string"
+                    },
+                    "name": {
+                        "maxLength": 100,
+                        "type": "string"
+                    },
+                    "statusDetails": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "code"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "maxLength": 10,
+                                    "minLength": 4,
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "maxLength": 200,
+                                    "type": "string"
+                                },
+                                "validationFields": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "message",
+                                            "name"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            },
+                                            "message": {
+                                                "maxLength": 100,
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {}
+                        }
+                    }
+                },
+                "xml": {
+                    "name": "response"
+                }
+            }
+        },
+        "responses": {
+            "200": {
+                "description": "Ok",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 200,
+                            "name": "Ok",
+                            "statusDetails": [
+                                {
+                                    "code": 200,
+                                    "message": "OK"
+                                }
+                            ],
+                            "data": [
+                                {
+                                    "sendStatus": "Sent",
+                                    "Message": {
+                                        "messageId": 2000241357901,
+                                        "status": "sent",
+                                        "messageBody": "test",
+                                        "country": "ksa",
+                                        "DLR": "Sent",
+                                        "senderId": "MOJ.GOV.SA",
+                                        "recipient": "966xxxxxxxxx",
+                                        "createdDate": "2019-10-17T09:07:43.970Z",
+                                        "sentDate": "2019-10-17T09:07:43.983Z",
+                                        "campaignId": "",
+                                        "messageSource": "Restful"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "201": {
+                "description": "Created",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 201,
+                            "name": "Created",
+                            "statusDetails": [
+                                {
+                                    "code": 201,
+                                    "message": "SMS Sent sucsessfuly"
+                                }
+                            ],
+                            "data": [
+                                {
+                                    "messageId": 2000241357901,
+                                    "status": "Sent",
+                                    "recipient": "966xxxxxxxxx",
+                                    "timeCreated": "2019-10-17T09:07:43.970Z"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "401": {
+                "description": "Unauthorized\n  **- list of errors** :\n        code: 401-01  - message: API authorization failed\n        code: 401-02  - message: Access Token expired\n",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 401,
+                            "name": "Unauthorized",
+                            "statusDetails": [
+                                {
+                                    "code": "401-01",
+                                    "message": "API authorization failed"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "Not found",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 404,
+                            "name": "Not Found",
+                            "statusDetails": [
+                                {
+                                    "code": 404,
+                                    "message": "Not Found"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "405": {
+                "description": "Method Not Allowed",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 405,
+                            "name": "Method Not Allowed",
+                            "statusDetails": [
+                                {
+                                    "code": 405,
+                                    "message": "Method Not Allowed"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "422": {
+                "description": "Unprocessable Entity \n  **- list of errors** :\n        code: 422-01  - message: message is required!\n        code: 422-01  - message: mobileNumbers  is required!\n        code: 422-04  - message: message Max Length is 300 !\n        code: 422-02  - message: mobileNumbers must be one of the following format 0096655xxxxxxx,+96655xxxxxxx,96655xxxxxxx,055xxxxxxx !\n",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 422,
+                            "name": "Unprocessable Entity",
+                            "statusDetails": [
+                                {
+                                    "code": "422-01",
+                                    "message": "Required Fields",
+                                    "validationFields": [
+                                        {
+                                            "name": "message",
+                                            "message": "message  is required!"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "429": {
+                "description": "Too many requests \n  **- list of errors** :\n        code: 429-01  - message: Too many requests by Spike arrest violation. Allowed rate is 10ps\n        code: 429-02  - message: Too many requests by quota violation. Allowed rate is 1000 per day\n",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 429,
+                            "name": "Too many requests",
+                            "statusDetails": [
+                                {
+                                    "code": "429-01",
+                                    "message": "Too many requests by Spike arrest violation. Allowed rate is 10ps"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Internal Server Error",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 500,
+                            "name": "Internal Server Error",
+                            "statusDetails": [
+                                {
+                                    "code": 500,
+                                    "message": "Internal Server Error - Report the error by mail to apisupport@moj.gov.sa"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "503": {
+                "description": "Service Unavailable",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 503,
+                            "name": "Service Unavailable",
+                            "statusDetails": [
+                                {
+                                    "code": 503,
+                                    "message": "Service Unavailable - Report the error by mail to apisupport@moj.gov.sa"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "504": {
+                "description": "Gateway Timeout",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 504,
+                            "name": "Gateway Timeout",
+                            "statusDetails": [
+                                {
+                                    "code": 504,
+                                    "message": "Gateway Timeout - Report the error by mail to apisupport@moj.gov.sa"
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            },
+            "422_getMessageDetails": {
+                "description": "Unprocessable Entity \n  **- list of errors** :\n        code: 422-01  - message: messageId  is required!\n        code: 422-04  - message: messageId Accept Only Digits With Max Of 20 !\n",
+                "content": {
+                    "*\/*": {
+                        "schema": {
+                            "$ref": "#\/components\/schemas\/response"
+                        }
+                    },
+                    "application\/json": {
+                        "example": {
+                            "code": 422,
+                            "name": "Unprocessable Entity",
+                            "statusDetails": [
+                                {
+                                    "code": "422-01",
+                                    "message": "Required Fields",
+                                    "validationFields": [
+                                        {
+                                            "name": "messageId",
+                                            "message": "messageId  is required!"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "data": []
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "OAuth2": {
+                "type": "oauth2",
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "\/v1\/authorize\/access-token",
+                        "scopes": {
+                            "send_sms": "Grant send SMS",
+                            "send_sms_otp": "Grant send OTP",
+                            "get_sms": "Grant get SMS"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

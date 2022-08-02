@@ -1,0 +1,1133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
+  <data name="Account Details" xml:space="preserve">
+    <value>كشف الحساب</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>أوامر</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>إضافه</value>
+  </data>
+  <data name="Adjustment Reports" xml:space="preserve">
+    <value>محاضر واوامر تحديث الحق</value>
+  </data>
+  <data name="Adjustments" xml:space="preserve">
+    <value>التسويات</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>إدارة</value>
+  </data>
+  <data name="Area" xml:space="preserve">
+    <value>المنطقة</value>
+  </data>
+  <data name="AreaCode" xml:space="preserve">
+    <value>رقم المنطقه</value>
+  </data>
+  <data name="Areas" xml:space="preserve">
+    <value>المناطق</value>
+  </data>
+  <data name="Bank accounts" xml:space="preserve">
+    <value>الحسابات البنكية</value>
+  </data>
+  <data name="BankAccountsString" xml:space="preserve">
+    <value>الحسابات البنكيه</value>
+  </data>
+  <data name="Basic data" xml:space="preserve">
+    <value>البيانات الأساسية</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="Case Number" xml:space="preserve">
+    <value>رقم الطلب</value>
+  </data>
+  <data name="Case profile" xml:space="preserve">
+    <value>محفظة طلب التنفيذ</value>
+  </data>
+  <data name="Case Statuses" xml:space="preserve">
+    <value>قائمة حالات طلبات التنفيذ</value>
+  </data>
+  <data name="Case Types" xml:space="preserve">
+    <value>قائمة أنواع طلبات التنفيذ</value>
+  </data>
+  <data name="CaseNumber" xml:space="preserve">
+    <value>رقم طلب التنفيذ</value>
+  </data>
+  <data name="Cases" xml:space="preserve">
+    <value>طلبات التنفيذ</value>
+  </data>
+  <data name="Claim Basic Info" xml:space="preserve">
+    <value>بيانات المطالبة الاساسية</value>
+  </data>
+  <data name="Claim Dashboard" xml:space="preserve">
+    <value>لوحة معلومات المطالبة</value>
+  </data>
+  <data name="Claim History" xml:space="preserve">
+    <value>أحداث المطالبة</value>
+  </data>
+  <data name="Changes" xml:space="preserve">
+    <value>تغييرات</value>
+  </data>
+  <data name="Claims" xml:space="preserve">
+    <value>المطالبات المالية</value>
+  </data>
+  <data name="Claims Statuses" xml:space="preserve">
+    <value>قائمة حالات المطالبات المالية</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>الكود</value>
+  </data>
+  <data name="Collection channels" xml:space="preserve">
+    <value>قنوات التحصيل</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+  <data name="Court" xml:space="preserve">
+    <value>المحكمة</value>
+  </data>
+  <data name="CourtCode" xml:space="preserve">
+    <value>كود المحكمة</value>
+  </data>
+  <data name="Courts" xml:space="preserve">
+    <value>المحاكم</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>إنشاء</value>
+  </data>
+  <data name="Creation Date" xml:space="preserve">
+    <value>تاريخ الإنشاء</value>
+  </data>
+  <data name="Crerate Employee" xml:space="preserve">
+    <value>موظف جديد</value>
+  </data>
+  <data name="Current Case Amount" xml:space="preserve">
+    <value>اجمالي المطالبة المالية</value>
+  </data>
+  <data name="Current Court" xml:space="preserve">
+    <value>المحكمة الحالية</value>
+  </data>
+  <data name="Current Division" xml:space="preserve">
+    <value>الدائرة الحالية</value>
+  </data>
+  <data name="Current Judge" xml:space="preserve">
+    <value>القاضى الحالى</value>
+  </data>
+  <data name="Current Mahasa Judge" xml:space="preserve">
+    <value>قاضى المحاصة الحالى</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة المعلومات</value>
+  </data>
+  <data name="Debt Type" xml:space="preserve">
+    <value>تصنيف الدين</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Delete Confirmation" xml:space="preserve">
+    <value>تأكيد الحذف</value>
+  </data>
+  <data name="Delete Content" xml:space="preserve">
+    <value>هل تريد حقًا الحذف؟</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>التفاصيل</value>
+  </data>
+  <data name="Display Name" xml:space="preserve">
+    <value>اسم العرض</value>
+  </data>
+  <data name="Division" xml:space="preserve">
+    <value>الدائرة</value>
+  </data>
+  <data name="Divisions" xml:space="preserve">
+    <value>قائمة دوائر التنفيذ</value>
+  </data>
+  <data name="DivisionStatus" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Do you really want to logout?" xml:space="preserve">
+    <value>هل تريد حقًا تسجيل الخروج؟</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Edit Employee" xml:space="preserve">
+    <value>تعديل </value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>البريد إلكتروني</value>
+  </data>
+  <data name="Email Host" xml:space="preserve">
+    <value>مضيف البريد الإلكتروني</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>الأحداث</value>
+  </data>
+  <data name="Execution Orders" xml:space="preserve">
+    <value>طلبات التنفيذ</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>انشاء اكسل</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>فلتر</value>
+  </data>
+  <data name="Financial Adjustment Reasons" xml:space="preserve">
+    <value>قائمة أسباب التحديثات المباشرة</value>
+  </data>
+  <data name="Financial Claim Number" xml:space="preserve">
+    <value>رقم المطالبة </value>
+  </data>
+  <data name="Financial Claim Status" xml:space="preserve">
+    <value>حالة المطالبة المالية</value>
+  </data>
+  <data name="Financial Claim Wallet" xml:space="preserve">
+    <value>محفظة المطالبة المالية</value>
+  </data>
+  <data name="Financial Claims" xml:space="preserve">
+    <value>المطالبات المالية</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>عام</value>
+  </data>
+  <data name="Hangfire" xml:space="preserve">
+    <value>وظائف النظام</value>
+  </data>
+  <data name="Hello world" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>رقم</value>
+  </data>
+  <data name="information" xml:space="preserve">
+    <value>معلومة</value>
+  </data>
+  <data name="Information panel" xml:space="preserve">
+    <value>لوحة المعلومات</value>
+  </data>
+  <data name="Input Details" xml:space="preserve">
+    <value>تفاصيل المُدخل</value>
+  </data>
+  <data name="Is Active" xml:space="preserve">
+    <value>نشيط</value>
+  </data>
+  <data name="Judge" xml:space="preserve">
+    <value>القاضى</value>
+  </data>
+  <data name="Judges" xml:space="preserve">
+    <value>قائمة قضاة التنفيذ</value>
+  </data>
+  <data name="Log Details" xml:space="preserve">
+    <value>تفاصيل الخطأ</value>
+  </data>
+  <data name="Log Exception" xml:space="preserve">
+    <value>تفاصيل الخطأ</value>
+  </data>
+  <data name="Log Info" xml:space="preserve">
+    <value>معلومات الخطأ</value>
+  </data>
+  <data name="Log Level" xml:space="preserve">
+    <value>مستوى الخطأ</value>
+  </data>
+  <data name="Log Message" xml:space="preserve">
+    <value>رسالة الخطأ</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="Logout Confirmation" xml:space="preserve">
+    <value>تأكيد تسجيل الخروج</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>سجلات التدقيق</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>الرساله</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>الاشعارات</value>
+  </data>
+  <data name="Number of Cases" xml:space="preserve">
+    <value>عدد طلبات التنفيذ المرتبطة</value>
+  </data>
+  <data name="Others Actions" xml:space="preserve">
+    <value>أوامر أخرى</value>
+  </data>
+  <data name="Page Under Construction" xml:space="preserve">
+    <value>الصفحة قيد الانشاء</value>
+  </data>
+  <data name="Parties" xml:space="preserve">
+    <value>المستفيدون</value>
+  </data>
+  <data name="Party Identity Types" xml:space="preserve">
+    <value>قائمة أنواع هويات المستفيدين</value>
+  </data>
+  <data name="Party Locations" xml:space="preserve">
+    <value>قائمة مكان إقامة المستفيدين</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمه السر</value>
+  </data>
+  <data name="Pay Orders" xml:space="preserve">
+    <value>أوامر الصرف</value>
+  </data>
+  <data name="Payment channels" xml:space="preserve">
+    <value>قنوات الدفع</value>
+  </data>
+  <data name="Payment Channels for Beneficiary" xml:space="preserve">
+    <value>قنوات الدفع للمستفيد</value>
+  </data>
+  <data name="Port" xml:space="preserve">
+    <value>نقطة الاتصال</value>
+  </data>
+  <data name="Promissories" xml:space="preserve">
+    <value>السندات التنفيذية</value>
+  </data>
+  <data name="Promissory Number" xml:space="preserve">
+    <value>رقم السند</value>
+  </data>
+  <data name="Promissory Type" xml:space="preserve">
+    <value>نوع السند</value>
+  </data>
+  <data name="Promissory Types" xml:space="preserve">
+    <value>قائمة أنواع سندات التنفيذ</value>
+  </data>
+  <data name="Reconciliations" xml:space="preserve">
+    <value>المطابقات</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>التقارير</value>
+  </data>
+  <data name="Request Id" xml:space="preserve">
+    <value>رقم الطلب</value>
+  </data>
+  <data name="Request Name" xml:space="preserve">
+    <value>إسم الطلب</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>ادوار المستخدمين</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Save Changes" xml:space="preserve">
+    <value>حفظ التغييرات</value>
+  </data>
+  <data name="Seizing Orders" xml:space="preserve">
+    <value>أوامر الحجز</value>
+  </data>
+  <data name="Select.." xml:space="preserve">
+    <value>اختر .. </value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>اعدادات النظام</value>
+  </data>
+  <data name="SMS" xml:space="preserve">
+    <value>الرساله النصيه</value>
+  </data>
+  <data name="Source Phone Number" xml:space="preserve">
+    <value>رقم المحمول</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحاله</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>تم بنجاح</value>
+  </data>
+  <data name="System Lists" xml:space="preserve">
+    <value>القوائم</value>
+  </data>
+  <data name="Table Types" xml:space="preserve">
+    <value>نوع القائمة</value>
+  </data>
+  <data name="Transfers" xml:space="preserve">
+    <value>التحويلات</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="Use Ssl" xml:space="preserve">
+    <value>استخدام الاتصال الامن</value>
+  </data>
+  <data name="User Administration" xml:space="preserve">
+    <value>إدارة المستخدمين</value>
+  </data>
+  <data name="User Name" xml:space="preserve">
+    <value>إسم المستخدم</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>إسم المستخدم</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>المستخدمين</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>القيمه</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Case Amount" xml:space="preserve">
+    <value>إجمالي المطالبة المالية</value>
+  </data>
+  <data name="Case Remaining Amount" xml:space="preserve">
+    <value>المبلغ المتبقي</value>
+  </data>
+  <data name="Case Status" xml:space="preserve">
+    <value>حاله طلب التنفيذ</value>
+  </data>
+  <data name="Case Summary" xml:space="preserve">
+    <value>الملخص</value>
+  </data>
+  <data name="Case Type" xml:space="preserve">
+    <value>نوع طلب التنفيذ</value>
+  </data>
+  <data name="Case Bank Accounts" xml:space="preserve">
+    <value>عدد الحسابات البنكية المرتبطة</value>
+  </data>
+  <data name="Case Events" xml:space="preserve">
+    <value>الأحداث</value>
+  </data>
+  <data name="Claims Count" xml:space="preserve">
+    <value>عدد المطالبات المالية</value>
+  </data>
+  <data name="d" xml:space="preserve">
+    <value>ي</value>
+  </data>
+  <data name="Parties Count" xml:space="preserve">
+    <value>عدد أطراف طلب التنفيذ</value>
+  </data>
+  <data name="Promissories Count" xml:space="preserve">
+    <value>عدد سندات التنفيذ</value>
+  </data>
+  <data name="SAR" xml:space="preserve">
+    <value>ر.س</value>
+  </data>
+  <data name="Case Age" xml:space="preserve">
+    <value>عمر الطلب</value>
+  </data>
+  <data name="Closed From" xml:space="preserve">
+    <value>منتهية منذ</value>
+  </data>
+  <data name="h" xml:space="preserve">
+    <value>س</value>
+  </data>
+  <data name="Received From" xml:space="preserve">
+    <value>مستلمة منذ</value>
+  </data>
+  <data name="RemainingAmount" xml:space="preserve">
+    <value>المبلغ المتبقى</value>
+  </data>
+  <data name="RequiredAmount" xml:space="preserve">
+    <value>المبلغ المطلوب</value>
+  </data>
+  <data name="Party Identity Number" xml:space="preserve">
+    <value>رقم الهوية</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>العدد</value>
+  </data>
+  <data name="Account Statement" xml:space="preserve">
+    <value>كشف حساب</value>
+  </data>
+  <data name="Creditor-Rights" xml:space="preserve">
+    <value>الحقوق- دائن</value>
+  </data>
+  <data name="Debt-Debts" xml:space="preserve">
+    <value>الديون-مدين</value>
+  </data>
+  <data name="Party Profile" xml:space="preserve">
+    <value>محفظة المستفيد</value>
+  </data>
+  <data name="m" xml:space="preserve">
+    <value>د</value>
+  </data>
+  <data name="Identity Number" xml:space="preserve">
+    <value>رقم الهوية</value>
+  </data>
+  <data name="Identity type" xml:space="preserve">
+    <value>نوع الهوية</value>
+  </data>
+  <data name="Party Type" xml:space="preserve">
+    <value>طبيعة المستفيد</value>
+  </data>
+  <data name="Cases Status" xml:space="preserve">
+    <value>حالة طلبات التنفيذ</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>الحدث</value>
+  </data>
+  <data name="Account Name" xml:space="preserve">
+    <value>إسم الحساب</value>
+  </data>
+  <data name="Account Number" xml:space="preserve">
+    <value>رقم الحساب</value>
+  </data>
+  <data name="Account Type" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>البنك</value>
+  </data>
+  <data name="Acceptance Date" xml:space="preserve">
+    <value>تاريخ القبول</value>
+  </data>
+  <data name="Receive Date" xml:space="preserve">
+    <value>تاريخ الاستلام</value>
+  </data>
+  <data name="Select Case Status" xml:space="preserve">
+    <value>اختر حالة طلب التنفيذ</value>
+  </data>
+  <data name="Select Case Type" xml:space="preserve">
+    <value>اختر نوع طلب التنفيذ</value>
+  </data>
+  <data name="Select Court" xml:space="preserve">
+    <value>اختر المحكمة</value>
+  </data>
+  <data name="Select Division" xml:space="preserve">
+    <value>اختر الدائرة</value>
+  </data>
+  <data name="Select Judge" xml:space="preserve">
+    <value>اختر القاضى</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>الدور</value>
+  </data>
+  <data name="Role Summary" xml:space="preserve">
+    <value>ملخص الأدوار</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Select Case Operation" xml:space="preserve">
+    <value>اختر الحدث</value>
+  </data>
+  <data name="Accused" xml:space="preserve">
+    <value>المدين</value>
+  </data>
+  <data name="Cashing" xml:space="preserve">
+    <value>صرف</value>
+  </data>
+  <data name="Cheque" xml:space="preserve">
+    <value>شيك</value>
+  </data>
+  <data name="Claim Details" xml:space="preserve">
+    <value>تفاصيل المطالبة</value>
+  </data>
+  <data name="Claim Number" xml:space="preserve">
+    <value>رقم المطالبة</value>
+  </data>
+  <data name="Complaint" xml:space="preserve">
+    <value>الدائن</value>
+  </data>
+  <data name="Debt Amount" xml:space="preserve">
+    <value>قيمة الدين</value>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>اخفاء</value>
+  </data>
+  <data name="Hide All" xml:space="preserve">
+    <value>اخفاء الكل</value>
+  </data>
+  <data name="Named" xml:space="preserve">
+    <value>اسميه</value>
+  </data>
+  <data name="Pays" xml:space="preserve">
+    <value>تسديدات</value>
+  </data>
+  <data name="Billing Amount" xml:space="preserve">
+    <value>المفوتر</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>محاضر</value>
+  </data>
+  <data name="Required Amount" xml:space="preserve">
+    <value>اجمالى المطالبة قبل</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="Show All" xml:space="preserve">
+    <value>عرض الكل</value>
+  </data>
+  <data name="Total Collected Amount" xml:space="preserve">
+    <value>إجمالى المبالغ المحصلة</value>
+  </data>
+  <data name="Total Remaining Amount" xml:space="preserve">
+    <value>إجمالى المتبقى</value>
+  </data>
+  <data name="Total Required Amount" xml:space="preserve">
+    <value>اجمالي المطالبات المالية على الطلب</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>تحويل</value>
+  </data>
+  <data name="Rows Per Page" xml:space="preserve">
+    <value>عدد العناصر فى الصفحه:</value>
+  </data>
+  <data name="Number of pages" xml:space="preserve">
+    <value>عدد الصفحات</value>
+  </data>
+  <data name="{last_item}-{first_item} of {all_items}" xml:space="preserve">
+    <value>{last_item}-{first_item} من {all_items}</value>
+  </data>
+  <data name="Bank Account" xml:space="preserve">
+    <value>حساب بنكى </value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>شيك</value>
+  </data>
+  <data name="Creditor Collection" xml:space="preserve">
+    <value>المحصل للدائن</value>
+  </data>
+  <data name="Creditor Pay Order" xml:space="preserve">
+    <value>أوامر الصرف للدائن</value>
+  </data>
+  <data name="Edit Right Channels" xml:space="preserve">
+    <value>قنوات التعديل على الحقوق</value>
+  </data>
+  <data name="In Payment Channels" xml:space="preserve">
+    <value>قنوات الدفع الداخلية</value>
+  </data>
+  <data name="Nominal Transfer" xml:space="preserve">
+    <value>حواله اسمية </value>
+  </data>
+  <data name="Out Payment Channels" xml:space="preserve">
+    <value>قنوات الدفع الخارجية</value>
+  </data>
+  <data name="Pay Creditor Right" xml:space="preserve">
+    <value>تسديد حق لدائن</value>
+  </data>
+  <data name="Pay Reports" xml:space="preserve">
+    <value>محاضر</value>
+  </data>
+  <data name="Time (MS)" xml:space="preserve">
+    <value>الوقت (ج ث)</value>
+  </data>
+  <data name="Advanced Search" xml:space="preserve">
+    <value>بحث متقدم</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="Remaining Amount" xml:space="preserve">
+    <value>اجمالى المطالبة بعد</value>
+  </data>
+  <data name="FinancialClaimStatus" xml:space="preserve">
+    <value>حالة المطالبة المالية</value>
+  </data>
+  <data name="Financial Claim Statuses" xml:space="preserve">
+    <value>قائمة حالات المطالبات المالية</value>
+  </data>
+  <data name="Amount In Riyal" xml:space="preserve">
+    <value>القيمة بالريال السعودى</value>
+  </data>
+  <data name="Cash Amount" xml:space="preserve">
+    <value>قيمة النقد</value>
+  </data>
+  <data name="Loading..." xml:space="preserve">
+    <value>جارى التحميل</value>
+  </data>
+  <data name="No matching records found" xml:space="preserve">
+    <value>لا توجد بيانات</value>
+  </data>
+  <data name="MS" xml:space="preserve">
+    <value>ج ث</value>
+  </data>
+  <data name="Updated By" xml:space="preserve">
+    <value>بواسطة</value>
+  </data>
+  <data name="Case" xml:space="preserve">
+    <value>طلب التنفيذ</value>
+  </data>
+  <data name="Identity" xml:space="preserve">
+    <value>الهوية</value>
+  </data>
+  <data name="Remaining" xml:space="preserve">
+    <value>المتبقي</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>المطلوب</value>
+  </data>
+  <data name="Promissory Date" xml:space="preserve">
+    <value>تاريخ السند</value>
+  </data>
+  <data name="Timeline" xml:space="preserve">
+    <value>الجدول الزمنى</value>
+  </data>
+  <data name="Manage Roles" xml:space="preserve">
+    <value>إدارة الأدوار</value>
+  </data>
+  <data name="View Profile" xml:space="preserve">
+    <value>عرص الصفحة الشخصية</value>
+  </data>
+  <data name="Party Number" xml:space="preserve">
+    <value>رقم الطرف</value>
+  </data>
+  <data name="Promissories Numbers" xml:space="preserve">
+    <value>رقم السند</value>
+  </data>
+  <data name="Claim profile" xml:space="preserve">
+    <value>محفظة المطالبة</value>
+  </data>
+  <data name="Adjustment Amount" xml:space="preserve">
+    <value>قيمة التحديث</value>
+  </data>
+  <data name="Adjustment Reason" xml:space="preserve">
+    <value>سبب التحديث</value>
+  </data>
+  <data name="Report Date" xml:space="preserve">
+    <value>تاريخ المحضر</value>
+  </data>
+  <data name="New Amount" xml:space="preserve">
+    <value>القيمة الجدبدة</value>
+  </data>
+  <data name="Old Amount" xml:space="preserve">
+    <value>القيمة السابقة </value>
+  </data>
+  <data name="Judge Order" xml:space="preserve">
+    <value>امر قاضي</value>
+  </data>
+  <data name="Cases Menu" xml:space="preserve">
+    <value>قائمة طلبات التنفيذ</value>
+  </data>
+  <data name="Adjustment Channels" xml:space="preserve">
+    <value>قنوات التعديل على الحقوق</value>
+  </data>
+  <data name="Add New Debt" xml:space="preserve">
+    <value>اضافة دين</value>
+  </data>
+  <data name="Manage Lookups" xml:space="preserve">
+    <value>ادارة القوائم</value>
+  </data>
+  <data name="Manage Notifications" xml:space="preserve">
+    <value>ادارة الاشعارات</value>
+  </data>
+  <data name="Entity History" xml:space="preserve">
+    <value>سجل التعديلات</value>
+  </data>
+  <data name="Entity Id" xml:space="preserve">
+    <value>رقم الكيان</value>
+  </data>
+  <data name="Entity Name" xml:space="preserve">
+    <value>إسم الكيان</value>
+  </data>
+  <data name="Operation Type" xml:space="preserve">
+    <value>نوع العملية</value>
+  </data>
+  <data name="New Value" xml:space="preserve">
+    <value>القيمة الجديدة</value>
+  </data>
+  <data name="Old Value" xml:space="preserve">
+    <value>القيمة القديمة</value>
+  </data>
+  <data name="Property Name" xml:space="preserve">
+    <value>إسم الصفة</value>
+  </data>
+  <data name="Report Amount" xml:space="preserve">
+    <value>قيمة المحضر</value>
+  </data>
+  <data name="No changes found" xml:space="preserve">
+    <value>لا توجد تعديلات</value>
+  </data>
+  <data name="View Changes" xml:space="preserve">
+    <value>عرض التعديلات</value>
+  </data>
+  <data name="View Details" xml:space="preserve">
+    <value>عرض التفاصيل </value>
+  </data>
+  <data name="Command" xml:space="preserve">
+    <value>أمر</value>
+  </data>
+  <data name="Query" xml:space="preserve">
+    <value>إستعلام</value>
+  </data>
+  <data name="Request Type" xml:space="preserve">
+    <value>نوع الطلب</value>
+  </data>
+  <data name="Accused Count" xml:space="preserve">
+    <value>عدد المنفذ ضدهم</value>
+  </data>
+  <data name="Complaint Count" xml:space="preserve">
+    <value>عدد طلاب التنفيذ</value>
+  </data>
+  <data name="Effect Reason" xml:space="preserve">
+    <value>سبب التأثير</value>
+  </data>
+  <data name="Effect Type" xml:space="preserve">
+    <value>نوع التأثير</value>
+  </data>
+  <data name="Discounts And Effects" xml:space="preserve">
+    <value>التأثيرات والخصومات</value>
+  </data>
+  <data name="Effect And Discount Amount" xml:space="preserve">
+    <value>قيمة التأثير</value>
+  </data>
+  <data name="Created By" xml:space="preserve">
+    <value>بواسطة</value>
+  </data>
+  <data name="Requesters Count" xml:space="preserve">
+    <value>عدد طلاب التنفيذ</value>
+  </data>
+  <data name="Respondents Count" xml:space="preserve">
+    <value>عدد المنفذ ضدهم</value>
+  </data>
+  <data name="Print/PDF" xml:space="preserve">
+    <value>طباعة/تصدير PDF</value>
+  </data>
+  <data name="Claim Date" xml:space="preserve">
+    <value>تاريخ المطالبة</value>
+  </data>
+  <data name="Total Credits Amount" xml:space="preserve">
+    <value>إجمالى الحقوق</value>
+  </data>
+  <data name="Total Required Amounts" xml:space="preserve">
+    <value>إجمالى الديون</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>الجنسية</value>
+  </data>
+  <data name="VIbans" xml:space="preserve">
+    <value>الحسابات الافتراضية</value>
+  </data>
+  <data name="Collection Account" xml:space="preserve">
+    <value>رقم الحساب التجميعي</value>
+  </data>
+  <data name="Reference Name" xml:space="preserve">
+    <value>ارتباط الحساب البنكي</value>
+  </data>
+  <data name="Reference Type" xml:space="preserve">
+    <value>اسم الهدف المنشأ له</value>
+  </data>
+  <data name="Transaction Count" xml:space="preserve">
+    <value>حركات الحساب البنكي</value>
+  </data>
+  <data name="Max Required Amount" xml:space="preserve">
+    <value>اكبر قيمه للمبلغ المطلوب</value>
+  </data>
+  <data name="Min Required Amount" xml:space="preserve">
+    <value>اقل قيمه للمبلغ المطلوب</value>
+  </data>
+  <data name="Max Credits" xml:space="preserve">
+    <value>الحد الاعلى للحقوق</value>
+  </data>
+  <data name="Max Debts" xml:space="preserve">
+    <value>الحد الاعلى للديون</value>
+  </data>
+  <data name="Min Credits" xml:space="preserve">
+    <value>الحد الادنى للحقوق</value>
+  </data>
+  <data name="Min Debts" xml:space="preserve">
+    <value>الحد الادنى للديون</value>
+  </data>
+  <data name="Credit Cases Count" xml:space="preserve">
+    <value>عدد الطلبات كطالب تنفيذ</value>
+  </data>
+  <data name="Debt Cases Count" xml:space="preserve">
+    <value>عدد الطلبات كمنفذ ضده</value>
+  </data>
+  <data name="Date Of Birth" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>أنثى</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>النوع</value>
+  </data>
+  <data name="Loaction" xml:space="preserve">
+    <value>الموقع</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>ذكر</value>
+  </data>
+  <data name="Cases Count" xml:space="preserve">
+    <value>عدد طلبات التنفيذ</value>
+  </data>
+  <data name="Total Debts Amount" xml:space="preserve">
+    <value>إجمالى الديون</value>
+  </data>
+  <data name="Total Paid Amount" xml:space="preserve">
+    <value>إجمالى المبالغ المدفوعة</value>
+  </data>
+  <data name="Payment Channel Number" xml:space="preserve">
+    <value>رقم قناة الدفع</value>
+  </data>
+  <data name="Account Status" xml:space="preserve">
+    <value>حالة الحساب</value>
+  </data>
+  <data name="Issue Date" xml:space="preserve">
+    <value>تاريخ الانشاء</value>
+  </data>
+  <data name="Alias" xml:space="preserve">
+    <value>الاسم المستعار</value>
+  </data>
+  <data name="Reference Number" xml:space="preserve">
+    <value>رقم الهدف</value>
+  </data>
+  <data name="Select Reference Type" xml:space="preserve">
+    <value>اختر اسم الهدف</value>
+  </data>
+  <data name="Number of Claims" xml:space="preserve">
+    <value>عدد المطالبات المالية المرتبطة</value>
+  </data>
+  <data name="Number of Parties" xml:space="preserve">
+    <value>عدد الأطراف المرتبطة</value>
+  </data>
+  <data name="Party IBAN Number" xml:space="preserve">
+    <value>رقم الحساب البنكى الحقيقى</value>
+  </data>
+  <data name="Phone Number" xml:space="preserve">
+    <value>رقم الهاتف</value>
+  </data>
+  <data name="Accused Party Cases" xml:space="preserve">
+    <value>طلبات التنفيذ للطرف كمنفذ ضده</value>
+  </data>
+  <data name="Approved Amount" xml:space="preserve">
+    <value>المبلغ المطلوب تنفيذه</value>
+  </data>
+  <data name="Case Basic Amount" xml:space="preserve">
+    <value>المبلغ  الأساسي</value>
+  </data>
+  <data name="Complaint Party Cases" xml:space="preserve">
+    <value>طلبات التنفيذ للطرف كطالب تنفيذ</value>
+  </data>
+  <data name="Total Case Collected Amount" xml:space="preserve">
+    <value>اجمالي المحصل</value>
+  </data>
+  <data name="Total Party Case Accuesed Amount" xml:space="preserve">
+    <value>إجمالى المستحق على الطرف</value>
+  </data>
+  <data name="Total Remaining Party Case Accuesed Amount" xml:space="preserve">
+    <value>القيمة المستحقة المتبقية على الطرف</value>
+  </data>
+  <data name="Total Party Case Complaint Amount" xml:space="preserve">
+    <value>حق الطرف من الاجمالى</value>
+  </data>
+  <data name="Total Remaining Party Case Complaint Amount" xml:space="preserve">
+    <value>القيمة المتبقية من حق الطرف</value>
+  </data>
+  <data name="Total Transfered Amount" xml:space="preserve">
+    <value>اجمالي ما تم تحويله</value>
+  </data>
+  <data name="Final Balance Amount" xml:space="preserve">
+    <value>الرصيد النهائي</value>
+  </data>
+  <data name="Financial Transaction CaseNumber" xml:space="preserve">
+    <value>طلب تنفيذ الحركة المالية</value>
+  </data>
+  <data name="Financial Transaction Date" xml:space="preserve">
+    <value>تاريخ الحركة المالية</value>
+  </data>
+  <data name="Financial Transaction Number" xml:space="preserve">
+    <value>رقم الحركة المالية</value>
+  </data>
+  <data name="Financial Transaction Paid Amount" xml:space="preserve">
+    <value>قيمة الحركة المالية المدفوعة</value>
+  </data>
+  <data name="Financial Transaction Ref" xml:space="preserve">
+    <value>الرقم المرجعي للحركة المالية</value>
+  </data>
+  <data name="Financial Transaction Remaining Amount" xml:space="preserve">
+    <value>إجمالي القيمة المتبقية  للمطالبة المالية</value>
+  </data>
+  <data name="Financial Transaction Source" xml:space="preserve">
+    <value>مصدر الحركة المالية</value>
+  </data>
+  <data name="Financial Transaction Transfered Amount" xml:space="preserve">
+    <value>قيمة المحول من الحركة المالية المدفوعة</value>
+  </data>
+  <data name="Financial Transaction Type" xml:space="preserve">
+    <value>نوع الحركة المالية</value>
+  </data>
+  <data name="Account Validity Status" xml:space="preserve">
+    <value>حالة التأكد من صلاحية الحساب</value>
+  </data>
+  <data name="Account Verification Status" xml:space="preserve">
+    <value>حالة
+
+التحقق من الحساب البنكي</value>
+  </data>
+  <data name="Cach Notice Amount" xml:space="preserve">
+    <value>قيمة مبلغ اشعار النقد</value>
+  </data>
+  <data name="Cach Notice Date" xml:space="preserve">
+    <value>تاريخ اشعار النقد</value>
+  </data>
+  <data name="Collected Amount" xml:space="preserve">
+    <value>المبلغ المحصل</value>
+  </data>
+  <data name="Collection Channel" xml:space="preserve">
+    <value>قناة التحصيل</value>
+  </data>
+  <data name="Collection Channel Type" xml:space="preserve">
+    <value>نوع قناة التحصيل</value>
+  </data>
+  <data name="Not Has Account Reason" xml:space="preserve">
+    <value>سبب عدم وجود حساب بنكي</value>
+  </data>
+  <data name="Payment Notice Amount" xml:space="preserve">
+    <value>قيمة مبلغ اشعار الدفع</value>
+  </data>
+  <data name="Payment Notice Date" xml:space="preserve">
+    <value>تاريخ اشعار الدفع</value>
+  </data>
+  <data name="Ref Number" xml:space="preserve">
+    <value>رقم المرجع</value>
+  </data>
+  <data name="Settlement Date" xml:space="preserve">
+    <value>تاريخ التسوية</value>
+  </data>
+  <data name="Settlement Result" xml:space="preserve">
+    <value>نتيجة التسوية</value>
+  </data>
+  <data name="Sadad Invoices" xml:space="preserve">
+    <value>فواتير سداد</value>
+  </data>
+</root>

@@ -1,0 +1,56 @@
+﻿<style>
+    #paymentTable .header-centered > th {
+        text-align: center !important;
+        font-weight: bold !important;
+    }
+
+    #paymentTable .compose-header-th {
+        border-left: 1px solid var(--mud-palette-table-lines) !important;
+    }
+
+    #paymentTable .mud-table-cell {
+        border-right: 1px solid var(--mud-palette-table-lines) !important;
+        text-align: center !important;
+    }
+</style>
+
+<MudTable Items="PaymentChannelsDtoList" Bordered="true" Striped="true" Dense="true"
+          Hover="true" Breakpoint="Breakpoint.Sm" CustomHeader="true" HeaderClass="table-head-bordered" id="paymentTable">
+    <HeaderContent>
+        <MudTHeadRow Class="header-centered">
+            <MudTh colspan="3"></MudTh>
+
+            <MudTh colspan="3" Class="compose-header-th">@Globallocalizer["Out Payment Channels"]</MudTh>
+
+            <MudTh>@Globallocalizer["In Payment Channels"]</MudTh>
+            
+            <MudTh>@Globallocalizer["Edit Right Channels"]</MudTh>
+        </MudTHeadRow>
+        <MudTHeadRow Class="header-centered">
+            <MudTh>@Globallocalizer["Financial Claim Number"]</MudTh>
+            <MudTh>@Globallocalizer["Creditor Pay Order"]</MudTh>
+            <MudTh>@Globallocalizer["Creditor Collection"]</MudTh>
+
+            <MudTh>@Globallocalizer["Bank Account"]</MudTh>
+            <MudTh>@Globallocalizer["Nominal Transfer"]</MudTh>
+            <MudTh>@Globallocalizer["Check"]</MudTh>
+
+            <MudTh>@Globallocalizer["Pay Creditor Right"]</MudTh>
+
+            <MudTh>@Globallocalizer["Pay Reports"]</MudTh>
+        </MudTHeadRow>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.ClaimNumber</MudTd>
+        <MudTd>@context.CreditorPayOrder</MudTd>
+        <MudTd>@context.CreditorCollection</MudTd>
+
+        <MudTd>@context.BankAccount</MudTd>
+        <MudTd>@context.NominalTransfer</MudTd>
+        <MudTd>@context.Check</MudTd>
+
+        <MudTd>@context.PayRight</MudTd>
+
+        <MudTd>@context.Report</MudTd>
+    </RowTemplate>
+</MudTable>

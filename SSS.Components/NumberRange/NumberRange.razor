@@ -1,0 +1,17 @@
+﻿@using MudBlazor
+
+<MudItem xs="12">
+    <MudNumericField T="decimal?" Value="_start" ValueChanged="(value) => HandleMinValueChanged(value)" Label="@MinLabel"
+                     Format="@Format" Min="0"
+                     Variant="@Variant"
+                     Adornment="Adornment.Start"
+                     AdornmentIcon="@Icon" />
+</MudItem>
+
+<MudItem xs="12">
+    <MudNumericField T="decimal?" Value="_end" ValueChanged="value => HandleMaxValueChanged(value)" Label="@MaxLabel"
+                     Format="@Format" Min="0"
+                     Variant="@Variant"
+                     Adornment="Adornment.Start"
+                     AdornmentIcon="@Icon" />
+</MudItem>

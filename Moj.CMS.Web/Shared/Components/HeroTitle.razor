@@ -1,0 +1,29 @@
+﻿@namespace Moj.CMS.Web.Shared.Components
+<style>
+    .titleIcon {
+        width: 52px;
+        height: auto;
+        margin-top: 8px;
+    }
+
+    .titleText {
+        border-bottom: 3px solid var(--mud-palette-drawer-icon);
+        padding: 10px 0;
+        padding-inline-start: 2rem;
+        line-height: 2.5rem;
+        margin-inline-start: -25px;
+        font-size: 22px;
+        font-weight: 400;
+    }
+</style>
+
+<div style="display: flex; align-items: center; margin-bottom: 25px;">
+    <img src="/imgs/title_bg.png" class="titleIcon" />
+    <MudText Typo="Typo.h6" Color="Color.Info" Class="titleText">@Title</MudText>
+    <MudText Color="Color.Surface">@Description</MudText>
+</div>
+@code
+{
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string Description { get; set; }
+}

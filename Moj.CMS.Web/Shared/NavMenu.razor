@@ -1,0 +1,136 @@
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using Moj.CMS.Shared.Constants.Permission
+<link href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet">
+<style>
+    .mud-navmenu > .mud-ripple.active {
+        color: #FFF;
+        background-color: var(--mud-palette-tertiary);
+    }
+</style>
+
+<MudLink Href="@Urls.Administration.Dashboard.Href" Class="logoAdlLink">
+    <img src="imgs/AdlFullLogo.svg" class="logoAdl" />
+</MudLink>
+<MudNavMenu Style="margin-top: 80px;">
+    <MudNavGroup Title="@Globallocalizer[Urls.Administration.Tilte]" Expanded="@Urls.Administration.IsExpanded" HideExpandIcon="false">
+        <MudNavLink OnClick="@(() => NavLinkClicked(Urls.Administration.Hangfire.Href, true))" Icon="@Urls.Administration.Hangfire.Icon">
+            @Globallocalizer[Urls.Administration.Hangfire.Title]
+        </MudNavLink>
+        <AuthorizeView Policy="@Permissions.Dashboard.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.Administration.Dashboard.Href,false))"
+                        Class="@(CurrentHref.ToLower() == Urls.Administration.Dashboard.Href.ToLower() ? "active"  : "")"
+                        Icon="@Urls.Administration.Dashboard.Icon" Match="NavLinkMatch.All">
+                @Globallocalizer[Urls.Administration.Dashboard.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <MudNavLink OnClick="@(() => NavLinkClicked(Urls.Administration.Logs.Href,false))"
+                    Class="@(CurrentHref.ToLower().StartsWith(Urls.Administration.Logs.Href.ToLower()) ? "active"  : "")"
+                    Icon="@Urls.Administration.Logs.Icon">
+            @Globallocalizer[Urls.Administration.Logs.Title]
+        </MudNavLink>
+    </MudNavGroup>
+    <MudNavGroup Title="@Globallocalizer[Urls.Settings.Tilte]" Expanded="@Urls.Settings.IsExpanded" HideExpandIcon="false">
+        <AuthorizeView Policy="@Permissions.Settings.Lookups">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.Settings.Lists.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.Settings.Lists.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.Settings.Lists.Icon">
+                @Globallocalizer[Urls.Settings.Lists.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.Settings.Notifications">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.Settings.Notify.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.Settings.Notify.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.Settings.Notify.Icon">
+                @Globallocalizer[Urls.Settings.Notify.Title]
+            </MudNavLink>
+        </AuthorizeView>
+    </MudNavGroup>
+    <MudNavGroup Title="@Globallocalizer[Urls.General.Tilte]" Expanded="@Urls.General.IsExpanded" HideExpandIcon="false">
+        <AuthorizeView Policy="@Permissions.Cases.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.Cases.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.Cases.Href.ToLower()) ? "active" : "")"
+                        Icon="@Urls.General.Cases.Icon">
+                @Globallocalizer[Urls.General.Cases.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.Promissories.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.Promissories.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.Promissories.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.Promissories.Icon">
+                @Globallocalizer[Urls.General.Promissories.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.Parties.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.Parties.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.Parties.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.Parties.Icon">
+                @Globallocalizer[Urls.General.Parties.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.Claims.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.Claims.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.Claims.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.Claims.Icon">
+                @Globallocalizer[Urls.General.Claims.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.SadadInvoice.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.SadadInvoices.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.SadadInvoices.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.SadadInvoices.Icon">
+                @Globallocalizer[Urls.General.SadadInvoices.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.AdjustmentReports.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.AdjustmentReports.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.AdjustmentReports.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.AdjustmentReports.Icon">
+                @Globallocalizer[Urls.General.AdjustmentReports.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.Adjustments.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.Adjustments.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.Adjustments.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.Adjustments.Icon">
+                @Globallocalizer[Urls.General.Adjustments.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.SeizingOrders.Href,false))"
+                    Class="@(CurrentHref.ToLower().StartsWith(Urls.General.SeizingOrders.Href.ToLower()) ? "active"  : "")"
+                    Icon="@Urls.General.SeizingOrders.Icon">
+            @Globallocalizer[Urls.General.SeizingOrders.Title]
+        </MudNavLink>
+        <AuthorizeView Policy="@Permissions.Reports.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.Reports.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.Reports.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.Reports.Icon">
+                @Globallocalizer[Urls.General.Reports.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.VIbans.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.General.VIbans.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.General.VIbans.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.General.VIbans.Icon">
+                @Globallocalizer[Urls.General.VIbans.Title]
+            </MudNavLink>
+        </AuthorizeView>
+    </MudNavGroup>
+    <MudNavGroup Title="@Globallocalizer[Urls.UserAdministration.Tilte]" Expanded="@Urls.UserAdministration.IsExpanded" HideExpandIcon="false">
+        <AuthorizeView Policy="@Permissions.Users.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.UserAdministration.Users.Href,false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.UserAdministration.Users.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.UserAdministration.Users.Icon">
+                @Globallocalizer[Urls.UserAdministration.Users.Title]
+            </MudNavLink>
+        </AuthorizeView>
+        <AuthorizeView Policy="@Permissions.Roles.View">
+            <MudNavLink OnClick="@(() => NavLinkClicked(Urls.UserAdministration.Roles.Href, false))"
+                        Class="@(CurrentHref.ToLower().StartsWith(Urls.UserAdministration.Roles.Href.ToLower()) ? "active"  : "")"
+                        Icon="@Urls.UserAdministration.Roles.Icon">
+                @Globallocalizer[Urls.UserAdministration.Roles.Title]
+            </MudNavLink>
+        </AuthorizeView>
+    </MudNavGroup>
+</MudNavMenu>
+

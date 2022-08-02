@@ -1,0 +1,99 @@
+﻿@using Moj.CMS.Shared.Constants.Application
+@using Moj.CMS.Shared.Enums
+<MudTable ServerData="@(new Func<TableState, Task<TableData<Log>>>(ServerReload))"
+          Elevation="0"
+          Loading="_loading"
+          Hover="true"
+          Dense="true"
+          Bordered="false"
+          Striped="true"
+          @ref="_table"
+          HorizontalScrollbar="true"
+          Class="inlineTable">
+    <ToolBarContent>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="LogFilter.RequestId"
+                          Placeholder="@Globallocalizer["Request Id"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="LogFilter.RequestName"
+                          Placeholder="@Globallocalizer["Request Name"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudSelect T="RequestType?" Clearable="true"
+                       @bind-Value="LogFilter.RequestType"
+                       Label="@Globallocalizer["Request Type"]"
+                       Strict="false" Variant="Variant.Text" Adornment="Adornment.End" Class="m-2  text-justify" Direction="Direction.Bottom"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium" Dense="true" OffsetY="true">
+                <MudSelectItem Disabled="true" T="RequestType?" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                <MudSelectItem T="RequestType?" Value='RequestType.Query'>@Globallocalizer[RequestType.Query.ToString()]</MudSelectItem>
+                <MudSelectItem T="RequestType?" Value='RequestType.Command'>@Globallocalizer[RequestType.Command.ToString()]</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudSelect T="string" Clearable="true"
+                       @bind-Value="LogFilter.Status"
+                       Label="@Globallocalizer["Status"]"
+                       Strict="false" Variant="Variant.Text" Adornment="Adornment.End" Class="m-2  text-justify" Direction="Direction.Bottom"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       IconSize="Size.Medium" Dense="true" OffsetY="true">
+                <MudSelectItem Disabled="true" T="string" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                <MudSelectItem T="string" Value='ErrorStatus.Error'>@Globallocalizer[ErrorStatus.Error]</MudSelectItem>
+                <MudSelectItem T="string" Value='ErrorStatus.Success'>@Globallocalizer[ErrorStatus.Success]</MudSelectItem>
+            </MudSelect>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="LogFilter.UserName"
+                          Placeholder="@Globallocalizer["UserName"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudItem lg="2" md="3" sm="6" xs="12">
+            <MudTextField T="string" Clearable="true"
+                          @bind-Value="LogFilter.InputDetails"
+                          Placeholder="@Globallocalizer["Input Details"]"
+                          Class="m-2"></MudTextField>
+        </MudItem>
+        <MudToolBarSpacer />
+        <MudTooltip Text="@Globallocalizer["Filter"]">
+            <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(OnFilter)"></MudIconButton>
+        </MudTooltip>
+        <MudTooltip Text="@Globallocalizer["Clear"]">
+            <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(Clear)"></MudIconButton>
+        </MudTooltip>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Request Id"]</MudTh>
+        <MudTh>@Globallocalizer["Request Name"]</MudTh>
+        <MudTh>@Globallocalizer["Message"]</MudTh>
+        <MudTh>@Globallocalizer["Status"]</MudTh>
+        <MudTh>@Globallocalizer["Time (MS)"]</MudTh>
+        <MudTh><MudTableSortLabel T="Log" SortLabel="CreationTime" InitialDirection="SortDirection.Descending">@Globallocalizer["Creation Date"]</MudTableSortLabel></MudTh>
+        <MudTh>@Globallocalizer["UserName"]</MudTh>
+        <MudTh></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="@Globallocalizer["Request Id"]">@context.RequestId</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Request Name"]">@context.RequestName</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Message"]">@context.MessageShortcut</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Status"]">@Globallocalizer[context.Status]</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Time (MS)"]">@context.ExecutionTime.ToString()</MudTd>
+        <MudTd DataLabel="@Globallocalizer["Creation Date"]">@context.CreationTime.FormatDateTime()</MudTd>
+        <MudTd DataLabel="@Globallocalizer["UserName"]">@context.UserName</MudTd>
+        <SSSActionsTd T="Log" Actions="@Actions" IconStyle="@IconStyle" RowContext="@context" />
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="_table" />
+    </PagerContent>
+</MudTable>

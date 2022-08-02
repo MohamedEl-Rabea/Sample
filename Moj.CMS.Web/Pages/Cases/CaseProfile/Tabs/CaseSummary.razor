@@ -1,0 +1,84 @@
+﻿<style>
+    .mud-link:hover {
+        text-decoration: underline !important;
+        cursor: pointer;
+    }
+
+    .mud-grid-item {
+        display: inline-flex;
+    }
+
+    p {
+        font-weight: bold;
+        margin-inline-end: 10px;
+        margin-bottom: 0;
+    }
+</style>
+
+@if (Loading)
+{
+    <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="mb-7" />
+}
+else
+{
+    <MudGrid Class="text-justify">
+        <MudItem md="12" xs="12" Style="align-items: center">
+            <p>@Globallocalizer["Case Number"]: </p> @CaseSummaryDto.CaseDetails.CaseNumber
+            <span Style="margin-inline-start: 25px">
+                <MudChip Text="@CaseSummaryDto.CaseDetails.CaseType" Color="@TypeColor"></MudChip>
+                <MudChip Text="@CaseSummaryDto.CaseDetails.CaseStatus" Color="@StatusColor"></MudChip>
+            </span>
+        </MudItem>
+        <MudItem md="4" xs="5">
+            <MudGrid>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Case Amount"] :</p>
+                    <Money MoneyDto="@CaseSummaryDto.FinancialDetails.CurrentAmount" />
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Case Remaining Amount"] :</p>
+                    <Money MoneyDto="@CaseSummaryDto.FinancialDetails.RemainingAmount" />
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Received From"] :</p>
+                    <MudText>@CaseSummaryDto.CaseDetails.ReceiveDate.FormatDateTime()</MudText>
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Case Age"] :</p>
+                    <Duration TimeSpan="@CaseSummaryDto.CaseDetails.CaseAge" ShowTime="false" />
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Closed From"] :</p>
+                    <MudText>@(CaseSummaryDto.CaseDetails.CloseDate.HasValue ? 
+                               CaseSummaryDto.CaseDetails.CloseDate.Value.FormatDateTime() : 
+                               "---")</MudText>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+
+        <MudItem md="8" xs="7">
+            <MudGrid>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Parties Count"] :</p>
+                    <MudLink Color="Color.Secondary" @onclick="@(() => ChangeActivePanel(PartiesPanel))">@CaseSummaryDto.CaseDetails.PartiesCount</MudLink>
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Promissories Count"] :</p>
+                    <MudLink Color="Color.Secondary" @onclick="@(() => ChangeActivePanel(PromissoriesPanel))">@CaseSummaryDto.CaseDetails.PromissoriesCount</MudLink>
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Claims Count"] :</p>
+                    <MudLink Color="Color.Secondary" @onclick="@(() => ChangeActivePanel(ClaimsPanel))">@CaseSummaryDto.FinancialDetails.ClaimsCount</MudLink>
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Case Bank Accounts"] :</p>
+                    <MudLink Color="Color.Secondary" @onclick="@(() => ChangeActivePanel(BankAccountsPanel))">@CaseSummaryDto.CaseDetails.BankAccountsCount</MudLink>
+                </MudItem>
+                <MudItem xs="12">
+                    <p>@Globallocalizer["Case Events"] :</p>
+                    <MudLink Color="Color.Secondary" @onclick="@(() => ChangeActivePanel(CaseEventsPanel))">@CaseSummaryDto.CaseDetails.CaseEventsCount</MudLink>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+    </MudGrid>
+}

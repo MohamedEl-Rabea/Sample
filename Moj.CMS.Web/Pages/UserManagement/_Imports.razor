@@ -1,0 +1,25 @@
+﻿@using System.Net.Http
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.JSInterop
+@using MudBlazor
+@using Blazored.FluentValidation
+@using System.Threading
+@using Moj.CMS.UserAccess.Application.Services.Interfaces
+@using Microsoft.Extensions.Localization
+@using Moj.CMS.UserAccess.Application.DTO
+@using Moj.CMS.Application.AppServices.Case
+@using SSS.Components.RowActions
+
+@*Shared Libraries*@
+@inherits UserManagementComponentBase
+
+@inject IStringLocalizer<App> Globallocalizer
+@attribute [Authorize]
+@inject IAuthorizationService _authorizationService
+@inject ILocalStorageService _localStorage

@@ -1,0 +1,12 @@
+﻿@($"{MoneyDto.Value.FormatZeroDecimals()} {Globallocalizer[MoneyDto.CurrencyIso]}")
+
+@code {
+
+    [Parameter] public MoneyDto MoneyDto { get; set; } = new MoneyDto();
+
+    protected override async Task OnInitializedAsync()
+    {
+        MoneyDto.CurrencyIso ??= String.Empty;
+        await base.OnInitializedAsync();
+    }
+}

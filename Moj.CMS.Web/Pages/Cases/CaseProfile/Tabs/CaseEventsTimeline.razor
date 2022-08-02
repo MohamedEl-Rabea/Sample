@@ -1,0 +1,18 @@
+﻿<style>
+    .mud-timeline-item:nth-child(odd) {
+        text-align: start;
+    }
+
+    .mud-timeline-item:nth-child(even) {
+        text-align: end;
+    }
+</style>
+<MudTimeline TimelineOrientation="TimelineOrientation.Vertical" TimelinePosition="TimelinePosition.Alternate" Reverse="false">
+    @foreach (var caseEvent in _caseEventsTimelineDto)
+    {
+        <MudTimelineItem Color="@caseEvent.Color" Variant="Variant.Filled" Size="Size.Small">
+            <MudText Typo="Typo.button">@caseEvent.Operation</MudText>
+            <MudText Typo="Typo.body2" Class="mud-text-secondary">@caseEvent.Date.FormatDateTime()</MudText>
+        </MudTimelineItem>
+    }
+</MudTimeline>

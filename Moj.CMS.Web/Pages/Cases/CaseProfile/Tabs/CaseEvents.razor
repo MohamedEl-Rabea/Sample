@@ -1,0 +1,18 @@
+﻿<MudGrid>
+    <MudItem xs="12">
+        <MudRadioGroup @bind-SelectedOption="@_showTimeline" Style="text-align: center;">
+            <MudRadio Color="Color.Secondary" Option="@true">@Globallocalizer["Timeline"]</MudRadio>
+            <MudRadio Color="Color.Tertiary" Option="@false">@Globallocalizer["Details"]</MudRadio>
+        </MudRadioGroup>
+    </MudItem>
+    <MudItem xs="12">
+        @if (_showTimeline)
+        {
+            <CaseEventsTimeline CaseEvents="@CaseEventsList" />
+        }
+        else
+        {
+            <CaseEventsDetails CaseEvents="@CaseEventsList" />
+        }
+    </MudItem>
+</MudGrid>

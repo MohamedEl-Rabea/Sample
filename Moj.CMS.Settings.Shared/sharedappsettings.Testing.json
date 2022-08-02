@@ -1,0 +1,12 @@
+{
+  "TahseelApiOptions": {
+    "ClientId": "testClientId",
+    "ClientSecret": "testSecert",
+    "BaseAddress": "https://api-test.moj.gov.local/v1/tahseel_169"
+  },
+  "SMSMojApiOptions": {
+    "ClientId": "testClientId",
+    "ClientSecret": "testSecert",
+    "BaseAddress": "https://api-test.moj.gov.local/v1/nic/sms/socialid"
+  }
+}

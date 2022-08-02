@@ -1,0 +1,10 @@
+@page "/account"
+<HeroTitle Title="@localizer["Manage your account"]" />
+<MudTabs Rounded="true" ApplyEffectsToContainer="true" Border="true" Outlined="true" Class="noShadow">
+    <MudTabPanel Text="@localizer["Profile"]">
+        <Profile />
+    </MudTabPanel>
+    <MudTabPanel Text="@localizer["Security"]">
+        <Security />
+    </MudTabPanel>
+</MudTabs>

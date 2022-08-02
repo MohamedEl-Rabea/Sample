@@ -1,0 +1,62 @@
+﻿<style>
+    #selectPager {
+        display: inline-flex !important;
+        margin-inline-start: 2px !important;
+    }
+
+        #selectPager .mud-input-slot {
+            padding: 3px !important;
+        }
+
+        #selectPager .mud-input-control > .mud-input-control-input-container > div.mud-input.mud-input-text {
+            margin: 0 !important;
+        }
+</style>
+@if (Count > 0)
+{
+    <MudGrid Style="align-items: center;">
+        <MudItem>
+            <MudPagination SelectedChanged="PageChanged" ShowFirstButton="true" ShowLastButton="true" Count="@Count" Class="pa-4" />
+        </MudItem>
+        <MudItem>
+            @Info
+        </MudItem>
+        <MudItem id="selectPager">
+            <p style="margin: 0; align-self: center; margin-inline-end: 3px;">@Globallocalizer["Rows Per Page"]</p>
+            <MudSelect T="string" ValueChanged="SetRowsPerPage" Value="@Table?.RowsPerPage.ToString()" DisableUnderLine="true" Dense="true">
+                @foreach (int pageSize in PageSizeOptions)
+                {
+                    <MudSelectItem T="string" Value="@pageSize.ToString()">@pageSize.ToString().ToUpper()</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+}
+
+@typeparam TItem
+@code
+{
+    [Parameter]
+    public MudTable<TItem> Table { get; set; } = null!;
+    public int[] PageSizeOptions { get; set; } = new int[] { 10, 25, 50, 100 };
+
+    static string InfoFormat = "{last_item}-{first_item} of {all_items}";
+    private string Info => Table == null ? "Table==null" : Globallocalizer[InfoFormat].Value
+    .Replace("{first_item}", $"{Table?.CurrentPage * Table.RowsPerPage + 1}")
+    .Replace("{last_item}", $"{Math.Min((Table.CurrentPage + 1) * Table.RowsPerPage, Table.GetFilteredItemsCount())}")
+    .Replace("{all_items}", $"{Table.GetFilteredItemsCount()}");
+
+
+
+    private int Count =>
+        (int)Math.Ceiling((double)Table.GetFilteredItemsCount() / Table.RowsPerPage);
+
+    private void PageChanged(int i)
+    {
+        Table.NavigateTo(i - 1);
+    }
+    private void SetRowsPerPage(string size)
+    {
+        Table?.SetRowsPerPage(int.Parse(size));
+    }
+}

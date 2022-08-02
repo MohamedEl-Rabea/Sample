@@ -1,0 +1,49 @@
+@attribute [RouteAttribute(Urls.General.Cases.ProfileHref + "{CaseId:int}")]
+@using Moj.CMS.Web.Pages.Cases.CaseProfile.Tabs
+
+<div class="text-justify">
+    <HeroTitle Title="@Globallocalizer["Case profile"]" />
+</div>
+
+<MudTabs Rounded="true" ApplyEffectsToContainer="true" Border="_caseExists" Outlined="true" TabPanelClass="tabPanel" Class="tabClass"
+         PanelClass="pa-5" ActivePanelIndex="@CurrentActiveTabIndex">
+    @if (_caseExists || _loading)
+    {
+        <MudTabPanel Text="@Globallocalizer["Case Summary"]">
+            <CaseSummary CaseId="@CaseId" Loading="_loading" CaseSummaryDto="CaseSummaryDto" OnActivePanelChanged="ActivePanelChanged"></CaseSummary>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Basic data"]">
+            <BasicDetails CaseId="@CaseId"></BasicDetails>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Parties"]">
+            <CaseParties CaseId="@CaseId"></CaseParties>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Promissories"]">
+            <CasePromissories CaseId="@CaseId"></CasePromissories>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Claims"]">
+            <CaseClaims CaseId="@CaseId"></CaseClaims>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Collection channels"]">
+            <CollectionChannels CaseId="@CaseId"></CollectionChannels>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Payment channels"]">
+            <PaymentChannels></PaymentChannels>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Bank accounts"]">
+            <CaseBankAccounts CaseId="@CaseId"></CaseBankAccounts>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Discounts And Effects"]">
+            <EffectsAndDiscounts CaseId="@CaseId"></EffectsAndDiscounts>
+        </MudTabPanel>
+        <MudTabPanel Text="@Globallocalizer["Events"]">
+            <CaseEvents CaseId="@CaseId"></CaseEvents>
+        </MudTabPanel>
+    }
+    else
+    {
+        <MudItem Class="notFoundContainer">
+            <ItemNotFound></ItemNotFound>
+        </MudItem>
+    }
+</MudTabs>

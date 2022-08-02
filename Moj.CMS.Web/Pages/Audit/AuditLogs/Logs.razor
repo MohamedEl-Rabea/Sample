@@ -1,0 +1,13 @@
+﻿@attribute [RouteAttribute(Urls.Administration.Logs.Href)]
+@using System.Globalization
+
+<HeroTitle Title="@Globallocalizer["Logs"]" />
+
+<MudTabs Rounded="true" Border="true" Outlined="true" Class="noShadow">
+    <MudTabPanel Text="@Globallocalizer["Events"]">
+        <LogEvents />
+    </MudTabPanel>
+    <MudTabPanel Text="@Globallocalizer["Entity History"]">
+        <EntityHistory />
+    </MudTabPanel>
+</MudTabs>

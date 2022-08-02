@@ -1,0 +1,31 @@
+﻿@using MudBlazor
+@typeparam T
+
+<div class="d-inline-flex">
+
+    @foreach (var action in FlatActions)
+    {
+        <MudIconButton Title="@action.Name" Icon="@action.Icon" Variant="@IconStyle.Variant" Color="@action.Color" Size="@IconStyle.Size" Class="@IconStyle.Class"
+                       @onclick="() => action.Action.Invoke(RowContext)" />
+    }
+
+    @if (ContextMenuActions.Any())
+    {
+        <MudMenu title="@IconStyle.MenuButtonIcon.Name" Icon="@IconStyle.MenuButtonIcon.Icon" Variant="@IconStyle.Variant" Size="@IconStyle.Size" Class="@IconStyle.Class"
+                 Dense="@IconStyle.MenuButtonIcon.Dense" OffsetY="true" Direction="@Direction" Color="@IconStyle.MenuButtonIcon.Color">
+            @foreach (var action in ContextMenuActions)
+            {
+                <MudMenuItem Style="padding: 0; padding-inline-end: 8px;" title="">
+                    <MudButton StartIcon="@action.Icon" IconColor="@action.Color" Size="@IconStyle.Size" Class="@IconStyle.Class" Style="width: 100%; justify-content: end;"
+                               @onclick="() => action.Action.Invoke(RowContext)">@action.Name</MudButton>
+                        </MudMenuItem>
+                    }
+        </MudMenu>
+    }
+</div>
+
+<style>
+    .mud-popover {
+        top: 100%;
+    }
+</style>

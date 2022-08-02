@@ -1,0 +1,56 @@
+﻿@using Moj.CMS.Application.AppServices.Case.Queries.GetCaseParties
+
+<style>
+    #partiesTable > .mud-grid {
+        align-items: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .mud-table-root .mud-table-head .mud-table-cell {
+        font-weight: bold;
+    }
+</style>
+
+<div style="margin-bottom: 20px;" id="partiesTable">
+    <MudGrid Class="text-justify d-inline-flex m-0">
+        <MudItem Class="d-inline-flex" Style="margin-inline-end:20px">
+            <p style="font-weight: bold">@Globallocalizer["Complaint Count"] :</p>
+            <p style="color: var(--mud-palette-info) !important;margin-inline-start:5px">@CasePartiesDto.Summary.ComplaintCount</p>
+        </MudItem>
+        <MudItem Class="d-inline-flex" Style="margin-inline-end:20px">
+            <p style="font-weight: bold">@Globallocalizer["Accused Count"] :</p>
+            <p style="color: var(--mud-palette-info) !important;margin-inline-start:5px">@CasePartiesDto.Summary.AccusedCount</p>
+        </MudItem>
+    </MudGrid>
+</div>
+
+<MudTable Items="@_parties" Hover="true" Dense="true" Bordered="false" Striped="true" Breakpoint="Breakpoint.Sm" Loading="@_loading"
+          LoadingProgressColor="Color.Info" Elevation="2" @ref="table">
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Number"]</MudTh>
+        <MudTh>@Globallocalizer["Name"]</MudTh>
+        <MudTh>@Globallocalizer["Type"]</MudTh>
+        <MudTh>@Globallocalizer["Role"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Number">@context.Number</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Type">@context.Type</MudTd>
+        <MudTd DataLabel="Role">@context.Role</MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

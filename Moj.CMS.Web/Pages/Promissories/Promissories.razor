@@ -1,0 +1,94 @@
+﻿@attribute [RouteAttribute(Urls.General.Promissories.Href)]
+@using Moj.CMS.Application.AppServices.Promissory.Queries
+@using System.Globalization
+
+
+<div style="text-align:initial">
+    <HeroTitle Title="@Globallocalizer["Promissories"]" />
+    <MudTable ServerData="@(new Func<TableState, Task<TableData<GetAllPromissoriesDto>>>(ServerReload))" Loading="_loading" Hover="true" Dense="true" Bordered="@false" Striped="@true" @ref="table" HorizontalScrollbar="true">
+        <ToolBarContent>
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudTextField T="string" Clearable="true"
+                              @bind-Value="PromissoryFilter.Number"
+                              Placeholder="@Globallocalizer["Promissory Number"]"
+                              Class="m-2 mt-1"></MudTextField>
+            </MudItem>
+
+            <MudItem lg="2" md="3" sm="6" xs="12">
+                <MudSelect T="int?" @bind-Value="PromissoryFilter.TypeId" Clearable="true"
+                           Placeholder="@( Globallocalizer["Promissory Type"])" Dense="true"
+                           Strict="false" Variant="Variant.Text" Adornment="Adornment.End" Class="m-2" OffsetY="true"
+                           AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                           IconSize="Size.Medium">
+                    <MudSelectItem Disabled="true" T="int?" Value='default'>@Globallocalizer["Select.."]</MudSelectItem>
+                    @foreach (var item in promissoriesTypesList)
+                    {
+                        <MudSelectItem T="int?" Value="@item.Key">@item.Text</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+
+            <MudToolBarSpacer />
+            <MudTooltip Text="@Globallocalizer["Filter"]">
+                <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(OnFilter)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Clear"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(Clear)"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Advanced Search"]">
+                <AdvancedSearchButton OnClick="@((e) => OpenFilterManager(true))" />
+            </MudTooltip>
+            @if (pagedData?.Any() == true)
+            {
+                <MudTooltip Text="@Globallocalizer["Export"]">
+                    <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+                </MudTooltip>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>@Globallocalizer["Promissory Number"]</MudTh>
+            <MudTh>@Globallocalizer["Promissory Type"]</MudTh>
+            <MudTh><MudTableSortLabel T="GetAllPromissoriesDto" SortLabel="IssueDate">@Globallocalizer["Promissory Date"]</MudTableSortLabel></MudTh>
+            <MudTh>@Globallocalizer["Number of Cases"]</MudTh>
+            <MudTh>@Globallocalizer["Number of Parties"]</MudTh>
+            <MudTh>@Globallocalizer["Number of Claims"]</MudTh>
+            <MudTh>
+                <MudTableSortLabel SortLabel="LastUpdate" InitialDirection="SortDirection.Descending" T="GetAllPromissoriesDto">
+                    <span class="addColor">@localizer["Add"]/</span><span class="updateColor">@localizer["Update"]</span>
+                </MudTableSortLabel>
+            </MudTh>
+            <MudTh>@Globallocalizer["Updated By"]</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Number" Class="tableTd">@context.PromissoryNumber</MudTd>
+            <MudTd DataLabel="Level" Class="tableTd">@context.PromissoryType</MudTd>
+
+            <MudTd DataLabel="IssueDate" Class="tableTd">@context.PromissoryDate.FormatDateTime()</MudTd>
+            <MudTd DataLabel="NumberOfCases" Class="tableTd">
+                <MudLink Href="@($"{Urls.General.Cases.Href}?promissoryNumber={context.PromissoryNumber}")"
+                         @onclick='@(()=>AddBreadItem(Globallocalizer[Urls.General.Cases.Title],href: $"{Urls.General.Cases.Href}?promissoryNumber={context.PromissoryNumber}",Icon: Urls.General.Cases.Icon))'>@context.NumberOfCases</MudLink>
+            </MudTd>
+            <MudTd DataLabel="NumberOfParties" Class="tableTd">@context.NumberOfParties</MudTd>
+            <MudTd DataLabel="NumberOfClaims" Class="tableTd">@context.NumberOfClaims</MudTd>
+            <MudTd DataLabel="LastUpdate" Class="@(context.IsUpdate ? "updateColor" : "addColor")">@context.LastUpdate.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)</MudTd>
+            <MudTd DataLabel="UpdatedBy">@context.UpdatedBy</MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>@Globallocalizer["No matching records found"] </MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>@Globallocalizer["Loading..."]</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <TablePager Table="table" />
+        </PagerContent>
+    </MudTable>
+</div>
+<AdvancedSearch Open="FilterManagerOpen" OpenChanged="OpenFilterManager" OnClearFilters="Clear" OnApplyFilters="OnFilter">
+    <Content>
+        <MudItem xs="12">
+            <MudDateRangePicker @ref="_promissoryPicker" Label="@(Globallocalizer["Promissory Date"])"
+                                Variant="Variant.Text" @bind-DateRange="PromissoryDateRange" />
+        </MudItem>
+    </Content>
+</AdvancedSearch>

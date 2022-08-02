@@ -1,0 +1,112 @@
+﻿@attribute [RouteAttribute(Urls.Settings.Lists.Href)]
+@using MatBlazor
+@using Moj.CMS.Domain.Shared.LookupModels
+@using Moj.CMS.Shared.Constants.Permission
+@using SSS.Components.RowActions
+
+<style>
+    .mud-popover.mud-popover-open {
+        box-shadow: var(--mud-elevation-1) !important;
+    }
+</style>
+
+<div style="text-align:initial">
+    <HeroTitle Title="@Globallocalizer["System Lists"]" />
+</div>
+
+
+<MudTable Items="@items" Hover="true" Dense="true" Striped="true" @ref="table">
+    <ToolBarContent>
+        <MudItem lg="3" md="4" sm="4" xs="8">
+            <MudSelect T="int" Dense="true" ValueChanged="@(selected => Clear(selected))"
+                       Label="@(localizer["Table Types"])"
+                       Strict="false"
+                       Variant="Variant.Outlined" Class="m-2 mt-3 mb-5 text-justify text-nowrap flex-wrap" Direction="Direction.Bottom"
+                       AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                       OffsetY="true" IconSize="Size.Medium">
+                <MudSelectItem Disabled="true" T="int" Value='0'>@Globallocalizer["Select.."]</MudSelectItem>
+                @foreach (var item in lookupTypes)
+                {
+                    <MudSelectItem T="int" Value="@item.Id">@(localizer[item.Name])</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        @foreach (var filter in GetFilterableProps())
+        {
+            if (filter.PropertyType == Domain.Shared.Helpers.PropertyType.String)
+            {
+                <MudItem lg="2" md="3" sm="6" xs="12">
+                    <MudTextField T="string" Clearable="true"
+                                  Value="GetFilterValue(filter)"
+                                  ValueChanged="(filterValue) => SetFilterValue(filterValue, filter)"
+                                  Placeholder="@Globallocalizer[filter.Name]" Class="m-2 mb-7"></MudTextField>
+                </MudItem>
+            }
+            if (filter.PropertyType == Domain.Shared.Helpers.PropertyType.Status)
+            {
+                <MudItem lg="2" md="3" sm="6" xs="12">
+                    <MudSelect T="string" Clearable="true"
+                               SelectedValues="GetFilterValues(filter)"
+                               ValueChanged="(filterValue) => SetFilterValue(filterValue, filter)"
+                               Label="@Globallocalizer[filter.Name]"
+                               Strict="false" Variant="Variant.Text" Adornment="Adornment.End" Class="m-2 mb-7 text-justify" Direction="Direction.Bottom"
+                               AdornmentIcon="@Icons.Material.Filled.ArrowDropDown"
+                               IconSize="Size.Medium" Dense="true" OffsetY="true">
+                        <MudSelectItem Disabled="true" T="string" Value='""'>@Globallocalizer["Select.."]</MudSelectItem>
+                        <MudSelectItem T="string" Value='"true"'>@currentPageLocalizer["True"]</MudSelectItem>
+                        <MudSelectItem T="string" Value='"false"'>@currentPageLocalizer["False"]</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+            }
+        }
+        <MudToolBarSpacer />
+        @if (lookupTypeId > 0)
+        {
+            <MudTooltip Text="@Globallocalizer["Reload"]">
+                <MudIconButton Icon="@Icons.Material.Filled.FilterAlt" @onclick="@(() => RefreshLookupItems())"></MudIconButton>
+            </MudTooltip>
+            <MudTooltip Text="@Globallocalizer["Clear"]">
+                <MudIconButton Icon="@Icons.Material.Filled.Clear" @onclick="@(ClearFilter)"></MudIconButton>
+            </MudTooltip>
+            @if (items.Any())
+            {
+                <MudTooltip Text="@Globallocalizer["Export"]">
+                    <MudIconButton Icon="@Icons.Custom.FileFormats.FileExcel" OnClick="@(GenerateExcel)"></MudIconButton>
+                </MudTooltip>
+            }
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        @foreach (var prop in CurrentLookupProperties)
+        {
+            <MudTh Style="@(typeof(LookupBase).GetProperty(prop)?.PropertyType == typeof(string) ? "min-width: 8em;" : "")">@(Globallocalizer[prop])</MudTh>
+        }
+    </HeaderContent>
+    <RowTemplate>
+        @foreach (var prop in CurrentLookupProperties)
+        {
+            <MudTd DataLabel="@prop" Style="cursor: pointer !important">
+                <span class="textWithDots" onclick="ShowTextWithDots(this)"> @GetPropertyValue(context, prop)</span>
+            </MudTd>
+        }
+    </RowTemplate>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>
+
+
+
+<style>
+    .textWithDots {
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical !important;
+    }
+
+    .mud-table-cell {
+        padding-inline-start: 10px !important;
+        padding-inline-end: 8px !important;
+    }
+</style>

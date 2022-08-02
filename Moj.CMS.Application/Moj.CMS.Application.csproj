@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AppServices\Claims\Commands\NewFolder\**" />
+    <Compile Remove="DomainEventsHandlers\**" />
+    <EmbeddedResource Remove="AppServices\Claims\Commands\NewFolder\**" />
+    <EmbeddedResource Remove="DomainEventsHandlers\**" />
+    <None Remove="AppServices\Claims\Commands\NewFolder\**" />
+    <None Remove="DomainEventsHandlers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Notifications\Templates\SadadInvoiceCreatedEmailNotification-ar.html" />
+    <EmbeddedResource Include="Notifications\Templates\SadadInvoiceCreatedEmailNotification-en.html" />
+    <EmbeddedResource Include="Notifications\Templates\SadadInvoiceCreatedSMSNotification-ar.txt" />
+    <EmbeddedResource Include="Notifications\Templates\SadadInvoiceCreatedSMSNotification-en.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.EnumMapping" Version="1.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.22" />
+    <PackageReference Include="LazyCache" Version="2.1.3" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="TanvirArjel.Extensions.Microsoft.DependencyInjection" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Moj.CMS.Domain\Moj.CMS.Domain.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Integration.Contracts\Moj.CMS.Integration.Contracts.csproj" />
+    <ProjectReference Include="..\Moj.CMS.Shared\Moj.CMS.Shared.csproj" />
+    <ProjectReference Include="..\SSS.BackgroundJobs.Abstraction\SSS.BackgroundJobs.Abstraction.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\AppServices\Product\ProductAppService - Copy.ar.Designer.cs">
+      <DependentUpon>ProductAppService.ar.Designer.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\AppServices\Product\ProductAppService.ar.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProductAppService.ar.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\AppServices\Product\ProductAppService.ar.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductAppService.ar.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Filters\" />
+  </ItemGroup>
+
+</Project>

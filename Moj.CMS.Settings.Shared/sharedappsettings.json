@@ -1,0 +1,89 @@
+{
+  "AllowedHosts": "*",
+  "AppConfiguration": {
+    "Secret": "S0M3RAN0MS3CR3T!1!MAG1C!1!"
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=localhost;Database=MOJ;Trusted_connection=true;MultipleActiveResultSets=True"
+  },
+  "Serilog": {
+    "MinimalLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Information",
+        "System": "Warning",
+        "System.Net.Http.HttpClient": "Information"
+      }
+    },
+    "WriteTo": [
+      { "Name": "Console" },
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "StartsWith(SourceContext, 'System.Net.Http.HttpClient')"
+                }
+              }
+            ],
+            "WriteTo": [
+              {
+                "Name": "File",
+                "Args": {
+                  "path": "Logs/HttpClient.log",
+                  //"formatter": "Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact",
+                  "outputTemplate": "{Timestamp:o} [{Level:u3}] ({SourceContext}) {Message}{NewLine}{Exception}",
+                  "rollingInterval": "Day",
+                  "retainedFileCountLimit": 7
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "Name": "Logger",
+        "Args": {
+          "configureLogger": {
+            "Filter": [
+              {
+                "Name": "ByIncludingOnly",
+                "Args": {
+                  "expression": "(@Level = 'Error' or @Level = 'Fatal')"
+                }
+              }
+            ],
+            "WriteTo": [
+              {
+                "Name": "File",
+                "Args": {
+                  "path": "Logs/Error.log",
+                  "outputTemplate": "{Timestamp:o} [{Level:u3}] ({SourceContext}) {Message}{NewLine}{Exception}",
+                  "rollingInterval": "Day",
+                  "retainedFileCountLimit": 7
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ]
+  },
+  "PasswordAESEncryptionOptions": {
+    "Key": "4Z2HF3XDe98V7veX3cRnGkMtkjbACGEp"
+  },
+  "AlahliApiOptions": {
+    "AccessToken": "f350aa73ad20e0f7c28fe54333baab60843990a769da1515085a7750db482544",
+    "CreateVIbanApi": "public/v1/users",
+    "BaseAddress": "https://gorest.co.in"
+  },
+  "TahseelApiOptions": {
+    "ClientId": "testClientId",
+    "ClientSecret": "testSecert",
+    "BaseAddress": "https://api-test.moj.gov.local/v1/tahseel_169"
+  }
+}

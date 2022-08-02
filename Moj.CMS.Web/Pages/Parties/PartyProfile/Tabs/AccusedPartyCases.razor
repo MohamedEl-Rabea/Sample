@@ -1,0 +1,68 @@
+﻿@using Moj.CMS.Application.AppServices.Party.Queries
+
+<MudTable   Hover="true" Items="@AccusedPartyCasesList" Dense="true" Bordered="false" Striped="true" @ref="table"
+          HorizontalScrollbar="true">
+    <ToolBarContent>@Globallocalizer["Accused Party Cases"] </ToolBarContent>
+    <HeaderContent>
+        <MudTh>@Globallocalizer["Case Number"]</MudTh>
+        <MudTh>@Globallocalizer["Case Type"]</MudTh>
+        <MudTh>@Globallocalizer["Case Status"]</MudTh>
+        <MudTh>@Globallocalizer["Court"]</MudTh>
+        <MudTh>@Globallocalizer["Division"]</MudTh>
+        <MudTh>@Globallocalizer["Judge"]</MudTh>
+        <MudTh><MudTableSortLabel SortLabel="ReceiveDate" T="PartyCaseListItemDto">@localizer["Receive Date"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="JudgeAcceptanceDate" T="PartyCaseListItemDto">@localizer["Acceptance Date"]</MudTableSortLabel></MudTh>
+        <MudTh>@Globallocalizer["Requesters Count"]</MudTh>
+        <MudTh>@Globallocalizer["Respondents Count"]</MudTh>
+        <MudTh>@Globallocalizer["Case Basic Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Approved Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Total Party Case Accuesed Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Total Case Collected Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Total Remaining Party Case Accuesed Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Total Required Amount"]</MudTh>
+        <MudTh>@Globallocalizer["Total Remaining Amount"]</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="CaseNumber"> @context.CaseNumber</MudTd>
+        <MudTd DataLabel="CaseType">@context.CaseType</MudTd>
+        <MudTd DataLabel="CaseStatus">@context.CaseStatus</MudTd>
+        <MudTd DataLabel="Court">@context.Court</MudTd>
+        <MudTd DataLabel="Division">@context.Division</MudTd>
+        <MudTd DataLabel="Judge">@context.Judge</MudTd>
+        <MudTd DataLabel="ReceiveDate">@context.ReceiveDate.FormatDate()</MudTd>
+        <MudTd DataLabel="JudgeAcceptanceDate">@context.JudgeAcceptanceDate.FormatDate()</MudTd>
+        <MudTd DataLabel="RequestersCount">@context.RequestersCount</MudTd>
+        <MudTd DataLabel="RespondentsCount">@context.RespondentsCount</MudTd>
+        <MudTd DataLabel="CaseBasicAmount">
+            <Money MoneyDto="@context.CaseBasicAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="ApprovedAmount">
+            <Money MoneyDto="@context.ApprovedAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="TotalPartyCaseAccuesedAmount">
+            <Money MoneyDto="@context.TotalPartyCaseAccuesedAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="TotalCollectedAmount">
+            <Money MoneyDto="@context.TotalCollectedAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="RespondentsCount">
+            <Money MoneyDto="@context.TotalRemainingPartyCaseAccuesedAmount"></Money>
+        </MudTd>
+
+        <MudTd DataLabel="TotalRequiredAmount">
+            <Money MoneyDto="@context.TotalRequiredAmount"></Money>
+        </MudTd>
+        <MudTd DataLabel="TotalRemainingAmount">
+            <Money MoneyDto="@context.TotalRemainingAmount"></Money>
+        </MudTd>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>@Globallocalizer["No matching records found"] </MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>@Globallocalizer["Loading..."]</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <TablePager Table="table" />
+    </PagerContent>
+</MudTable>

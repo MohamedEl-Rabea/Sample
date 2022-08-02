@@ -1,0 +1,196 @@
+﻿@using Moj.CMS.Application.AppServices.Case.Queries.GetCaseCollectionChannels
+<style>
+    .headerStyle-without-background th {
+        font-weight: 700 !important;
+        background-color: none;
+    }
+
+    .whiteBG {
+        position: sticky;
+        background-color: white !important;
+    }
+
+    .mud-table-container {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .childTable {
+        margin: 0;
+    }
+
+        .childTable th, .childTable td {
+            font-size: 12px;
+        }
+
+        .childTable .mud-table-container {
+            margin-top: 3px;
+        }
+
+        .childTable th.mud-table-cell {
+            padding: 3px !important;
+            background-color: inherit !important;
+            border-bottom: initial !important;
+            border-radius: 0 !important;
+        }
+</style>
+<MudGrid>
+    <MudItem sm="4">
+        <MudSimpleTable FixedHeader="true" Style="overflow-x: auto; height:18em; "
+                        Hover="true"
+                        Dense="true"
+                        Striped="true">
+            <thead>
+                <tr class="">
+                    <th>
+                        <h6>
+                            <a>
+                                قنوات التحصيل الخارجي
+                            </a>
+                        </h6>
+                    </th>
+                    <th>
+                        <h6>
+                            <a>
+                                المحصل عن طريق القناة
+                            </a>
+                        </h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>فواتير سداد</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>اوامر حجز بنك مركزي</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>اوامر حجز اسهم </td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>تبرع - فرجت</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>بيع مزادات</td>
+                    <td>0</td>
+                </tr>
+
+                <tr>
+                    <td>ايداع مباشر</td>
+                    <td>0</td>
+                </tr>
+
+            </tbody>
+        </MudSimpleTable>
+    </MudItem>
+    <MudItem sm="4">
+        <MudSimpleTable FixedHeader="true" Style="overflow-x: auto; height: 18em;" Hover="true"
+                        Dense="true"
+                        Striped="true">
+            <thead>
+                <tr class="">
+                    <th>
+                        <h6>
+                            <a>
+                                قنوات التحصيل الداخلي
+                            </a>
+                        </h6>
+                    </th>
+                    <th>
+                        <h6>
+                            <a>
+                                المحصل عن طريق القناة
+                            </a>
+                        </h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>تحصيل من مدين اخر</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+    </MudItem>
+    <MudItem sm="4">
+        <MudTable Items="@CollectionChannelsDto.AdjustmentChannels"
+                  Hover="true"
+                  Breakpoint="Breakpoint.Sm"
+                  Dense="true"
+                  HorizontalScrollbar="false"
+                  HeaderClass="headerStyle-without-background"
+                  Style="height: 18em;">
+            <HeaderContent>
+                <MudTh>@Globallocalizer["Adjustment Channels"]</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="AdjustmentReasonString">@context.AdjustmentReasonString</MudTd>
+                <MudTd>
+                    <MudToggleIconButton Size="Size.Small" Toggled="@context.ShowDetails" ToggledChanged="@(() => context.ShowDetails = !context.ShowDetails)"
+                                         Icon="@Icons.Material.Filled.ExpandMore"
+                                         Color="@Color.Info"
+                                         Title="@Globallocalizer["Show"]"
+                                         ToggledSize="Size.Small"
+                                         ToggledIcon="@Icons.Material.Filled.ExpandLess"
+                                         ToggledColor="@Color.Dark"
+                                         ToggledTitle="@Globallocalizer["Hide"]" />
+                </MudTd>
+            </RowTemplate>
+            <ChildRowContent>
+                @if (context.ShowDetails)
+                {
+                    <MudTr>
+                        <td colspan="2">
+                            <MudCard Elevation="0">
+                                <MudCardContent Class="pa-0 m-0">
+                                    <MudTable Items="@context.AdjustmentDetails" Context="report" Hover="true"
+                                              Breakpoint="Breakpoint.Sm"
+                                              Elevation="0"
+                                              Dense="true"
+                                              Striped="true"
+                                              Class="childTable"
+                                              HeaderClass="headerStyle"
+                                              HorizontalScrollbar="true"
+                                              FixedHeader="true">
+                                        <HeaderContent>
+                                            <MudTh>@Globallocalizer["Claim Number"]</MudTh>
+                                            <MudTh>@Globallocalizer["Report Date"]</MudTh>
+                                            <MudTh>@Globallocalizer["Old Amount"]</MudTh>
+                                            <MudTh>@Globallocalizer["New Amount"]</MudTh>
+                                            <MudTh>@Globallocalizer["Report Amount"]</MudTh>
+                                        </HeaderContent>
+                                        <RowTemplate>
+                                            <MudTd DataLabel="ClaimNumber">@report.ClaimNumber</MudTd>
+                                            <MudTd DataLabel="ReportDate">@report.ReportDate.FormatDate()</MudTd>
+                                            <MudTd DataLabel="OldAmount">
+                                                <Money MoneyDto="@report.OldAmount" />
+                                            </MudTd>
+                                            <MudTd DataLabel="NewAmount">
+                                                <Money MoneyDto="@report.NewAmount" />
+                                            </MudTd> 
+                                            <MudTd DataLabel="ReportAmount">
+                                                <Money MoneyDto="@report.ReportAmount" />
+                                            </MudTd>
+                                        </RowTemplate>
+                                    </MudTable>
+                                </MudCardContent>
+                            </MudCard>
+                        </td>
+                    </MudTr>
+                }
+            </ChildRowContent>
+        </MudTable>
+    </MudItem>
+</MudGrid>

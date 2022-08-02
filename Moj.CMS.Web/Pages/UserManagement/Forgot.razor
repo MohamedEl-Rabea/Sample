@@ -1,0 +1,31 @@
+@page "/account/forgot-password"
+@using Moj.CMS.Web.Shared
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+<EditForm Model="@emailModel" OnValidSubmit="SubmitAsync">
+    <FluentValidationValidator />
+    <MudGrid>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <img src="../imgs/Adllogo.svg" Style="height:150px !important;" />
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.h4">@localizer["Forgot password?"]</MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <div class="d-flex justify-center">
+                <MudText Typo="Typo.subtitle2" Class="mb-n4">@localizer["Enter email for password reset"]</MudText>
+            </div>
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField Label="@localizer["E-mail"]" @bind-Value="emailModel.Email" For="@(() => emailModel.Email)" Variant="Variant.Outlined"></MudTextField>
+        </MudItem>
+        <MudItem xs="12" Class="d-flex justify-center">
+            <MudButton Variant="Variant.Filled" Color="Color.Info" Size="Size.Large" ButtonType="MudButtonType.Submit" FullWidth="true">@localizer["Reset Password"]</MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>
